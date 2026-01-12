@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treat Details</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="treats.js"></script>
+</head>
+<body>
+
+    <header class="hero-section">
+        <h1 id="treat-name">Loading...</h1>
+        <h2>Ingredients</h2>
+        <p id="ingredient-list" class="ingredient-list"></p>
+        
+        <div class="allergen-container">
+            <h3 class="allergen-heading">Contains:</h3>
+            <p id="allergen-list" class="allergen-list"></p>
+        </div>
+    </header>
+
+    <main class="content-container">
+        <div class="content-block">
+            <div class="placeholder-img"><span>Treat Visual</span></div>
+        </div>
+        <div class="content-block">
+            <div class="video-container">
+                <iframe id="video-player" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </main>
+
+    <section class="preorder-section">
+        <button class="preorder-btn">Preorder Here</button>
+    </section>
+
+    <script>
+        window.onload = function() {
+            // 1. Read the URL
+            const params = new URLSearchParams(window.location.search);
+            const treatId = params.get('id');
+
+            // 2. Find the treat in the loaded treats.js file
+            if (treatId && treatData[treatId]) {
+                const treat = treatData[treatId];
+
+                // 3. Inject the Data
+                document.getElementById('treat-name').innerText = treat.name;
+                document.getElementById('ingredient-list').innerText = treat.ingredients;
+                document.getElementById('allergen-list').innerText = treat.allergens;
+                document.getElementById('video-player').src = "https://www.youtube.com/embed/" + treat.youtubeID;
+                document.title = treat.name + " | jaytreats";
+            } else {
+                // 4. Fallback if ID is broken
+                document.getElementById('treat-name').innerText = "Treat Not Found";
+                console.error("ID missing or not found in database:", treatId);
+            }
+        };
+    </script>
+</body>
+</html>
