@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treat Details</title>
+    <title>Treat Details | jaytreats</title>
     <link rel="stylesheet" href="style.css">
     
     <script src="treats.js"></script>
@@ -22,14 +22,20 @@
     </header>
 
     <main class="content-container">
+        
         <div class="content-block">
-            <div class="placeholder-img"><span>Treat Visual</span></div>
+            <img id="main-treat-image" src="" alt="Treat Main View" class="main-image-display">
         </div>
+
         <div class="content-block">
             <div class="video-container">
                 <iframe id="video-player" src="" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
+
+        <div id="extra-images-container" class="image-grid">
+            </div>
+
     </main>
 
     <section class="preorder-section">
@@ -38,26 +44,103 @@
 
     <script>
         window.onload = function() {
-            // 1. Read the URL
+            // 1. Get the ID from the URL
             const params = new URLSearchParams(window.location.search);
             const treatId = params.get('id');
 
-            // 2. Find the treat in the loaded treats.js file
+            // 2. Validate Data
             if (treatId && treatData[treatId]) {
                 const treat = treatData[treatId];
 
-                // 3. Inject the Data
+                // --- TEXT FILL ---
                 document.getElementById('treat-name').innerText = treat.name;
                 document.getElementById('ingredient-list').innerText = treat.ingredients;
                 document.getElementById('allergen-list').innerText = treat.allergens;
-                document.getElementById('video-player').src = "https://www.youtube.com/embed/" + treat.youtubeID;
                 document.title = treat.name + " | jaytreats";
+
+                // --- VIDEO FILL ---
+                const videoFrame = document.getElementById('video-player');
+                if (treat.youtubeID) {
+                    videoFrame.src = "https://www.youtube.com/embed/" + treat.youtubeID;
+                } else {
+                    // Hide the video container if no video exists
+                    videoFrame.parentElement.parentElement.style.display = 'none'; 
+                }
+
+                // --- IMAGE LOGIC ---
+                const mainImg = document.getElementById('main-treat-image');
+                const extraContainer = document.getElementById('extra-images-container');
+                extraContainer.innerHTML = ""; // Clear any previous content
+
+                if (treat.images && treat.images.length > 0) {
+                    // A. SET MAIN IMAGE (The first link in your array)
+                    mainImg.src = treat.images[0];
+                    mainImg.alt = treat.name + " Main View";
+
+                    // B. LOOP EXTRA IMAGES (Start at index 1 to skip the main one)
+                    if (treat.images.length > 1) {
+                        treat.images.slice(1).forEach(function(imgSrc) {
+                            const newImg = document.createElement('img');
+                            newImg.src = imgSrc;
+                            newImg.className = "gallery-detail-img"; // Use class for styling
+                            newImg.alt = treat.name + " detail shot";
+                            extraContainer.appendChild(newImg);
+                        });
+                    }
+                } else {
+                    // Fallback if NO images exist in the array
+                    mainImg.alt = "No Image Available";
+                    mainImg.style.display = 'none';
+                }
+
             } else {
-                // 4. Fallback if ID is broken
+                // Error State
                 document.getElementById('treat-name').innerText = "Treat Not Found";
                 console.error("ID missing or not found in database:", treatId);
             }
         };
     </script>
+
+    <style>
+        /* 1. Main Image Styling */
+        .main-image-display {
+            width: 100%;
+            height: auto;
+            max-height: 500px; /* Prevents it from being too tall on desktop */
+            object-fit: cover; /* Ensures it fills the box nicely */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: block; /* Removes tiny gap under images */
+        }
+
+        /* 2. Extra Gallery Grid */
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        /* 3. Detail Images Styling */
+        .gallery-detail-img {
+            width: 100%;
+            max-width: 300px; /* Keeps detail shots smaller */
+            height: 200px;    /* Uniform height for tidiness */
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-detail-img:hover {
+            transform: scale(1.05);
+            border-color: #FF69B4;
+        }
+    </style>
 </body>
+<footer>
+        <h5><a href="index.html">Back to Home</a></h5>
+    </footer>
 </html>

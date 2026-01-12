@@ -54,7 +54,7 @@ h2 {
     color: #ffbc6b;
     font-size: 1.8rem;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 h5 {
@@ -64,6 +64,13 @@ h5 {
     color: #FFFF00;
     text-align: center;
     padding: 40px 0;
+}
+p {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    color: #ffbc6b;
+    text-align: center;
+    padding: 5px 0;
 }
 
 /* Placeholders */
