@@ -4,7 +4,7 @@ const currentTreatID = "british-smores";
 // 2. The "Backlog" - Your complete database of items
 const treatData = {
   "british-smores": {
-    name: "British Smores",
+    name: "British Smores.",
     vibe: "#8e3d00",
     ingredients: "British people and smores.",
     allergens: "Flour, Dairy",
@@ -12,20 +12,35 @@ const treatData = {
     // The first link is the Main Image. Add as many others as you want.
     images: [
       "images/british-main.jpeg",
+      "images/british-1.jpeg",
+      "images/british-2.jpeg",
+      "images/british-poster.jpeg",
     ],
   },
-  "classic-jay": {
-    name: "The Classic Jay",
+  "santas-cookies": {
+    name: "Santas Cookies.",
+    vibe: "#ff2710",
     ingredients: "Chocolate chips, sea salt, brown butter.",
-    allergens: "Wheat, Dairy",
+    allergens: "Flour (gluetn), Almonds",
     youtubeID: "dQw4w9WgXcQ",
-    images: ["images/classic-jay-main.jpg", "images/classic-stack.jpg"],
+    images: [
+      "images/santa-main.jpeg",
+      "images/santa-1.jpeg",
+      "images/santa-2.jpeg",
+      "images/santa-poster.jpeg",
+    ],
   },
-  "double-choc": {
-    name: "Double Trouble",
+  "basque-cheesecake": {
+    name: "Caramel Biscoff Basque Cheesecake.",
+    vibe: "#6f5948",
     ingredients: "Cocoa powder, dark chocolate chunks, espresso.",
-    allergens: "Wheat, Dairy, Eggs",
+    allergens: "Nutmeg",
     youtubeID: "dQw4w9WgXcQ",
-    images: ["images/classic-jay-main.jpg", "images/classic-stack.jpg"],
+    images: [
+      "images/basquecake-main.jpeg",
+      "images/basquecake-1.jpeg",
+      "images/basquecake-2.jpeg",
+      "images/basquecake-poster.jpeg",
+    ],
   },
 };
