@@ -310,3 +310,33 @@ footer {
         flex-direction: column;
     }
 }
+/* FORCE FIX FOR LANDSCAPE MOBILE */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    
+    /* 1. Reset the Main Container */
+    /* Prevents the page from trying to fit everything on one screen (100vh) */
+    body, html, .content-container {
+        height: auto !important;
+        overflow-y: auto !important;
+        display: block !important; /* Stops Flexbox side-by-side squeezing */
+    }
+
+    /* 2. Force the Blocks to have Width */
+    /* If width is 0, the 16:9 aspect ratio calculation = 0 height (Invisible) */
+    .content-block {
+        width: 100% !important; 
+        display: block !important;
+        margin-bottom: 20px;
+        flex: none !important; /* Disables flex shrinking */
+    }
+
+    /* 3. Ensure the Video Container keeps its shape */
+    .video-container {
+        width: 80% !important; /* Keeps it from being too wide in landscape */
+        margin: 0 auto; /* Centers it */
+        padding-bottom: 45%; /* Slightly wider ratio for short screens (optional) */
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}

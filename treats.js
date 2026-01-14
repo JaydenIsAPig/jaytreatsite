@@ -1,16 +1,17 @@
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "strawberry-dream";
+const currentTreatID = "british-smores";
 
 // 2. The "Backlog" - Your complete database of items
 const treatData = {
-  "strawberry-dream": {
-    name: "Strawberry Dream",
-    ingredients: "Fresh strawberries, white chocolate, vanilla bean, cream.",
-    allergens: "Dairy, Soy",
-    youtubeID: "xyz123", // Replace with real YouTube ID
+  "british-smores": {
+    name: "British Smores",
+    vibe: "#8e3d00",
+    ingredients: "British people and smores.",
+    allergens: "Flour, Dairy",
+    youtubeID: "4rsmACYUxQ", // Replace with real YouTube ID
     // The first link is the Main Image. Add as many others as you want.
     images: [
-      "images/strawberry-main.jpg",
+      "images/british-main.jpeg",
     ],
   },
   "classic-jay": {

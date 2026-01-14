@@ -53,7 +53,23 @@
                 const treat = treatData[treatId];
 
                 // --- TEXT FILL ---
-                document.getElementById('treat-name').innerText = treat.name;
+                // ... inside window.onload ...
+
+// 1. Set Text Info
+const nameElement = document.getElementById('treat-name');
+nameElement.innerText = treat.name;
+
+// NEW: Apply the "Vibe" Outline
+// This creates a hard colored outline around the text
+if (treat.vibe) {
+    nameElement.style.textShadow = 
+        `1px 1px 0 ${treat.vibe}, 
+        -1px 1px 0 ${treat.vibe}, 
+        1px -1px 0 ${treat.vibe}, 
+        -1px -1px 0 ${treat.vibe}`;
+}
+
+// ... rest of code (ingredients, video, etc)
                 document.getElementById('ingredient-list').innerText = treat.ingredients;
                 document.getElementById('allergen-list').innerText = treat.allergens;
                 document.title = treat.name + " | jaytreats";
@@ -102,43 +118,71 @@
     </script>
 
     <style>
-        /* 1. Main Image Styling */
-        .main-image-display {
-            width: 100%;
-            height: auto;
-            max-height: 500px; /* Prevents it from being too tall on desktop */
-            object-fit: cover; /* Ensures it fills the box nicely */
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            display: block; /* Removes tiny gap under images */
-        }
+    /* 1. VIDEO PLAYER (The "Keep Safe" styling) */
+    .video-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* Force 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 10px;
+        background-color: #000;
+        margin-bottom: 20px;
+    }
 
-        /* 2. Extra Gallery Grid */
-        .image-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 40px;
-            width: 100%;
-        }
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
 
-        /* 3. Detail Images Styling */
-        .gallery-detail-img {
-            width: 100%;
-            max-width: 300px; /* Keeps detail shots smaller */
-            height: 200px;    /* Uniform height for tidiness */
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
+    /* 2. MAIN IMAGE */
+    .main-image-display {
+        width: 100%;
+        height: auto;       /* CHANGED from fixed height to auto */
+        /* max-height: 500px;  <-- DELETE THIS if you want the full tall image to show */
+        object-fit: contain; /* Ensures the whole image is visible */
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        display: block;
+        margin-bottom: 20px;
+    }
 
-        .gallery-detail-img:hover {
-            transform: scale(1.05);
-            border-color: #FF69B4;
-        }
-    </style>
+    /* 3. EXTRA GALLERY GRID */
+    .image-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 40px;
+        
+        /* DELETED: width: 100%; */
+        /* Removing this lets the grid fit naturally without fighting the video */
+    }
+
+    /* 4. DETAIL SHOTS (Bottom Gallery) */
+    .gallery-detail-img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;       /* CHANGED from 200px to auto */
+        object-fit: contain; /* Ensures full image is seen */
+        border-radius: 10px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease;
+        
+        /* Optional: align them nicely if they are different heights */
+        align-self: flex-start; 
+    }
+
+    .gallery-detail-img:hover {
+        transform: scale(1.05);
+        border-color: #FF69B4;
+    }
+</style>
+    
 </body>
 <footer>
         <h5><a href="index.html">Back to Home</a></h5>
