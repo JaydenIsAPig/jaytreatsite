@@ -61,7 +61,7 @@ h5 {
     font-family: "Times New Roman", Times, serif;
     font-style: italic;
     text-decoration: underline;
-    color: #FFFF00;
+    color: #5a5a31;
     text-align: center;
     padding: 40px 0;
 }
@@ -153,21 +153,26 @@ p {
 }
 
 .preorder-btn {
-    background-color: #FFFFFF;
-    color: #000000;
-    padding: 20px 50px;
-    font-size: 1.5rem;
-    font-weight: bold;
+    background-color: #001aff63; /* Hot Pink */
+    color: white;
+    font-size: 1.2rem;
+    padding: 15px 30px;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.preorder-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
 }
 
 .preorder-btn:hover {
     transform: scale(1.1);
-    background-color: #FFD700; /* Yellow hover to match h5 style */
+    background-color: #ffd900b7; /* Yellow hover to match h5 style */
 }
 
 /* Ensure mobile stacking remains active */
@@ -184,7 +189,7 @@ p {
     flex-wrap: wrap; /* Allows cards to wrap to the next line */
     justify-content: center;
     gap: 40px;
-    padding: 50px 20px;
+    padding: 30px 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -223,7 +228,7 @@ p {
 .search-container {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 60px;
     margin-bottom: 20px;
 }
 
@@ -287,8 +292,8 @@ html {
 }
 
 /* Adjust footer padding to make room */
-footer {
-    padding: 20px 0 60px 0;
+.home footer {
+    padding: 10px 0 20px 0;
 }
 /* Styling the specific "Old Stuff" H5 link */
 .old-stuff-link h5 a {
@@ -310,33 +315,34 @@ footer {
         flex-direction: column;
     }
 }
-/* FORCE FIX FOR LANDSCAPE MOBILE */
-@media screen and (orientation: landscape) and (max-height: 500px) {
-    
-    /* 1. Reset the Main Container */
-    /* Prevents the page from trying to fit everything on one screen (100vh) */
-    body, html, .content-container {
-        height: auto !important;
-        overflow-y: auto !important;
-        display: block !important; /* Stops Flexbox side-by-side squeezing */
-    }
+/* Target the link specifically */
+a {
+    color: rgb(255, 176, 28); /* Changes text color */
+    text-decoration-color: rgba(255, 0, 0, 0.523); /* Removes the underline */
+}
 
-    /* 2. Force the Blocks to have Width */
-    /* If width is 0, the 16:9 aspect ratio calculation = 0 height (Invisible) */
-    .content-block {
-        width: 100% !important; 
-        display: block !important;
-        margin-bottom: 20px;
-        flex: none !important; /* Disables flex shrinking */
-    }
+/* Optional: Change color when hovering */
+a:hover {
+    color: #ffffff; /* Hot Pink on hover */
+}
+/* --- FOOTER & SOCIAL ICONS --- */
+.insta-container footer {
 
-    /* 3. Ensure the Video Container keeps its shape */
-    .video-container {
-        width: 80% !important; /* Keeps it from being too wide in landscape */
-        margin: 0 auto; /* Centers it */
-        padding-bottom: 45%; /* Slightly wider ratio for short screens (optional) */
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
+    text-align: center;
+    padding: 0px 0;
+    margin-top: 20px; /* Separates footer from the rest of the page */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider line */
+}
+
+.social-icon {
+    padding-top: 20px;
+    width: 15%;;  /* Adjusts the size of the insta logo */
+    height: auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.social-icon:hover {
+    transform: scale(1.2); /* Grows slightly when hovered */
+    opacity: 0.8;
 }
