@@ -90,13 +90,23 @@ p {
     border-radius: 20px;
 }
 
+/* Standard Video (16:9) - The default */
 .video-container {
     position: relative;
+    width: 100%;
     padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
     height: 0;
-    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    border-radius: 10px;
+    background-color: #000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* NEW: Shorts Mode (9:16) - Vertical Phone Shape */
+.video-container.shorts-mode {
+    padding-bottom: 177.78%; /* (16 / 9) * 100 = 177.77...% */
+    max-width: 400px; /* Optional: Prevents it from being MASSIVE on desktop */
+    margin: 0 auto;   /* Centers it if we limit the width */
 }
 
 .video-container iframe {
@@ -105,6 +115,7 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
+    border: none;
 }
 
 /* Page 2 Specific Typography */
@@ -152,8 +163,11 @@ p {
     padding: 60px 20px;
 }
 
+
 .preorder-btn {
+    display: inline-block; /* Important for links to look like buttons */
     background-color: #001aff63; /* Hot Pink */
+    text-decoration: none; /* Removes the underline from the link */
     color: white;
     font-size: 1.2rem;
     padding: 15px 30px;
@@ -345,4 +359,46 @@ a:hover {
 .social-icon:hover {
     transform: scale(1.2); /* Grows slightly when hovered */
     opacity: 0.8;
+}
+/* =========================================
+   GALLERY GRID SYSTEM
+   Use this class on the PARENT <div> that holds the list of treats/images
+   ========================================= */
+.gallery-grid {
+    display: grid;
+    gap: 30px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    
+    /* ADD THIS LINE: */
+    padding: 0 40px; /* 0px top/bottom, 40px left/right */
+    
+    /* Box-sizing ensures the padding doesn't make the width > 100% and cause scrollbars */
+    box-sizing: border-box; 
+    
+    /* Default (Mobile) */
+    grid-template-columns: 1fr;
+}
+
+/* TABLETS: 2 Columns */
+@media (min-width: 600px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* LAPTOPS: 3 Columns */
+@media (min-width: 900px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* DESKTOPS: Max 4 Columns */
+/* This ensures it never goes to 5 or 6, even on huge screens */
+@media (min-width: 1200px) {
+    .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
