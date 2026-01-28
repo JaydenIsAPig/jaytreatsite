@@ -106,7 +106,7 @@ const treatData = {
       "images/golden-smoreo-main.jpeg",
       "images/golden-smoreo-1.jpeg",
       "images/golden-smoreo-2.jpeg",
-      "images/golden-smoreo-psoster.JPG",
+      "images/golden-smoreo-poster.JPG",
     ],
   },
 };
