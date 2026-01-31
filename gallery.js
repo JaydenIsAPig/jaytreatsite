@@ -24,25 +24,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // PART 1: HOME PAGE LOGIC (Feature of the Week)
     // ==========================================
+    const heroContainer = document.getElementById('treat-name');
     const featuredContainer = document.getElementById('featured-treat-container');
     
-    if (featuredContainer && typeof currentTreatID !== 'undefined') {
+    if (typeof currentTreatID !== 'undefined') {
         const featuredTreat = treatData[currentTreatID];
+        if (heroContainer) {
+        heroContainer.innerText = featuredTreat.name + "";
+        }
+    if (featuredContainer) {
+        
         
         if (featuredTreat) {
             
             // --- 1. PREORDER BUTTON LOGIC ---
-            const preorderWrapper = document.getElementById('preorder-wrapper');
             // Use the GLOBAL variable from treats.js
             const displayPrice = (typeof currentPrice !== 'undefined') ? currentPrice : "0";
+           // gonna be here
 
-            if (preorderWrapper) {
-                preorderWrapper.innerHTML = `
-                    <a href="https://venmo.com/Jaden-Daden?txn=pay&amount=${displayPrice}&note=jaytreat" target="_blank" class="preorder-btn">
-                        Preorder Now ($${displayPrice})
-                    </a>
-                `;
-            }
+           //old preorder wrapper
+            // if (preorderWrapper) {
+            //     preorderWrapper.innerHTML = `
+            //         <a href="https://venmo.com/Jaden-Daden?txn=pay&amount=${displayPrice}&note=jaytreat" target="_blank" class="preorder-btn">
+            //             Preorder Now ($${displayPrice})
+            //         </a>
+            //     `;
+            // }
 
             // --- 2. IMAGE LOGIC ---
             const heroImage = (featuredTreat.images && featuredTreat.images.length > 0) 
@@ -52,12 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const vibeStyle = getVibeStyle(featuredTreat.vibe || '#000');
 
             if (heroImage) {
+                const preorderWrapper = document.getElementById('preorder-wrapper');
                 visualHTML = 
                     `<div style="position: relative;">
                         <img src="${heroImage}" alt="${featuredTreat.name}" style="width:100%; height: auto; border-radius:10px; display: block;">
                         <h2 style="position: absolute; bottom: 10px; left: 10px; margin: 0; color: white; font-size: 2rem; ${vibeStyle}">
                             ${featuredTreat.name}
                         </h2>
+                        <a style="position: absolute; right: -15px; top: 10px; margin: 0;" href="https://venmo.com/Jaden-Daden?txn=pay&amount=${displayPrice}&note=jaytreat" target="_blank" class="preorder-btn">
+                        Click to preorder (${displayPrice.toFixed(2)}$)
+                    </a>
                     </div>`;
             } else {
                 visualHTML = `<div class="placeholder-img"><span>${featuredTreat.name}</span></div>`;
@@ -80,8 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (rawLink.includes("shorts")) {
                     containerClass += " shorts-mode";
                 }
-
                 featuredContainer.innerHTML = 
+
                     '<div class="content-block">' +
                         '<a href="treat.html?id=' + currentTreatID + '" class="image-link">' +
                             visualHTML + 
@@ -109,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             featuredContainer.innerHTML = "<p>Treat data not found for ID: " + currentTreatID + "</p>";
         }
     }
+}
 
     // ==========================================
     // PART 2: GALLERY PAGE LOGIC (Full Menu)

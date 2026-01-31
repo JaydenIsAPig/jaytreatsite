@@ -1,10 +1,22 @@
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "velvet-cheesecake";
-const currentPrice = 5;
+const currentTreatID = "biscoff-crispy";
+const currentPrice = 3.50;
 
 
 // 2. The "Backlog" - Your complete database of items
 const treatData = {
+  "biscoff-crispy": {
+    name: "Biscoff Rice Crisp treat",
+    vibe: "#3e0f04",
+    ingredients: "Chewy Rice Crispy infused with biscoff butter, finished with a biscoff white choclate and encrusted with more biscoff powder",
+    allergens: "Cinnamon, Gelatin",
+    images: [
+      "images/biscoff-crispy-main.jpg",
+      "images/biscoff-crispy-1.jpg",
+      "images/biscoff-crispy-2.jpg",
+      "images/biscoff-crispy-poster.jpg",
+    ],
+  },
   "velvet-cheesecake": {
     name: "Dark Velvet Cheesecake Cookie",
     vibe: "#3e0f04",

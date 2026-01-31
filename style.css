@@ -166,10 +166,10 @@ p {
 
 .preorder-btn {
     display: inline-block; /* Important for links to look like buttons */
-    background-color: #001aff63; /* Hot Pink */
+    background-color: #5100ffd4; /* Hot Pink */
     text-decoration: none; /* Removes the underline from the link */
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     padding: 15px 30px;
     border: none;
     border-radius: 50px;
@@ -294,7 +294,7 @@ html {
     text-decoration: none;
     font-family: "Times New Roman", serif;
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: 2.0rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
 }

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treat Details | jaytreats</title>
     <link rel="stylesheet" href="style.css">
-    
-    <script src="treats.js"></script>  <script src="gallery.js"></script> ```
+
+    <script src="treats.js"></script>
+    <script src="gallery.js"></script>
 
     <style>
         /* --- 1. LAYOUT GRID (The Fix for Widescreen) --- */
@@ -15,11 +17,11 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px 0;
-            
+
             /* MOBILE DEFAULT: Stacked (1 Column) */
             display: flex;
             flex-direction: column;
-            gap: 30px; 
+            gap: 30px;
         }
 
         /* DESKTOP/WIDESCREEN: Switch to 2-Column Grid */
@@ -27,9 +29,10 @@
             .content-container {
                 display: grid;
                 /* This forces exactly 2 items per row (Image Left, Video Right) */
-                grid-template-columns: 1fr 1fr; 
-                gap: 40px; 
-                align-items: center; /* Prevents stretching height */
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+                align-items: center;
+                /* Prevents stretching height */
             }
 
             /* Make the bottom gallery span the full width of the screen */
@@ -40,40 +43,46 @@
 
         /* --- 2. VIDEO PLAYER --- */
         /* Standard Video (16:9) - The default */
-.video-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-    height: 0;
-    overflow: hidden;
-    border-radius: 10px;
-    background-color: #000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            background-color: #000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
 
-/* NEW: Shorts Mode (9:16) - Vertical Phone Shape */
-.video-container.shorts-mode {
-    padding-bottom: 177.78%; /* (16 / 9) * 100 = 177.77...% */
-    max-width: 400px; /* Optional: Prevents it from being MASSIVE on desktop */
-    margin: 0 auto;   /* Centers it if we limit the width */
-}
+        /* NEW: Shorts Mode (9:16) - Vertical Phone Shape */
+        .video-container.shorts-mode {
+            padding-bottom: 177.78%;
+            /* (16 / 9) * 100 = 177.77...% */
+            max-width: 400px;
+            /* Optional: Prevents it from being MASSIVE on desktop */
+            margin: 0 auto;
+            /* Centers it if we limit the width */
+        }
 
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
 
         /* --- 3. MAIN IMAGE --- */
         .main-image-display {
             width: 100%;
-            height: auto;        /* Auto height prevents cropping */
-            object-fit: contain; /* Shows full image always */
+            height: auto;
+            /* Auto height prevents cropping */
+            object-fit: contain;
+            /* Shows full image always */
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             display: block;
         }
 
@@ -87,13 +96,15 @@
             margin-top: 20px;
 
             /* CRITICAL FIX: Stops borders from stretching into empty space */
-            align-items: flex-start; 
+            align-items: flex-start;
         }
 
         .gallery-detail-img {
             width: 100%;
-            max-width: 300px; /* Limits size of individual gallery shots */
-            height: auto;     /* Ensures aspect ratio is kept */
+            max-width: 300px;
+            /* Limits size of individual gallery shots */
+            height: auto;
+            /* Ensures aspect ratio is kept */
             object-fit: contain;
             border-radius: 10px;
             border: 2px solid rgba(255, 255, 255, 0.2);
@@ -104,7 +115,7 @@
             transform: scale(1.05);
             border-color: #FF69B4;
         }
-        
+
         /* Ensure content blocks behave well in the grid */
         .content-block {
             width: 100%;
@@ -112,13 +123,14 @@
         }
     </style>
 </head>
+
 <body>
 
     <header class="hero-section">
         <h1 id="treat-name">Loading...</h1>
         <h2>Ingredients</h2>
         <p id="ingredient-list" class="ingredient-list"></p>
-        
+
         <div class="allergen-container">
             <h3 class="allergen-heading">Contains:</h3>
             <p id="allergen-list" class="allergen-list"></p>
@@ -126,7 +138,7 @@
     </header>
 
     <main class="content-container">
-        
+
         <div class="content-block">
             <img id="main-treat-image" src="" alt="Treat Main View" class="main-image-display">
         </div>
@@ -138,12 +150,12 @@
         </div>
 
         <div id="extra-images-container" class="image-grid">
-            </div>
+        </div>
 
     </main>
 
     <script>
-        window.onload = function() {
+        window.onload = function () {
             const params = new URLSearchParams(window.location.search);
             const treatId = params.get('id');
 
@@ -160,47 +172,47 @@
                 // 2. VIBE LOGIC (Apply Outline Color)
                 if (treat.vibe) {
                     const c = treat.vibe;
-                    nameHeader.style.textShadow = 
+                    nameHeader.style.textShadow =
                         `1px 1px 0 ${c}, -1px 1px 0 ${c}, 1px -1px 0 ${c}, -1px -1px 0 ${c}`;
                 }
 
                 // ... inside treat.html script ...
 
-// 3. Video Logic
-const videoFrame = document.getElementById('video-player');
-const videoContainer = videoFrame.closest('.video-container'); // Grab the container to change styling
-const videoBlock = videoFrame.closest('.content-block');
+                // 3. Video Logic
+                const videoFrame = document.getElementById('video-player');
+                const videoContainer = videoFrame.closest('.video-container'); // Grab the container to change styling
+                const videoBlock = videoFrame.closest('.content-block');
 
-if (treat.youtubeID) {
-    let rawID = treat.youtubeID;
-    let videoID = rawID;
-    let isShort = false;
+                if (treat.youtubeID) {
+                    let rawID = treat.youtubeID;
+                    let videoID = rawID;
+                    let isShort = false;
 
-    // Detect if it is a Short based on the URL structure
-    if (rawID.includes('shorts/')) {
-        isShort = true;
-        videoID = rawID.split('shorts/')[1];
-    } else if (rawID.includes('v=')) {
-        videoID = rawID.split('v=')[1].split('&')[0];
-    }
+                    // Detect if it is a Short based on the URL structure
+                    if (rawID.includes('shorts/')) {
+                        isShort = true;
+                        videoID = rawID.split('shorts/')[1];
+                    } else if (rawID.includes('v=')) {
+                        videoID = rawID.split('v=')[1].split('&')[0];
+                    }
 
-    // Apply the Fix
-    if (isShort) {
-        videoContainer.classList.add('shorts-mode'); // Switch to vertical shape
-    } else {
-        videoContainer.classList.remove('shorts-mode'); // Ensure standard shape
-    }
+                    // Apply the Fix
+                    if (isShort) {
+                        videoContainer.classList.add('shorts-mode'); // Switch to vertical shape
+                    } else {
+                        videoContainer.classList.remove('shorts-mode'); // Ensure standard shape
+                    }
 
-    videoFrame.src = "https://www.youtube.com/embed/" + videoID + "?rel=0&modestbranding=1";
+                    videoFrame.src = "https://www.youtube.com/embed/" + videoID + "?rel=0&modestbranding=1";
 
-} else {
-    if (videoBlock) videoBlock.style.display = 'none';
-}
+                } else {
+                    if (videoBlock) videoBlock.style.display = 'none';
+                }
 
                 // 4. Image Logic
                 const mainImg = document.getElementById('main-treat-image');
                 const extraContainer = document.getElementById('extra-images-container');
-                extraContainer.innerHTML = ""; 
+                extraContainer.innerHTML = "";
 
                 if (treat.images && treat.images.length > 0) {
                     // Set Main Image
@@ -209,7 +221,7 @@ if (treat.youtubeID) {
 
                     // Loop Extra Images (Skip the first one)
                     if (treat.images.length > 1) {
-                        treat.images.slice(1).forEach(function(imgSrc) {
+                        treat.images.slice(1).forEach(function (imgSrc) {
                             const newImg = document.createElement('img');
                             newImg.src = imgSrc;
                             newImg.className = "gallery-detail-img";
@@ -228,17 +240,20 @@ if (treat.youtubeID) {
     </script>
 </body>
 <div class="home">
-    <footer>        <h5 style="font-size:1.4rem;"><a href="index.html">Back to Home</a></h5></footer>
+    <footer>
+        <h5 style="font-size:1.4rem;"><a href="index.html">Back to Home</a></h5>
+    </footer>
 </div>
 <div class="insta-container">
     <footer>
         <a href="https://www.instagram.com/jaydessertss" target="_blank">
             <img src="images/insta.png" alt="Follow us on Instagram" class="social-icon">
         </a>
-        
+
         <p style="font-size: 0.8rem; color: #ccc; margin-top: 10px;">
             &copy; 2026 JayTreats
         </p>
-<footer>
+        <footer>
 </div>
+
 </html>
