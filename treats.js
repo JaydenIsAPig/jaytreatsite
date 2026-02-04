@@ -7,7 +7,7 @@ const currentPrice = 3.50;
 const treatData = {
   "biscoff-crispy": {
     name: "Biscoff Rice Crisp treat",
-    vibe: "#3e0f04",
+    vibe: "#0095f2",
     ingredients: "Chewy Rice Crispy infused with biscoff butter, finished with a biscoff white choclate and encrusted with more biscoff powder",
     allergens: "Cinnamon, Gelatin",
     images: [
@@ -113,12 +113,109 @@ const treatData = {
     name: "Golden Smoreo Cookie.",
     vibe: "#a44f00",
     ingredients: "Classic Jaytreat cookie base with a golden oreo surprise on the bottom, and a marshmallow one on top.",
-    allergens: "Flour (gluetn), Dairy, Cinnamon, Gelatin",
+    allergens: "Flour (gluetn), Dairy, Cinnamon",
     images: [
       "images/golden-smoreo-main.jpeg",
       "images/golden-smoreo-1.jpeg",
       "images/golden-smoreo-2.jpeg",
       "images/golden-smoreo-poster.JPG",
+    ],
+  },
+  "smores-pc": {
+    name: "Pretzel Caramel Smores Cookie.",
+    vibe: "#5b3614",
+    ingredients: "Classic Jaytreat cookie stuffed with pretzels, caramel, chocolate chips, and topped with a toasted marsh",
+    allergens: "Flour (gluetn), Dairy, Cinnamon",
+    images: [
+      "images/smores-pc-main.jpeg",
+      "images/smores-pc-1.jpeg",
+      "images/smores-pc-2.jpeg",
+      "images/smores-pc-poster.jpg",
+    ],
+  },
+  "mountain-cookie": { 
+    name: "Mountain Cookie.",
+    vibe: "#000000",
+    ingredients: "Heath, Biscoff, Oreo, COOKIE",
+    allergens: "Flour (gluetn)",
+    images: [
+      "images/mountain-cookie-main.jpeg",
+      "images/mountain-cookie-1.jpeg",
+      "images/mountain-cookie-2.jpeg",
+      "images/mountain-cookie-3.jpeg",
+      "images/mountain-cookie-poster.jpeg",
+    ],
+  },
+  "matcha-cookie": { 
+    name: "Matcha Cookie.",
+    vibe: "#44ff00",
+    ingredients: "Matcha, Cream cheese, Honey Caramel, Oatmeal",
+    allergens: "Flour (gluetn), Cream Cheese, Performative nature",
+    images: [
+      "images/matcha-cookie-main.jpeg",
+      "images/matcha-cookie-1.jpeg",
+      "images/matcha-cookie-poster.jpg",
+    ],  
+  },
+   "dubai-cookie": { 
+    name: "Dubai Cookie.",
+    vibe: "#114a00",
+    ingredients: "Classic Jaytreat, with dubai pistachio filling and chocolate topping.",
+    allergens: "Flour (gluetn) Gelatin, Peach",
+    images: [
+      "images/dubai-cookie-main.jpeg",
+      "images/dubai-cookie-1.jpeg",
+      "images/dubai-cookie-2.JPG",
+      "images/dubai-cookie-poster.JPG",
+    ],
+  },
+   "apple-studel": { 
+    name: "Apple Strudel Kup.",
+    vibe: "#ff3006",
+    ingredients: "Delicious cookie cup with apple filling topped with crunchy cinnamon sugar strudel",
+    allergens: "Flour (gluetn) Gelatin, Peach",
+    images: [
+      "images/apple-strudel-main.jpeg",
+      "images/apple-strudel-1.jpeg",
+      "images/apple-strudel-2.jpeg",
+      "images/apple-strudel-poster.JPG",
+    ],
+  },
+  
+    "peach-cream": { 
+    name: "Peaches & Cream Cookie.",
+    vibe: "#ffaa64",
+    ingredients: "Classic Jaytreat cookie base mixed with peach puree and white choclate chips",
+    allergens: "Flour (gluetn) Gelatin, Peach",
+    images: [
+      "images/peach-cream-main.jpg",
+      "images/peach-cream-1.jpeg",
+      "images/peach-cream-2.jpeg",
+      "images/peach-cream-poster.JPG",
+    ],
+  },
+  "kid-kup": { 
+    name: "Kid Kups.",
+    vibe: "#ffd900",
+    ingredients: "Everything you love in a cup (marshmallow, cookie, chocolate, pretzel, m&m)",
+    allergens: "Flour (gluetn) Gelatin",
+    images: [
+      "images/kid-kup-main.jpeg",
+      "images/kid-kup-1.jpeg",
+      "images/kid-kup-2.jpeg",
+      "images/kid-kup-poster.JPG",
+    ],
+  },
+    "throwbacks": {
+    name: "Throwbacks",
+    vibe: "#ffffff",
+    ingredients: "Idk, a bunch of em, these are oldies",
+    allergens: "I think one had peanuts",
+    images: [
+      "images/other-main.jpeg",
+      "images/other-1.jpeg",
+      "images/other-2.JPG",
+      "images/other-3.jpeg",
     ],
   },
 };
