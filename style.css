@@ -402,3 +402,13 @@ a:hover {
         grid-template-columns: repeat(4, 1fr);
     }
 }
+/* Smooth fade-in for lazy loaded images */
+.lazy-load.loaded {
+    opacity: 1 !important;
+}
+
+/* Optional: Add a light grey background to the image space while loading */
+.image-link img {
+    background-color: #f0f0f0;
+    min-height: 200px; /* Adjust to match your average image height */
+}

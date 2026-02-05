@@ -1,10 +1,22 @@
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "biscoff-crispy";
-const currentPrice = 3.50;
+const currentTreatID = "fudge-brookie";
+const currentPrice = 4.50;
 
 
 // 2. The "Backlog" - Your complete database of items
 const treatData = {
+  "fudge-brookie": {
+    name: "Heath Oreo Brookie Fudge Bomb",
+    vibe: "#822300b5",
+    ingredients: "Heath, Cookie Dough Oreo, Semisweet chocolate chips, Butter, Sugar, Salt, Cocoa Powder",
+    allergens: "Flour (Gluetn)",
+    images: [
+      "images/fudge-brookie-main.jpeg",
+      "images/fudge-brookie-1.jpeg",
+      "images/fudge-brookie-2.jpeg",
+      "images/fudge-brookie-poster.jpeg",
+    ],
+  },
   "biscoff-crispy": {
     name: "Biscoff Rice Crisp treat",
     vibe: "#0095f2",

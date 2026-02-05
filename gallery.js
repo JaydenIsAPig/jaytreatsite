@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }
 
-    // ==========================================
+// ==========================================
     // PART 2: GALLERY PAGE LOGIC (Full Menu)
     // ==========================================
     const galleryContainer = document.getElementById('full-gallery');
@@ -116,6 +116,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (galleryContainer) {
         
+        // --- LAZY LOADING OBSERVER ---
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    // Move data-src to src
+                    img.src = img.dataset.src;
+                    // Add a class to trigger CSS fade-in
+                    img.classList.add('loaded');
+                    // Stop watching this specific image
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '0px 0px 300px 0px' // Load 300px before they appear
+        });
+
         function renderGallery(filterText = "") {
             galleryContainer.innerHTML = "";
             let matchCount = 0; 
@@ -124,19 +141,23 @@ document.addEventListener('DOMContentLoaded', () => {
             Object.keys(treatData).forEach(function(id) {
                 const treat = treatData[id];
                 
-                // Search Filter Logic
                 if (treat.name.toLowerCase().includes(cleanFilter) || 
                     treat.ingredients.toLowerCase().includes(cleanFilter)) {
                     
                     matchCount++;
                     
-                    // Image Logic
                     const cardImage = (treat.images && treat.images.length > 0) ? treat.images[0] : null;
+                    
+                    // MODIFIED: Use data-src instead of src for the high-res image
+                    // We use a tiny transparent gif as the initial src to keep it valid
                     let cardVisual = cardImage 
-                        ? `<img src="${cardImage}" alt="${treat.name}" style="width:100%; height:auto; border-radius:10px; margin-bottom:15px; display:block;">`
+                        ? `<img class="lazy-load" 
+                                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                                data-src="${cardImage}" 
+                                alt="${treat.name}" 
+                                style="width:100%; height:auto; border-radius:10px; margin-bottom:15px; display:block; opacity:0; transition: opacity 0.5s ease-in;">`
                         : `<div class="placeholder-img" style="height: 200px; margin-bottom: 15px;"><span>${treat.name}</span></div>`;
 
-                    // Vibe Text Logic
                     const vibeStyle = getVibeStyle(treat.vibe || '#000');
 
                     const cardHTML = 
@@ -145,26 +166,24 @@ document.addEventListener('DOMContentLoaded', () => {
                                 cardVisual +
                             '</a>' +
                             '<div class="card-text">' +
-                                // Title with Vibe Outline (No Underline)
                                 `<h3><a href="treat.html?id=${id}" style="text-decoration: none; color: white; ${vibeStyle}">${treat.name}</a></h3>` +
                             '</div>' +
                         '</div>';
                     
-                    galleryContainer.innerHTML += cardHTML;
+                    galleryContainer.insertAdjacentHTML('beforeend', cardHTML);
                 }
             });
-            
+
+            // Start observing the newly created images
+            document.querySelectorAll('.lazy-load').forEach(img => imageObserver.observe(img));
 
             if (matchCount === 0) {
                 galleryContainer.innerHTML = '<p style="text-align:center; width:100%;">No treats found matching "' + filterText + '"</p>';
             }
         }
-        
 
-        // Run once on load
         renderGallery();
 
-        // Listen for typing in search bar
         if (searchInput) {
             searchInput.addEventListener('input', (e) => renderGallery(e.target.value));
         }
