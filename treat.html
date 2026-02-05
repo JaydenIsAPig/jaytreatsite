@@ -11,58 +11,47 @@
     <script src="gallery.js"></script>
 
     <style>
-        /* --- 1. LAYOUT GRID (The Fix for Widescreen) --- */
+        /* --- 1. LAYOUT GRID --- */
         .content-container {
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px 0;
-
-            /* MOBILE DEFAULT: Stacked (1 Column) */
             display: flex;
             flex-direction: column;
             gap: 30px;
         }
 
-        /* DESKTOP/WIDESCREEN: Switch to 2-Column Grid */
         @media (min-width: 768px) {
             .content-container {
                 display: grid;
-                /* This forces exactly 2 items per row (Image Left, Video Right) */
                 grid-template-columns: 1fr 1fr;
                 gap: 40px;
-                align-items: center;
-                /* Prevents stretching height */
+                align-items: start;
             }
 
-            /* Make the bottom gallery span the full width of the screen */
             #extra-images-container {
                 grid-column: span 2;
             }
         }
 
         /* --- 2. VIDEO PLAYER --- */
-        /* Standard Video (16:9) - The default */
         .video-container {
             position: relative;
             width: 100%;
             padding-bottom: 56.25%;
-            /* 16:9 Aspect Ratio */
             height: 0;
             overflow: hidden;
             border-radius: 10px;
             background-color: #000;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: none; /* JS controls visibility */
         }
 
-        /* NEW: Shorts Mode (9:16) - Vertical Phone Shape */
         .video-container.shorts-mode {
             padding-bottom: 177.78%;
-            /* (16 / 9) * 100 = 177.77...% */
             max-width: 400px;
-            /* Optional: Prevents it from being MASSIVE on desktop */
             margin: 0 auto;
-            /* Centers it if we limit the width */
         }
 
         .video-container iframe {
@@ -78,15 +67,13 @@
         .main-image-display {
             width: 100%;
             height: auto;
-            /* Auto height prevents cropping */
             object-fit: contain;
-            /* Shows full image always */
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             display: block;
         }
 
-        /* --- 4. GALLERY GRID (With Border Fix) --- */
+        /* --- 4. GALLERY GRID --- */
         .image-grid {
             display: flex;
             flex-wrap: wrap;
@@ -94,17 +81,13 @@
             justify-content: center;
             width: 100%;
             margin-top: 20px;
-
-            /* CRITICAL FIX: Stops borders from stretching into empty space */
             align-items: flex-start;
         }
 
         .gallery-detail-img {
             width: 100%;
             max-width: 300px;
-            /* Limits size of individual gallery shots */
             height: auto;
-            /* Ensures aspect ratio is kept */
             object-fit: contain;
             border-radius: 10px;
             border: 2px solid rgba(255, 255, 255, 0.2);
@@ -116,11 +99,58 @@
             border-color: #FF69B4;
         }
 
-        /* Ensure content blocks behave well in the grid */
         .content-block {
             width: 100%;
             display: block;
         }
+
+        /* --- 5. THE UNIVERSAL CARD STYLE --- */
+        /* This applies the visual look (Box, Colors, Borders) PERMANENTLY */
+        
+        #universal-info-card {
+            background: rgba(239, 182, 255, 0.432);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+            
+            /* Default Text Colors */
+            color: white;
+        }
+
+        /* Pink Header for Ingredients */
+
+
+        /* Separator line before Allergens */
+        #universal-info-card .allergen-container {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed rgba(255,255,255,0.1);
+        }
+
+        /* STRICT COLOR MAPPING */
+        
+
+
+        /* --- POSITION VARIANTS (Controlled by JS) --- */
+
+        /* Variant A: When in Header (Top) */
+        #universal-info-card.in-header {
+            text-align: center; /* Center text for header look */
+            max-width: 800px;   /* Don't let it stretch too wide */
+            margin: 0 auto 30px auto; /* Center the box itself */
+        }
+
+        /* Variant B: When in Grid (Side) */
+        #universal-info-card.in-grid {
+            text-align: left; /* Left align for side column */
+            height: 100%;     /* Match height of image */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
     </style>
 </head>
 
@@ -128,13 +158,19 @@
 
     <header class="hero-section">
         <h1 id="treat-name">Loading...</h1>
-        <h2>Ingredients</h2>
-        <p id="ingredient-list" class="ingredient-list"></p>
-
-        <div class="allergen-container">
-            <h3 class="allergen-heading">Contains:</h3>
-            <p id="allergen-list" class="allergen-list"></p>
-        </div>
+        
+        <div id="header-slot">
+            
+            <div id="universal-info-card">
+                <h2>Ingredients</h2>
+                <p id="ingredient-list" class="ingredient-list"></p>
+                
+                <div class="allergen-container">
+                    <h3 class="allergen-heading">Contains:</h3>
+                    <p id="allergen-list" class="allergen-list"></p>
+                </div>
+            </div>
+            </div>
     </header>
 
     <main class="content-container">
@@ -143,10 +179,11 @@
             <img id="main-treat-image" src="" alt="Treat Main View" class="main-image-display">
         </div>
 
-        <div class="content-block">
-            <div class="video-container">
+        <div class="content-block" id="media-slot">
+            <div class="video-container" id="video-wrapper">
                 <iframe id="video-player" src="" frameborder="0" allowfullscreen></iframe>
             </div>
+            
         </div>
 
         <div id="extra-images-container" class="image-grid">
@@ -162,33 +199,43 @@
             if (treatId && treatData[treatId]) {
                 const treat = treatData[treatId];
 
-                // 1. Text Info
+                // 1. Populate Text
                 const nameHeader = document.getElementById('treat-name');
                 nameHeader.innerText = treat.name;
                 document.getElementById('ingredient-list').innerText = treat.ingredients;
                 document.getElementById('allergen-list').innerText = treat.allergens;
                 document.title = treat.name + " | jaytreats";
 
-                // 2. VIBE LOGIC (Apply Outline Color)
+                // Vibe Coloring
                 if (treat.vibe) {
                     const c = treat.vibe;
                     nameHeader.style.textShadow =
                         `1px 1px 0 ${c}, -1px 1px 0 ${c}, 1px -1px 0 ${c}, -1px -1px 0 ${c}`;
                 }
 
-                // ... inside treat.html script ...
-
-                // 3. Video Logic
+                // 2. LAYOUT LOGIC (Move Card & Toggle Alignment)
+                const infoCard = document.getElementById('universal-info-card');
+                const headerSlot = document.getElementById('header-slot');
+                const mediaSlot = document.getElementById('media-slot');
+                const videoWrapper = document.getElementById('video-wrapper');
                 const videoFrame = document.getElementById('video-player');
-                const videoContainer = videoFrame.closest('.video-container'); // Grab the container to change styling
-                const videoBlock = videoFrame.closest('.content-block');
 
                 if (treat.youtubeID) {
+                    // --- CASE A: Video Exists ---
+                    // 1. Place Card in Header
+                    headerSlot.appendChild(infoCard);
+                    
+                    // 2. Set Alignment Class
+                    infoCard.classList.add('in-header');
+                    infoCard.classList.remove('in-grid');
+                    
+                    // 3. Show Video
+                    videoWrapper.style.display = 'block';
+
+                    // Video setup
                     let rawID = treat.youtubeID;
                     let videoID = rawID;
                     let isShort = false;
-
-                    // Detect if it is a Short based on the URL structure
                     if (rawID.includes('shorts/')) {
                         isShort = true;
                         videoID = rawID.split('shorts/')[1];
@@ -196,36 +243,39 @@
                         videoID = rawID.split('v=')[1].split('&')[0];
                     }
 
-                    // Apply the Fix
                     if (isShort) {
-                        videoContainer.classList.add('shorts-mode'); // Switch to vertical shape
+                        videoWrapper.classList.add('shorts-mode');
                     } else {
-                        videoContainer.classList.remove('shorts-mode'); // Ensure standard shape
+                        videoWrapper.classList.remove('shorts-mode');
                     }
-
                     videoFrame.src = "https://www.youtube.com/embed/" + videoID + "?rel=0&modestbranding=1";
 
                 } else {
-                    if (videoBlock) videoBlock.style.display = 'none';
+                    // --- CASE B: No Video ---
+                    // 1. Hide Video
+                    videoWrapper.style.display = 'none';
+
+                    // 2. Move Card to Media Slot (Side)
+                    mediaSlot.appendChild(infoCard);
+
+                    // 3. Set Alignment Class
+                    infoCard.classList.add('in-grid');
+                    infoCard.classList.remove('in-header');
                 }
 
-                // 4. Image Logic
+                // 3. Image Logic
                 const mainImg = document.getElementById('main-treat-image');
                 const extraContainer = document.getElementById('extra-images-container');
                 extraContainer.innerHTML = "";
 
                 if (treat.images && treat.images.length > 0) {
-                    // Set Main Image
                     mainImg.src = treat.images[0];
                     mainImg.alt = treat.name + " Main View";
-
-                    // Loop Extra Images (Skip the first one)
                     if (treat.images.length > 1) {
                         treat.images.slice(1).forEach(function (imgSrc) {
                             const newImg = document.createElement('img');
                             newImg.src = imgSrc;
                             newImg.className = "gallery-detail-img";
-                            newImg.alt = treat.name + " detail shot";
                             extraContainer.appendChild(newImg);
                         });
                     }
@@ -249,7 +299,6 @@
         <a href="https://www.instagram.com/jaydessertss" target="_blank">
             <img src="images/insta.png" alt="Follow us on Instagram" class="social-icon">
         </a>
-
         <p style="font-size: 0.8rem; color: #ccc; margin-top: 10px;">
             &copy; 2026 JayTreats
         </p>

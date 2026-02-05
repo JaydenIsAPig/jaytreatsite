@@ -21,9 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // PART 1: HOME PAGE LOGIC (Feature of the Week)
     // ==========================================
-    // ==========================================
-    // PART 1: HOME PAGE LOGIC (Feature of the Week)
-    // ==========================================
     const heroContainer = document.getElementById('treat-name');
     const featuredContainer = document.getElementById('featured-treat-container');
     
@@ -38,18 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (featuredTreat) {
             
             // --- 1. PREORDER BUTTON LOGIC ---
-            // Use the GLOBAL variable from treats.js
             const displayPrice = (typeof currentPrice !== 'undefined') ? currentPrice : "0";
-           // gonna be here
-
-           //old preorder wrapper
-            // if (preorderWrapper) {
-            //     preorderWrapper.innerHTML = `
-            //         <a href="https://venmo.com/Jaden-Daden?txn=pay&amount=${displayPrice}&note=jaytreat" target="_blank" class="preorder-btn">
-            //             Preorder Now ($${displayPrice})
-            //         </a>
-            //     `;
-            // }
 
             // --- 2. IMAGE LOGIC ---
             const heroImage = (featuredTreat.images && featuredTreat.images.length > 0) 
