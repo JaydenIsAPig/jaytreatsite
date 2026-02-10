@@ -399,7 +399,7 @@ a:hover {
 /* This ensures it never goes to 5 or 6, even on huge screens */
 @media (min-width: 1200px) {
     .gallery-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 /* Smooth fade-in for lazy loaded images */
