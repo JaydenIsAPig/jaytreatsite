@@ -1,10 +1,22 @@
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "fudge-brookie";
-const currentPrice = 4.50;
+const currentTreatID = "cookies-cream";
+const currentPrice = 4.00;
 
 
 // 2. The "Backlog" - Your complete database of items
 const treatData = {
+  "cookies-cream": {
+    name: "Cookies & Cream",
+    vibe: "#000000b5",
+    ingredients: "Oreos (Golden & Original), Semi Sweet & White chocolate chips Butter, Sugar, Brown Sugar, Eggs, Flour, Baking Soda, Salt, Cornstarch,",
+    allergens: "Flour (Gluetn)",
+    images: [
+      "images/cookies-cream-main.jpeg",
+      "images/cookies-cream-1.jpeg",
+      "images/cookies-cream-2.jpeg",
+      "images/cookies-cream-3.jpeg",
+    ],
+  },
   "fudge-brookie": {
     name: "Heath Oreo Brookie Fudge Bomb",
     vibe: "#822300b5",
@@ -133,6 +145,18 @@ const treatData = {
       "images/golden-smoreo-poster.JPG",
     ],
   },
+    "cookies-scream": {
+    name: "Cookies & Scream Brownie",
+    vibe: "#ff5100b5",
+    ingredients: "Halloween Oreos, Chocolate goodness.",
+    allergens: "Flour (Gluetn)",
+    images: [
+      "images/cookies-scream-main.jpeg",
+      "images/cookies-scream-1.jpeg",
+      "images/cookies-scream-2.jpeg",
+      "images/cookies-scream-poster.JPG",
+    ],
+  },
   "smores-pc": {
     name: "Pretzel Caramel Smores Cookie.",
     vibe: "#5b3614",
@@ -228,6 +252,10 @@ const treatData = {
       "images/other-1.jpeg",
       "images/other-2.JPG",
       "images/other-3.jpeg",
+      "images/other-4.JPG",
+      "images/other-5.JPG",
+      "images/other-6.JPG",
+      "images/other-7.JPG",
     ],
   },
 };
