@@ -1,10 +1,22 @@
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "cookies-cream";
-const currentPrice = 4.00;
+const currentTreatID = "biscoff-brownie";
+const currentPrice = 6.00;
 
 
 // 2. The "Backlog" - Your complete database of items
 const treatData = {
+  "biscoff-brownie": {
+    name: "British Smores Brownie",
+    vibe: "#381300b5",
+    ingredients: "Marshmallows, Semi Sweet & Dark chocolate chips, Butter, Sugar, Brown Sugar, Eggs, Flour, Baking Powder, Salt, Cornstarch, Cocoa powder, Biscoff Spread, Biscoff Cookie",
+    allergens: "Flour (Gluetn), Gelatin",
+    images: [
+      "images/biscoff-brownie-main.jpeg",
+      "images/biscoff-brownie-1.jpeg",
+      "images/biscoff-brownie-2.jpeg",
+      "images/biscoff-brownie-poster.jpeg",
+    ],
+  },
   "cookies-cream": {
     name: "Cookies & Cream",
     vibe: "#000000b5",
