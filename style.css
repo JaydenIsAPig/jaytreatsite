@@ -26,11 +26,11 @@ body {
 @media (max-width: 768px) {
     .content-container {
         flex-direction: column; /* Stacks image on TOP and video BELOW */
-        gap: 40px; /* Extra space so it doesn't look cluttered on mobile */
+        gap: 35px; /* Extra space so it doesn't look cluttered on mobile */
     }
 
     h1 {
-        font-size: 2.5rem !important; /* Shrinks text slightly so it fits on one screen */
+        font-size: 3.0rem !important; /* Shrinks text slightly so it fits on one screen */
     }
 
     .content-block {
@@ -147,7 +147,7 @@ p {
 
 .allergen-list {
     font-size: 1.2rem;
-    color: #FFFFFF;
+    color: hsl(0, 100%, 50%);
     margin: 0;
 }
 
@@ -193,7 +193,7 @@ p {
 @media (max-width: 768px) {
     .content-container {
         flex-direction: column;
-        gap: 30px;
+        gap: 25px;
     }
     
 }

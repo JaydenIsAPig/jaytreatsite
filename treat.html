@@ -26,7 +26,7 @@
             .content-container {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 40px;
+                gap: 30px;
                 align-items: start;
             }
 
@@ -111,7 +111,7 @@
             background: rgba(239, 182, 255, 0.432);
             border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            padding: 30px;
+            padding: 5px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             box-sizing: border-box;
             
@@ -123,10 +123,10 @@
 
 
         /* Separator line before Allergens */
-        #universal-info-card .allergen-container {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px dashed rgba(255,255,255,0.1);
+        #universal-info-card .ingredient-container {
+            margin-top: 10px;
+            padding-top: 5px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.148);
         }
 
         /* STRICT COLOR MAPPING */
@@ -144,7 +144,7 @@
 
         /* Variant B: When in Grid (Side) */
         #universal-info-card.in-grid {
-            text-align: left; /* Left align for side column */
+            text-align: center; /* Left align for side column */
             height: 100%;     /* Match height of image */
             display: flex;
             flex-direction: column;
@@ -162,12 +162,15 @@
         <div id="header-slot">
             
             <div id="universal-info-card">
-                <h2>Ingredients</h2>
-                <p id="ingredient-list" class="ingredient-list"></p>
                 
-                <div class="allergen-container">
+                
+                
                     <h3 class="allergen-heading">Contains:</h3>
                     <p id="allergen-list" class="allergen-list"></p>
+                
+                <div class="ingredient-container"></div>
+                <h2>Ingredients</h2>
+                <p id="ingredient-list" class="ingredient-list"></p>
                 </div>
             </div>
             </div>
@@ -202,8 +205,9 @@
                 // 1. Populate Text
                 const nameHeader = document.getElementById('treat-name');
                 nameHeader.innerText = treat.name;
-                document.getElementById('ingredient-list').innerText = treat.ingredients;
                 document.getElementById('allergen-list').innerText = treat.allergens;
+                document.getElementById('ingredient-list').innerText = treat.ingredients;
+
                 document.title = treat.name + " | jaytreats";
 
                 // Vibe Coloring
