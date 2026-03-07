@@ -11,10 +11,10 @@ const treatData = {
     ingredients: "Marshmallows, Semi Sweet & Dark chocolate chips, Butter, Sugar, Brown Sugar, Eggs, Flour, Baking Powder, Salt, Cornstarch, Cocoa powder, Biscoff Spread, Biscoff Cookie",
     allergens: "Flour (Gluetn), Gelatin",
     images: [
-      "images/biscoff-brownie-main.jpeg",
-      "images/biscoff-brownie-1.jpeg",
-      "images/biscoff-brownie-2.jpeg",
-      "images/biscoff-brownie-poster.jpeg",
+      "images/biscoff-brownie-main.webp",
+      "images/biscoff-brownie-1.webp",
+      "images/biscoff-brownie-2.webp",
+      "images/biscoff-brownie-poster.webp",
     ],
   },
   "cookies-cream": {
@@ -23,10 +23,10 @@ const treatData = {
     ingredients: "Oreos (Golden & Original), Semi Sweet & White chocolate chips Butter, Sugar, Brown Sugar, Eggs, Flour, Baking Soda, Salt, Cornstarch,",
     allergens: "Flour (Gluetn)",
     images: [
-      "images/cookies-cream-main.jpeg",
-      "images/cookies-cream-1.jpeg",
-      "images/cookies-cream-2.jpeg",
-      "images/cookies-cream-3.jpeg",
+      "images/cookies-cream-main.webp",
+      "images/cookies-cream-1.webp",
+      "images/cookies-cream-2.webp",
+      "images/cookies-cream-3.webp",
     ],
   },
   "fudge-brookie": {
@@ -35,10 +35,10 @@ const treatData = {
     ingredients: "Heath, Cookie Dough Oreo, Semisweet chocolate chips, Butter, Sugar, Salt, Cocoa Powder",
     allergens: "Flour (Gluetn)",
     images: [
-      "images/fudge-brookie-main.jpeg",
-      "images/fudge-brookie-1.jpeg",
-      "images/fudge-brookie-2.jpeg",
-      "images/fudge-brookie-poster.jpeg",
+      "images/fudge-brookie-main.webp",
+      "images/fudge-brookie-1.webp",
+      "images/fudge-brookie-2.webp",
+      "images/fudge-brookie-poster.webp",
     ],
   },
   "biscoff-crispy": {
@@ -47,10 +47,10 @@ const treatData = {
     ingredients: "Chewy Rice Crispy infused with biscoff butter, finished with a biscoff white choclate and encrusted with more biscoff powder",
     allergens: "Cinnamon, Gelatin",
     images: [
-      "images/biscoff-crispy-main.jpg",
-      "images/biscoff-crispy-1.jpg",
-      "images/biscoff-crispy-2.jpg",
-      "images/biscoff-crispy-poster.jpg",
+      "images/biscoff-crispy-main.webp",
+      "images/biscoff-crispy-1.webp",
+      "images/biscoff-crispy-2.webp",
+      "images/biscoff-crispy-poster.webp",
     ],
   },
   "velvet-cheesecake": {
@@ -61,10 +61,10 @@ const treatData = {
     youtubeID: "https://www.youtube.com/shorts/h2pDgsDiEv8", // Replace with real YouTube ID
     // The first link is the Main Image. Add as many others as you want.
     images: [
-      "images/velvet-cheesecake-main.jpeg",
-      "images/velvet-cheesecake-1.jpeg",
-      "images/velvet-cheesecake-2.jpeg",
-      "images/velvet-cheesecake-poster.png",
+      "images/velvet-cheesecake-main.webp",
+      "images/velvet-cheesecake-1.webp",
+      "images/velvet-cheesecake-2.webp",
+      "images/velvet-cheesecake-poster.webp",
     ],
   },
   "british-smores": {
@@ -75,10 +75,10 @@ const treatData = {
     youtubeID: "https://www.youtube.com/shorts/wIAtMzUSFHI", // Replace with real YouTube ID
     // The first link is the Main Image. Add as many others as you want.
     images: [
-      "images/british-main.jpeg",
-      "images/british-1.jpeg",
-      "images/british-2.jpeg",
-      "images/british-poster.jpeg",
+      "images/british-main.webp",
+      "images/british-1.webp",
+      "images/british-2.webp",
+      "images/british-poster.webp",
     ],
   },
   "santas-cookies": {
@@ -88,10 +88,10 @@ const treatData = {
     allergens: "Flour (gluetn), Almonds",
     youtubeID: "https://www.youtube.com/shorts/V8w1FR6SCSM",
     images: [
-      "images/santa-main.jpeg",
-      "images/santa-1.jpeg",
-      "images/santa-2.jpeg",
-      "images/santa-poster.jpeg",
+      "images/santa-main.webp",
+      "images/santa-1.webp",
+      "images/santa-2.webp",
+      "images/santa-poster.webp",
     ],
   },
   "basque-cheesecake": {
@@ -101,10 +101,10 @@ const treatData = {
     allergens: "Nutmeg",
     youtubeID: "https://www.youtube.com/shorts/g6cSvJr3fzw",
     images: [
-      "images/basquecake-main.jpeg",
-      "images/basquecake-1.jpeg",
-      "images/basquecake-2.jpeg",
-      "images/basquecake-poster.jpeg",
+      "images/basquecake-main.webp",
+      "images/basquecake-1.webp",
+      "images/basquecake-2.webp",
+      "images/basquecake-poster.webp",
     ],
   },
   "choclate-smores": {
@@ -114,10 +114,10 @@ const treatData = {
     allergens: "Flour (gluetn), Dairy, Gelatin",
     youtubeID: "https://www.youtube.com/shorts/SEFPr8NGXiY",
     images: [
-      "images/smores-chip-main.jpeg",
-      "images/smores-chip-1.jpeg",
-      "images/smores-chip-2.jpeg",
-      "images/smores-chip-poster.jpg",
+      "images/smores-chip-main.webp",
+      "images/smores-chip-1.webp",
+      "images/smores-chip-2.webp",
+      "images/smores-chip-poster.webp",
     ],
   },
   "bannana-bread": {
@@ -127,10 +127,10 @@ const treatData = {
     allergens: "Flour (gluetn), Dairy, Bannana",
     youtubeID: "https://www.youtube.com/shorts/Q-Cp2_iJrfc",
     images: [
-      "images/bannana-cookie-main.jpeg",
-      "images/bannana-cookie-1.jpeg",
-      "images/bannana-cookie-2.jpeg",
-      "images/bannana-cookie-poster.png",
+      "images/bannana-cookie-main.webp",
+      "images/bannana-cookie-1.webp",
+      "images/bannana-cookie-2.webp",
+      "images/bannana-cookie-poster.webp",
     ],
   },
   "pumpkin-kup": {
@@ -139,10 +139,10 @@ const treatData = {
     ingredients: "Fluffy yellow cake with cinnamon sugar topping, and finished with maple spiced icing",
     allergens: "Flour (gluetn), Dairy, Cinnamon, Nutmeg",
     images: [
-      "images/pump-kup-main.jpeg",
-      "images/pump-kup-1.jpeg",
-      "images/pump-kup-2.jpeg",
-      "images/pump-kup-poster.JPG",
+      "images/pump-kup-main.webp",
+      "images/pump-kup-1.webp",
+      "images/pump-kup-2.webp",
+      "images/pump-kup-poster.webp",
     ],
   },
   "golden-smore": {
@@ -151,10 +151,10 @@ const treatData = {
     ingredients: "Classic Jaytreat cookie base with a golden oreo surprise on the bottom, and a marshmallow one on top.",
     allergens: "Flour (gluetn), Dairy, Cinnamon",
     images: [
-      "images/golden-smoreo-main.jpeg",
-      "images/golden-smoreo-1.jpeg",
-      "images/golden-smoreo-2.jpeg",
-      "images/golden-smoreo-poster.JPG",
+      "images/golden-smoreo-main.webp",
+      "images/golden-smoreo-1.webp",
+      "images/golden-smoreo-2.webp",
+      "images/golden-smoreo-poster.webp",
     ],
   },
     "cookies-scream": {
@@ -163,10 +163,10 @@ const treatData = {
     ingredients: "Halloween Oreos, Chocolate goodness.",
     allergens: "Flour (Gluetn)",
     images: [
-      "images/cookies-scream-main.jpeg",
-      "images/cookies-scream-1.jpeg",
-      "images/cookies-scream-2.jpeg",
-      "images/cookies-scream-poster.JPG",
+      "images/cookies-scream-main.webp",
+      "images/cookies-scream-1.webp",
+      "images/cookies-scream-2.webp",
+      "images/cookies-scream-poster.webp",
     ],
   },
   "smores-pc": {
@@ -175,10 +175,10 @@ const treatData = {
     ingredients: "Classic Jaytreat cookie stuffed with pretzels, caramel, chocolate chips, and topped with a toasted marsh",
     allergens: "Flour (gluetn), Dairy, Cinnamon",
     images: [
-      "images/smores-pc-main.jpeg",
-      "images/smores-pc-1.jpeg",
-      "images/smores-pc-2.jpeg",
-      "images/smores-pc-poster.jpg",
+      "images/smores-pc-main.webp",
+      "images/smores-pc-1.webp",
+      "images/smores-pc-2.webp",
+      "images/smores-pc-poster.webp",
     ],
   },
   "mountain-cookie": { 
@@ -187,11 +187,11 @@ const treatData = {
     ingredients: "Heath, Biscoff, Oreo, COOKIE",
     allergens: "Flour (gluetn)",
     images: [
-      "images/mountain-cookie-main.jpeg",
-      "images/mountain-cookie-1.jpeg",
-      "images/mountain-cookie-2.jpeg",
-      "images/mountain-cookie-3.jpeg",
-      "images/mountain-cookie-poster.jpeg",
+      "images/mountain-cookie-main.webp",
+      "images/mountain-cookie-1.webp",
+      "images/mountain-cookie-2.webp",
+      "images/mountain-cookie-3.webp",
+      "images/mountain-cookie-poster.webp",
     ],
   },
   "matcha-cookie": { 
@@ -200,9 +200,9 @@ const treatData = {
     ingredients: "Matcha, Cream cheese, Honey Caramel, Oatmeal",
     allergens: "Flour (gluetn), Cream Cheese, Performative nature",
     images: [
-      "images/matcha-cookie-main.jpeg",
-      "images/matcha-cookie-1.jpeg",
-      "images/matcha-cookie-poster.jpg",
+      "images/matcha-cookie-main.webp",
+      "images/matcha-cookie-1.webp",
+      "images/matcha-cookie-poster.webp",
     ],  
   },
    "dubai-cookie": { 
@@ -211,10 +211,10 @@ const treatData = {
     ingredients: "Classic Jaytreat, with dubai pistachio filling and chocolate topping.",
     allergens: "Flour (gluetn) Gelatin, Peach",
     images: [
-      "images/dubai-cookie-main.jpeg",
-      "images/dubai-cookie-1.jpeg",
-      "images/dubai-cookie-2.JPG",
-      "images/dubai-cookie-poster.JPG",
+      "images/dubai-cookie-main.webp",
+      "images/dubai-cookie-1.webp",
+      "images/dubai-cookie-2.webp",
+      "images/dubai-cookie-poster.webp",
     ],
   },
    "apple-studel": { 
@@ -223,10 +223,10 @@ const treatData = {
     ingredients: "Delicious cookie cup with apple filling topped with crunchy cinnamon sugar strudel",
     allergens: "Flour (gluetn) Gelatin, Peach",
     images: [
-      "images/apple-strudel-main.jpeg",
-      "images/apple-strudel-1.jpeg",
-      "images/apple-strudel-2.jpeg",
-      "images/apple-strudel-poster.JPG",
+      "images/apple-strudel-main.webp",
+      "images/apple-strudel-1.webp",
+      "images/apple-strudel-2.webp",
+      "images/apple-strudel-poster.webp",
     ],
   },
   
@@ -236,10 +236,10 @@ const treatData = {
     ingredients: "Classic Jaytreat cookie base mixed with peach puree and white choclate chips",
     allergens: "Flour (gluetn) Gelatin, Peach",
     images: [
-      "images/peach-cream-main.jpg",
-      "images/peach-cream-1.jpeg",
-      "images/peach-cream-2.jpeg",
-      "images/peach-cream-poster.JPG",
+      "images/peach-cream-main.webp",
+      "images/peach-cream-1.webp",
+      "images/peach-cream-2.webp",
+      "images/peach-cream-poster.webp",
     ],
   },
   "kid-kup": { 
@@ -248,10 +248,10 @@ const treatData = {
     ingredients: "Everything you love in a cup (marshmallow, cookie, chocolate, pretzel, m&m)",
     allergens: "Flour (gluetn) Gelatin",
     images: [
-      "images/kid-kup-main.jpeg",
-      "images/kid-kup-1.jpeg",
-      "images/kid-kup-2.jpeg",
-      "images/kid-kup-poster.JPG",
+      "images/kid-kup-main.webp",
+      "images/kid-kup-1.webp",
+      "images/kid-kup-2.webp",
+      "images/kid-kup-poster.webp",
     ],
   },
     "throwbacks": {
@@ -260,14 +260,14 @@ const treatData = {
     ingredients: "Idk, a bunch of em, these are oldies",
     allergens: "I think one had peanuts",
     images: [
-      "images/other-main.jpeg",
-      "images/other-1.jpeg",
-      "images/other-2.JPG",
-      "images/other-3.jpeg",
-      "images/other-4.JPG",
-      "images/other-5.JPG",
-      "images/other-6.JPG",
-      "images/other-7.JPG",
+      "images/other-main.webp",
+      "images/other-1.webp",
+      "images/other-2.webp",
+      "images/other-3.webp",
+      "images/other-4.webp",
+      "images/other-5.webp",
+      "images/other-6.webp",
+      "images/other-7.webp",
     ],
   },
 };
