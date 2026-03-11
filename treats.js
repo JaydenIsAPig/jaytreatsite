@@ -6,10 +6,10 @@ const currentPrice = 4.00;
 // 2. The "Backlog" - Your complete database of items
 const treatData = {
   "caramel-snickerdoodle": {
-    name: "British Smores Brownie",
+    name: "Carmel Snickerdoodle Cookie Sandwich",
     vibe: "#ffa21fc9",
     ingredients: "Butter, Sugar, Brown Sugar, Eggs, Flour, Baking Powder, Salt, Cornstarch, Cinnamon, Cream of Tar Tar",
-    allergens: "Flour (Gluetn), Gelatin",
+    allergens: "Flour (Gluetn), Cinnamon",
     images: [
       "images/caramel-snickerdoodle-main.webp",
       "images/caramel-snickerdoodle-1.webp",
