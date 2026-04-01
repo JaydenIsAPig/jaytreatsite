@@ -1,10 +1,24 @@
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "caramel-snickerdoodle";
-const currentPrice = 4.00;
+const currentTreatID = "choclate-smores'2";
+const currentPrice = 5.00;
 
 
 // 2. The "Backlog" - Your complete database of items
+
 const treatData = {
+  "choclate-smores'2": {
+    name: "Chocolate Chips Smores Cookie.",
+    vibe: "#9e4700",
+    ingredients: "Classic, Jaytreat cookie base, cinnamon, {Milk,White, Dark} choclate chips &, toasted marshmallow, graham cracker,",
+    allergens: "Flour (gluetn), Dairy, Gelatin",
+    images: [
+      "images/smores-chip'2-main.webp",
+      "images/smores-chip'2-1.webp",
+      "images/smores-chip'2-2.webp",
+      "images/smores-chip'2-3.webp",
+      "images/smores-chip'2-4.webp",
+    ],
+  },
   "caramel-snickerdoodle": {
     name: "Carmel Snickerdoodle Cookie Sandwich",
     vibe: "#ffa21fc9",
