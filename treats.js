@@ -7,7 +7,7 @@ const currentPrice = 5.00;
 
 const treatData = {
   "choclate-smores'2": {
-    name: "Chocolate Chips Smores Cookie.",
+    name: "Chocolate Chips Smores Cookie",
     vibe: "#9e4700",
     ingredients: "Classic, Jaytreat cookie base, cinnamon, {Milk,White, Dark} choclate chips &, toasted marshmallow, graham cracker,",
     allergens: "Flour (gluetn), Dairy, Gelatin",
@@ -94,7 +94,7 @@ const treatData = {
     ],
   },
   "british-smores": {
-    name: "British Smores Cookie.",
+    name: "British Smores Cookie",
     vibe: "#8e3d00",
     ingredients: "Classic, Jaytreat cookie base, cinnamon, white choclate chips, biscoff, biscoff cookie butter, toasted marshmallow",
     allergens: "Flour (gluetn), Dairy",
@@ -108,7 +108,7 @@ const treatData = {
     ],
   },
   "santas-cookies": {
-    name: "Santas Cookies.",
+    name: "Santas Cookies",
     vibe: "#ff2710",
     ingredients: "Classic Jaytreat cookie base, chocolate & white peppermint chocolate covered pretzels, chocolate covered caramels & almonds",
     allergens: "Flour (gluetn), Almonds",
@@ -121,7 +121,7 @@ const treatData = {
     ],
   },
   "basque-cheesecake": {
-    name: "Caramel Biscoff Basque Cheesecake.",
+    name: "Caramel Biscoff Basque Cheesecake",
     vibe: "#6f5948",
     ingredients: "Biscoff cookie base, salted caramel, cream cheese.",
     allergens: "Nutmeg",
@@ -134,7 +134,7 @@ const treatData = {
     ],
   },
   "choclate-smores": {
-    name: "Chocolate Chips Smores Cookie.",
+    name: "Chocolate Chips Smores Cookie",
     vibe: "#ffe6d2",
     ingredients: "Classic, Jaytreat cookie base, cinnamon, semi-sweet choclate chips, toasted marshmallow",
     allergens: "Flour (gluetn), Dairy, Gelatin",
@@ -147,7 +147,7 @@ const treatData = {
     ],
   },
   "bannana-bread": {
-    name: "Bannana Bread Cookies.",
+    name: "Bannana Bread Cookies",
     vibe: "#ffea00",
     ingredients: "Bannana bread-cookie hybrid that is soft and chewy but not too sweet.",
     allergens: "Flour (gluetn), Dairy, Bannana",
@@ -160,7 +160,7 @@ const treatData = {
     ],
   },
   "pumpkin-kup": {
-    name: "Iced Spiced Pumpkin Kupz.",
+    name: "Iced Spiced Pumpkin Kupz",
     vibe: "#a44f00",
     ingredients: "Fluffy yellow cake with cinnamon sugar topping, and finished with maple spiced icing",
     allergens: "Flour (gluetn), Dairy, Cinnamon, Nutmeg",
@@ -172,7 +172,7 @@ const treatData = {
     ],
   },
   "golden-smore": {
-    name: "Golden Smoreo Cookie.",
+    name: "Golden Smoreo Cookie",
     vibe: "#a44f00",
     ingredients: "Classic Jaytreat cookie base with a golden oreo surprise on the bottom, and a marshmallow one on top.",
     allergens: "Flour (gluetn), Dairy, Cinnamon",
@@ -196,7 +196,7 @@ const treatData = {
     ],
   },
   "smores-pc": {
-    name: "Pretzel Caramel Smores Cookie.",
+    name: "Pretzel Caramel Smores Cookie",
     vibe: "#5b3614",
     ingredients: "Classic Jaytreat cookie stuffed with pretzels, caramel, chocolate chips, and topped with a toasted marsh",
     allergens: "Flour (gluetn), Dairy, Cinnamon",
@@ -208,7 +208,7 @@ const treatData = {
     ],
   },
   "mountain-cookie": { 
-    name: "Mountain Cookie.",
+    name: "Mountain Cookie",
     vibe: "#000000",
     ingredients: "Heath, Biscoff, Oreo, COOKIE",
     allergens: "Flour (gluetn)",
@@ -221,7 +221,7 @@ const treatData = {
     ],
   },
   "matcha-cookie": { 
-    name: "Matcha Cookie.",
+    name: "Matcha Cookie",
     vibe: "#44ff00",
     ingredients: "Matcha, Cream cheese, Honey Caramel, Oatmeal",
     allergens: "Flour (gluetn), Cream Cheese, Performative nature",
@@ -232,7 +232,7 @@ const treatData = {
     ],  
   },
    "dubai-cookie": { 
-    name: "Dubai Cookie.",
+    name: "Dubai Cookie",
     vibe: "#114a00",
     ingredients: "Classic Jaytreat, with dubai pistachio filling and chocolate topping.",
     allergens: "Flour (gluetn) Gelatin, Peach",
@@ -244,7 +244,7 @@ const treatData = {
     ],
   },
    "apple-studel": { 
-    name: "Apple Strudel Kup.",
+    name: "Apple Strudel Kup",
     vibe: "#ff3006",
     ingredients: "Delicious cookie cup with apple filling topped with crunchy cinnamon sugar strudel",
     allergens: "Flour (gluetn) Gelatin, Peach",
@@ -257,7 +257,7 @@ const treatData = {
   },
   
     "peach-cream": { 
-    name: "Peaches & Cream Cookie.",
+    name: "Peaches & Cream Cookie",
     vibe: "#ffaa64",
     ingredients: "Classic Jaytreat cookie base mixed with peach puree and white choclate chips",
     allergens: "Flour (gluetn) Gelatin, Peach",
@@ -269,7 +269,7 @@ const treatData = {
     ],
   },
   "kid-kup": { 
-    name: "Kid Kups.",
+    name: "Kid Kups",
     vibe: "#ffd900",
     ingredients: "Everything you love in a cup (marshmallow, cookie, chocolate, pretzel, m&m)",
     allergens: "Flour (gluetn) Gelatin",
