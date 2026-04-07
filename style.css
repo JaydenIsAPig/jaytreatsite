@@ -21,6 +21,10 @@ body {
     max-width: 1200px;
     margin: 0 auto;
 }
+header {
+    background: radial-gradient(circle at top left, 
+               #fffc43, #8B0000, #FF69B4, #FF4500);
+}
 
 /* MOBILE SCALING (For iPhone Portrait Mode) */
 @media (max-width: 768px) {
