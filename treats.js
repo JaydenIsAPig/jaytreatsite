@@ -1,11 +1,23 @@
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "choclate-smores'2";
-const currentPrice = 5.00;
+const currentTreatID = "chocoberry";
+const currentPrice = 4.00;
 
 
 // 2. The "Backlog" - Your complete database of items
 
 const treatData = {
+  "chocoberry": {
+    name: "Strawberry covered Chocolate Cookie",
+    vibe: "#9e4700",
+    ingredients: "Freeze Dried Strawberry, Semi-Sweet chocolate, Butter, Sugar, Egg, Molasses, salt, baking soda",
+    allergens: "Flour (gluetn), Dairy",
+    images: [
+      "images/chocoberry-main.webp",
+      "images/chocoberry-1.webp",
+      "images/chocoberry-2.webp",
+      "images/chocoberry-3.webp",
+    ],
+  },
   "choclate-smores'2": {
     name: "Chocolate Chips Smores Cookie",
     vibe: "#9e4700",
