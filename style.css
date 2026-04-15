@@ -21,7 +21,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
 }
-header {
+.radial {
+    padding: .1rem;
     background: radial-gradient(circle at top left, 
                #fffc43, #8B0000, #FF69B4, #FF4500);
 }
