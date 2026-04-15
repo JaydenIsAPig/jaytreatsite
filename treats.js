@@ -1,14 +1,26 @@
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "chocoberry";
-const currentPrice = 4.00;
+const currentTreatID = "biscoff-billionaire";
+const currentPrice = 3.50;
 
 
 // 2. The "Backlog" - Your complete database of items
 
 const treatData = {
+  "biscoff-billionaire": {
+    name: "Biscoff Billionaire",
+    vibe: "#975b22",
+    ingredients: "Biscoff cookie, Butter, Biscoff cookie butter, Sweetned Condensed milk, Sugar, Sugar Syrup, White & Semi-Sweet chocolate chips",
+    allergens: "Flour (gluetn), Dairy",
+    images: [
+      "images/biscoff-b-main.webp",
+      "images/biscoff-b-1.webp",
+      "images/biscoff-b-2.webp",
+      "images/biscoff-b-3.webp",
+    ],
+  },
   "chocoberry": {
-    name: "Strawberry covered Chocolate Cookie",
-    vibe: "#9e4700",
+    name: "Strawberry Covered Chocolate Cookie",
+    vibe: "#9d0000",
     ingredients: "Freeze Dried Strawberry, Semi-Sweet chocolate, Butter, Sugar, Egg, Molasses, salt, baking soda",
     allergens: "Flour (gluetn), Dairy",
     images: [
@@ -33,7 +45,7 @@ const treatData = {
   },
   "caramel-snickerdoodle": {
     name: "Carmel Snickerdoodle Cookie Sandwich",
-    vibe: "#ffa21fc9",
+    vibe: "#ffbb5cc9",
     ingredients: "Butter, Sugar, Brown Sugar, Eggs, Flour, Baking Powder, Salt, Cornstarch, Cinnamon, Cream of Tar Tar",
     allergens: "Flour (Gluetn), Cinnamon",
     images: [

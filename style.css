@@ -5,7 +5,7 @@ body {
     min-height: 100vh;
     font-family: Arial, sans-serif;
     background: radial-gradient(circle at top left, 
-                #de7022e7, #5c1f00, #8B0000, #ffdda7);
+                #de7022e7, #5c1f00, #693600, #ffdda7);
     background-attachment: fixed;
     color: white;
 }
@@ -24,7 +24,7 @@ body {
 .radial {
     padding: 10px;
     background: radial-gradient(circle at top left, 
-               #ffca75, #8B0000, #aa0000, #833200);
+               #ffca75, #8B0000, #c76c1c, #833200);
 }
 
 /* MOBILE SCALING (For iPhone Portrait Mode) */
