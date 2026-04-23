@@ -1,11 +1,22 @@
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "biscoff-billionaire";
-const currentPrice = 3.50;
-
+const currentTreatID = "kitchen-sink";
+const currentPrice = 5.00;
 
 // 2. The "Backlog" - Your complete database of items
 
 const treatData = {
+  "kitchen-sink": {
+    name: "Kitchen Sink Cookie",
+    vibe: "#f5ca3c",
+    ingredients: "Butter, Sugar, Molassas, Eggs, Semi-sweet chocolate, Gluten Free (GF) Flour, GF pretzel, GF potato chips, Caramel bits, Cinnamon, Baking Soda, Salt",
+    allergens: "Dairy",
+    images: [
+      "images/kitchen-sink-main.webp",
+      "images/kitchen-sink-1.webp",
+      "images/kitchen-sink-2.webp",
+      "images/kitchen-sink-3.webp",
+    ],
+  },
   "biscoff-billionaire": {
     name: "Biscoff Billionaire",
     vibe: "#975b22",
