@@ -4,16 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Treat Details | jaytreats</title>
-    <link rel="stylesheet" href="style.css">
-
-    <script src="treats.js"></script>
-    <script src="gallery.js"></script>
+    <script>
+        document.write('<script src="treats.js?fresh=' + Date.now() + '"><\/script>');
+    </script>
+    <script>
+        var siteVersion = window.SITE_VERSION || Date.now();
+        document.write('<link rel="stylesheet" href="style.css?v=' + siteVersion + '">');
+        document.write('<script src="gallery.js?v=' + siteVersion + '"><\/script>');
+    </script>
 
     <style>
         /* --- 1. LAYOUT GRID --- */
         .content-container {
-            width: 90%;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px 0;
@@ -75,23 +82,34 @@
 
         /* --- 4. GALLERY GRID --- */
         .image-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            width: 90%;
             margin-top: 20px;
             align-items: flex-start;
+            justify-self: center;
         }
 
         .gallery-detail-img {
-            width: 100%;
-            max-width: 300px;
+            width: 90%;
             height: auto;
             object-fit: contain;
             border-radius: 10px;
             border: 2px solid rgba(255, 255, 255, 0.2);
             transition: transform 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .image-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .gallery-detail-img:last-child:nth-child(odd) {
+                grid-column: 1 / -1;
+                justify-self: center;
+                width: calc((100% - 20px) / 2);
+            }
         }
 
         .gallery-detail-img:hover {

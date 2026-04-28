@@ -1,14 +1,31 @@
+
+const SITE_VERSION = "20260428";
+window.SITE_VERSION = SITE_VERSION;
+
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "kitchen-sink";
+const currentTreatID = "smoreo";
 const currentPrice = 5.00;
 
 // 2. The "Backlog" - Your complete database of items
 
 const treatData = {
+  "smoreo": {
+    name: "S'moreo Cookie",
+    vibe: "#000000",
+    ingredients: "marshmallow, oreo cookies, butter, sugar, molassas, eggs, semi-sweet chocolate, white chocolate, (ap) flour, cornstarch, baking soda, baking powder, salt, cocoa power",
+    allergens: "Dairy",
+    images: [
+      "images/smoreo-main.webp",
+      "images/smoreo-1.webp",
+      "images/smoreo-2.webp",
+      "images/smoreo-3.webp",
+      "images/smoreo-4.webp",
+    ],
+  },
   "kitchen-sink": {
     name: "Kitchen Sink Cookie",
     vibe: "#f5ca3c",
-    ingredients: "Butter, Sugar, Molassas, Eggs, Semi-sweet chocolate, Gluten Free (GF) Flour, GF pretzel, GF potato chips, Caramel bits, Cinnamon, Baking Soda, Salt",
+    ingredients: "butter, sugar, molassas, eggs, semi-sweet chocolate, gluten Free (gf) Flour, (gf) pretzel, (gf) potato chips, caramel bits, cinnamon, baking Soda, salt",
     allergens: "Dairy",
     images: [
       "images/kitchen-sink-main.webp",
@@ -20,7 +37,7 @@ const treatData = {
   "biscoff-billionaire": {
     name: "Biscoff Billionaire",
     vibe: "#975b22",
-    ingredients: "Biscoff cookie, Butter, Biscoff cookie butter, Sweetned Condensed milk, Sugar, Sugar Syrup, White & Semi-Sweet chocolate chips",
+    ingredients: "biscoff cookie, butter, biscoff cookie butter, sweetned condensed milk, sugar, sugar syrup, white & semi-Sweet chocolate chips",
     allergens: "Flour (gluetn), Dairy",
     images: [
       "images/biscoff-b-main.webp",
@@ -32,7 +49,7 @@ const treatData = {
   "chocoberry": {
     name: "Strawberry Covered Chocolate Cookie",
     vibe: "#9d0000",
-    ingredients: "Freeze Dried Strawberry, Semi-Sweet chocolate, Butter, Sugar, Egg, Molasses, salt, baking soda",
+    ingredients: "freeze dried strawberry, semi-Sweet chocolate, butter, sugar, egg, molasses, salt, baking soda",
     allergens: "Flour (gluetn), Dairy",
     images: [
       "images/chocoberry-main.webp",
@@ -44,7 +61,7 @@ const treatData = {
   "choclate-smores'2": {
     name: "Chocolate Chips Smores Cookie",
     vibe: "#9e4700",
-    ingredients: "Classic, Jaytreat cookie base, cinnamon, {Milk,White, Dark} choclate chips &, toasted marshmallow, graham cracker,",
+    ingredients: "classic, jaytreat cookie base, cinnamon, {milk,white, dark} choclate chips &, toasted marshmallow, graham cracker,",
     allergens: "Flour (gluetn), Dairy, Gelatin",
     images: [
       "images/smores-chip'2-main.webp",
@@ -57,7 +74,7 @@ const treatData = {
   "caramel-snickerdoodle": {
     name: "Carmel Snickerdoodle Cookie Sandwich",
     vibe: "#ffbb5cc9",
-    ingredients: "Butter, Sugar, Brown Sugar, Eggs, Flour, Baking Powder, Salt, Cornstarch, Cinnamon, Cream of Tar Tar",
+    ingredients: "butter, sugar, brown Sugar, eggs, flour, baking Powder, salt, cornstarch, cinnamon, cream of tartar",
     allergens: "Flour (Gluetn), Cinnamon",
     images: [
       "images/caramel-snickerdoodle-main.webp",
@@ -69,7 +86,7 @@ const treatData = {
   "biscoff-brownie": {
     name: "British Smores Brownie",
     vibe: "#381300b5",
-    ingredients: "Marshmallows, Semi Sweet & Dark chocolate chips, Butter, Sugar, Brown Sugar, Eggs, Flour, Baking Powder, Salt, Cornstarch, Cocoa powder, Biscoff Spread, Biscoff Cookie",
+    ingredients: "marshmallows, semi sweet & dark chocolate chips, butter, sugar, brown Sugar, eggs, flour, baking powder, salt, cornstarch, cocoa powder, biscoff Spread, biscoff Cookie",
     allergens: "Flour (Gluetn), Gelatin",
     images: [
       "images/biscoff-brownie-main.webp",
@@ -81,7 +98,7 @@ const treatData = {
   "cookies-cream": {
     name: "Cookies & Cream",
     vibe: "#000000b5",
-    ingredients: "Oreos (Golden & Original), Semi Sweet & White chocolate chips Butter, Sugar, Brown Sugar, Eggs, Flour, Baking Soda, Salt, Cornstarch,",
+    ingredients: "oreos (golden & original), semi sweet & white chocolate chips Butter, sugar, brown Sugar, eggs, flour, baking soda, salt, cornstarch,",
     allergens: "Flour (Gluetn)",
     images: [
       "images/cookies-cream-main.webp",
@@ -93,7 +110,7 @@ const treatData = {
   "fudge-brookie": {
     name: "Heath Oreo Brookie Fudge Bomb",
     vibe: "#822300b5",
-    ingredients: "Heath, Cookie Dough Oreo, Semisweet chocolate chips, Butter, Sugar, Salt, Cocoa Powder",
+    ingredients: "heath, cookie dough oreo, semisweet chocolate chips, butter, sugar, salt, cocoa powder",
     allergens: "Flour (Gluetn)",
     images: [
       "images/fudge-brookie-main.webp",
@@ -105,7 +122,7 @@ const treatData = {
   "biscoff-crispy": {
     name: "Biscoff Rice Crisp treat",
     vibe: "#0095f2",
-    ingredients: "Chewy Rice Crispy infused with biscoff butter, finished with a biscoff white choclate and encrusted with more biscoff powder",
+    ingredients: "chewy rice crispy infused with biscoff butter, finished with a biscoff white choclate and encrusted with more biscoff powder",
     allergens: "Cinnamon, Gelatin",
     images: [
       "images/biscoff-crispy-main.webp",
@@ -117,10 +134,9 @@ const treatData = {
   "velvet-cheesecake": {
     name: "Dark Velvet Cheesecake Cookie",
     vibe: "#3e0f04",
-    ingredients: "Chocolate cookie base, Unprocessed Cocoa powder, White chocolate chips, Cream cheese filling",
+    ingredients: "chocolate cookie base, unprocessed cocoa powder, white chocolate chips, cream cheese filling",
     allergens: "Flour (gluetn), Dairy, Cocoa",
-    youtubeID: "https://www.youtube.com/shorts/h2pDgsDiEv8", // Replace with real YouTube ID
-    // The first link is the Main Image. Add as many others as you want.
+    youtubeID: "https://www.youtube.com/shorts/h2pDgsDiEv8",
     images: [
       "images/velvet-cheesecake-main.webp",
       "images/velvet-cheesecake-1.webp",
@@ -131,10 +147,9 @@ const treatData = {
   "british-smores": {
     name: "British Smores Cookie",
     vibe: "#8e3d00",
-    ingredients: "Classic, Jaytreat cookie base, cinnamon, white choclate chips, biscoff, biscoff cookie butter, toasted marshmallow",
+    ingredients: "classic, jaytreat cookie base, cinnamon, white choclate chips, biscoff, biscoff cookie butter, toasted marshmallow",
     allergens: "Flour (gluetn), Dairy",
-    youtubeID: "https://www.youtube.com/shorts/wIAtMzUSFHI", // Replace with real YouTube ID
-    // The first link is the Main Image. Add as many others as you want.
+    youtubeID: "https://www.youtube.com/shorts/wIAtMzUSFHI",
     images: [
       "images/british-main.webp",
       "images/british-1.webp",
@@ -145,7 +160,7 @@ const treatData = {
   "santas-cookies": {
     name: "Santas Cookies",
     vibe: "#ff2710",
-    ingredients: "Classic Jaytreat cookie base, chocolate & white peppermint chocolate covered pretzels, chocolate covered caramels & almonds",
+    ingredients: "classic jaytreat cookie base, chocolate & white peppermint chocolate covered pretzels, chocolate covered caramels & almonds",
     allergens: "Flour (gluetn), Almonds",
     youtubeID: "https://www.youtube.com/shorts/V8w1FR6SCSM",
     images: [
@@ -158,7 +173,7 @@ const treatData = {
   "basque-cheesecake": {
     name: "Caramel Biscoff Basque Cheesecake",
     vibe: "#6f5948",
-    ingredients: "Biscoff cookie base, salted caramel, cream cheese.",
+    ingredients: "biscoff cookie base, salted caramel, cream cheese.",
     allergens: "Nutmeg",
     youtubeID: "https://www.youtube.com/shorts/g6cSvJr3fzw",
     images: [
@@ -171,7 +186,7 @@ const treatData = {
   "choclate-smores": {
     name: "Chocolate Chips Smores Cookie",
     vibe: "#ffe6d2",
-    ingredients: "Classic, Jaytreat cookie base, cinnamon, semi-sweet choclate chips, toasted marshmallow",
+    ingredients: "classic, jaytreat cookie base, cinnamon, semi-sweet choclate chips, toasted marshmallow",
     allergens: "Flour (gluetn), Dairy, Gelatin",
     youtubeID: "https://www.youtube.com/shorts/SEFPr8NGXiY",
     images: [
@@ -184,7 +199,7 @@ const treatData = {
   "bannana-bread": {
     name: "Bannana Bread Cookies",
     vibe: "#ffea00",
-    ingredients: "Bannana bread-cookie hybrid that is soft and chewy but not too sweet.",
+    ingredients: "bannana bread-cookie hybrid that is soft and chewy but not too sweet.",
     allergens: "Flour (gluetn), Dairy, Bannana",
     youtubeID: "https://www.youtube.com/shorts/Q-Cp2_iJrfc",
     images: [
@@ -197,7 +212,7 @@ const treatData = {
   "pumpkin-kup": {
     name: "Iced Spiced Pumpkin Kupz",
     vibe: "#a44f00",
-    ingredients: "Fluffy yellow cake with cinnamon sugar topping, and finished with maple spiced icing",
+    ingredients: "fluffy yellow cake with cinnamon sugar topping, and finished with maple spiced icing",
     allergens: "Flour (gluetn), Dairy, Cinnamon, Nutmeg",
     images: [
       "images/pump-kup-main.webp",
@@ -209,7 +224,7 @@ const treatData = {
   "golden-smore": {
     name: "Golden Smoreo Cookie",
     vibe: "#a44f00",
-    ingredients: "Classic Jaytreat cookie base with a golden oreo surprise on the bottom, and a marshmallow one on top.",
+    ingredients: "classic jaytreat cookie base with a golden oreo surprise on the bottom, and a marshmallow one on top.",
     allergens: "Flour (gluetn), Dairy, Cinnamon",
     images: [
       "images/golden-smoreo-main.webp",
@@ -218,10 +233,10 @@ const treatData = {
       "images/golden-smoreo-poster.webp",
     ],
   },
-    "cookies-scream": {
+  "cookies-scream": {
     name: "Cookies & Scream Brownie",
     vibe: "#ff5100b5",
-    ingredients: "Halloween Oreos, Chocolate goodness.",
+    ingredients: "halloween Oreos, chocolate goodness.",
     allergens: "Flour (Gluetn)",
     images: [
       "images/cookies-scream-main.webp",
@@ -233,7 +248,7 @@ const treatData = {
   "smores-pc": {
     name: "Pretzel Caramel Smores Cookie",
     vibe: "#5b3614",
-    ingredients: "Classic Jaytreat cookie stuffed with pretzels, caramel, chocolate chips, and topped with a toasted marsh",
+    ingredients: "classic jaytreat cookie stuffed with pretzels, caramel, chocolate chips, and topped with a toasted marsh",
     allergens: "Flour (gluetn), Dairy, Cinnamon",
     images: [
       "images/smores-pc-main.webp",
@@ -245,7 +260,7 @@ const treatData = {
   "mountain-cookie": { 
     name: "Mountain Cookie",
     vibe: "#000000",
-    ingredients: "Heath, Biscoff, Oreo, COOKIE",
+    ingredients: "heath, biscoff, oreo, cookie!",
     allergens: "Flour (gluetn)",
     images: [
       "images/mountain-cookie-main.webp",
@@ -258,7 +273,7 @@ const treatData = {
   "matcha-cookie": { 
     name: "Matcha Cookie",
     vibe: "#44ff00",
-    ingredients: "Matcha, Cream cheese, Honey Caramel, Oatmeal",
+    ingredients: "matcha, cream cheese, honey caramel, oatmeal",
     allergens: "Flour (gluetn), Cream Cheese, Performative nature",
     images: [
       "images/matcha-cookie-main.webp",
@@ -266,11 +281,11 @@ const treatData = {
       "images/matcha-cookie-poster.webp",
     ],  
   },
-   "dubai-cookie": { 
+  "dubai-cookie": { 
     name: "Dubai Cookie",
     vibe: "#114a00",
-    ingredients: "Classic Jaytreat, with dubai pistachio filling and chocolate topping.",
-    allergens: "Flour (gluetn) Gelatin, Peach",
+    ingredients: "classic Jaytreat, with dubai pistachio filling and chocolate topping.",
+    allergens: "Flour (gluetn) gelatin, peach",
     images: [
       "images/dubai-cookie-main.webp",
       "images/dubai-cookie-1.webp",
@@ -278,11 +293,11 @@ const treatData = {
       "images/dubai-cookie-poster.webp",
     ],
   },
-   "apple-studel": { 
+  "apple-studel": { 
     name: "Apple Strudel Kup",
     vibe: "#ff3006",
-    ingredients: "Delicious cookie cup with apple filling topped with crunchy cinnamon sugar strudel",
-    allergens: "Flour (gluetn) Gelatin, Peach",
+    ingredients: "delicious cookie cup with apple filling topped with crunchy cinnamon sugar strudel",
+    allergens: "Flour (gluetn) gelatin Apple" ,
     images: [
       "images/apple-strudel-main.webp",
       "images/apple-strudel-1.webp",
@@ -290,11 +305,10 @@ const treatData = {
       "images/apple-strudel-poster.webp",
     ],
   },
-  
-    "peach-cream": { 
+  "peach-cream": { 
     name: "Peaches & Cream Cookie",
     vibe: "#ffaa64",
-    ingredients: "Classic Jaytreat cookie base mixed with peach puree and white choclate chips",
+    ingredients: "classic jaytreat cookie base mixed with peach puree and white choclate chips",
     allergens: "Flour (gluetn) Gelatin, Peach",
     images: [
       "images/peach-cream-main.webp",
@@ -306,7 +320,7 @@ const treatData = {
   "kid-kup": { 
     name: "Kid Kups",
     vibe: "#ffd900",
-    ingredients: "Everything you love in a cup (marshmallow, cookie, chocolate, pretzel, m&m)",
+    ingredients: "everything you love in a cup (marshmallow, cookie, chocolate, pretzel, m&m)",
     allergens: "Flour (gluetn) Gelatin",
     images: [
       "images/kid-kup-main.webp",
@@ -315,10 +329,10 @@ const treatData = {
       "images/kid-kup-poster.webp",
     ],
   },
-    "throwbacks": {
+  "throwbacks": {
     name: "Throwbacks",
     vibe: "#ffffff",
-    ingredients: "Idk, a bunch of em, these are oldies",
+    ingredients: "idk, a bunch of em, these are oldies",
     allergens: "I think one had peanuts",
     images: [
       "images/other-main.webp",

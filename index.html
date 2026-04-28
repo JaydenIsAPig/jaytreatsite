@@ -4,8 +4,18 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Jaytreats | Flavor of the Week</title>
-    <link rel="stylesheet" href="style.css" />
+    <script>
+        document.write('<script src="treats.js?fresh=' + Date.now() + '"><\/script>');
+    </script>
+    <script>
+        var siteVersion = window.SITE_VERSION || Date.now();
+        document.write('<link rel="stylesheet" href="style.css?v=' + siteVersion + '" />');
+        document.write('<script src="gallery.js?v=' + siteVersion + '"><\/script>');
+    </script>
 </head>
 
 
@@ -43,7 +53,6 @@
         </p>
 <footer>
     </main>
-    <script src="treats.js"></script>  <script src="gallery.js"></script>
 </body>
 
 </html>
