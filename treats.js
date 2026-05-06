@@ -3,12 +3,25 @@ const SITE_VERSION = "20260428";
 window.SITE_VERSION = SITE_VERSION;
 
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "smoreo";
+const currentTreatID = "dulce-bisicoff";
 const currentPrice = 5.00;
 
 // 2. The "Backlog" - Your complete database of items
 
 const treatData = {
+  "dulce-bisicoff": {
+    name: "Dulce de Leche Biscoff Cookie",
+    vibe: "#99671c",
+    ingredients: "sweetened condensed milk, biscoff, butter, {brown & granulated} sugar, eggs, white chocolate, (ap) flour, baking soda, baking powder, salt, cinnamon",
+    allergens: "Dairy, Flour (gluten)",
+    images: [
+      "images/dulce-bisicoff-main.webp",
+      "images/dulce-bisicoff-1.webp",
+      "images/dulce-bisicoff-2.webp",
+      "images/dulce-bisicoff-3.webp",
+      "images/dulce-bisicoff-4.webp",
+    ],
+  },
   "smoreo": {
     name: "S'moreo Cookie",
     vibe: "#000000",
@@ -25,7 +38,7 @@ const treatData = {
   "kitchen-sink": {
     name: "Kitchen Sink Cookie",
     vibe: "#f5ca3c",
-    ingredients: "butter, sugar, molassas, eggs, semi-sweet chocolate, gluten Free (gf) Flour, (gf) pretzel, (gf) potato chips, caramel bits, cinnamon, baking Soda, salt",
+    ingredients: "butter, sugar, molassas, eggs, semi-sweet chocolate, gluten Free (gf) flour, (gf) pretzel, (gf) potato chips, caramel bits, cinnamon, baking Soda, salt",
     allergens: "Dairy",
     images: [
       "images/kitchen-sink-main.webp",
