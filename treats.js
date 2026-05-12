@@ -1,14 +1,27 @@
 
-const SITE_VERSION = "20260428";
+const SITE_VERSION = "20260429";
 window.SITE_VERSION = SITE_VERSION;
 
 // 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "dulce-bisicoff";
-const currentPrice = 5.00;
+const currentTreatID = "bday-cake";
+const currentPrice = 4.00;
 
 // 2. The "Backlog" - Your complete database of items
 
 const treatData = {
+  "bday-cake": {
+    name: "Birthday Cake Cookie",
+    vibe: "#e023c7",
+    ingredients: "birthday cake oreo, rainbow sprinkles, butter, {brown & granulated} sugar, eggs, white chocolate, (ap) flour, birthday cake batter extract, baking soda, baking powder, cornstarch, salt,",
+    allergens: "Dairy, Flour (gluten)",
+    images: [
+      "images/bday-cake-main.webp",
+      "images/bday-cake-1.webp",
+      "images/bday-cake-2.webp",
+      "images/bday-cake-3.webp",
+      "images/bday-cake-4.webp",
+    ],
+  },
   "dulce-bisicoff": {
     name: "Dulce de Leche Biscoff Cookie",
     vibe: "#99671c",
