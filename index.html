@@ -7,52 +7,43 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <title>Jaytreats | Flavor of the Week</title>
-    <script>
-        document.write('<script src="treats.js?fresh=' + Date.now() + '"><\/script>');
-    </script>
-    <script>
-        var siteVersion = window.SITE_VERSION || Date.now();
-        document.write('<link rel="stylesheet" href="style.css?v=' + siteVersion + '" />');
-        document.write('<script src="gallery.js?v=' + siteVersion + '"><\/script>');
-    </script>
+    <title>JayTreats | Flavor of the Week</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="site-config.js"></script>
+    <script defer src="treats.js"></script>
+    <script defer src="gallery.js"></script>
 </head>
-
 
 <body>
     <header class="hero-section">
-        <div class = "radial"> 
-        <h1 id="treat-name">Loading...</h1> </div>
-        <h2>Click my picture for more info</h2>
-    </section>
-
-            
+        <div class="radial">
+            <h1 id="treat-name">Loading...</h1>
+        </div>
+        <h2 data-config-text="homeSubtitle">Click my picture for more info</h2>
     </header>
-   
-    <main>
-        <section id="featured-treat-section">
-        <div id="featured-treat-container" class="content-container"> 
-        
-        </div>
-        </section>
-    
-    <div class="old-stuff-link">
-        <div class = "radial">
-            <a href="gallery.html">Or browse all my old stuff</a>
-        </div>
-    </div>
 
-    <div class="insta-container">
-    <footer>
-        <a href="https://www.instagram.com/jaydessertss" target="_blank">
-            <img src="images/insta.png" alt="Follow us on Instagram" class="social-icon">
-        </a>
-        
-        <p style="font-size: 0.8rem; color: #ccc; margin-top: 10px;">
-            &copy; 2026 JayTreats
-        </p>
-<footer>
+    <main>
+        <section id="featured-treat-section" aria-labelledby="treat-name">
+            <div id="featured-treat-container" class="content-container"></div>
+        </section>
+
+        <nav class="old-stuff-link" aria-label="Treat archive">
+            <div class="radial">
+                <a href="gallery.html" data-page-link="gallery" data-config-text="browseArchiveLabel">
+                    Or browse all my old stuff
+                </a>
+            </div>
+        </nav>
     </main>
+
+    <footer class="site-footer insta-container">
+        <a href="#" target="_blank" rel="noopener noreferrer" data-social-link="instagram" aria-label="Follow JayTreats on Instagram">
+            <img src="images/insta.png" data-social-icon="instagram" alt="Follow us on Instagram" class="social-icon" />
+        </a>
+        <p class="site-footer-copy">
+            &copy; <span data-current-year>2026</span> <span data-site-name>JayTreats</span>
+        </p>
+    </footer>
 </body>
 
 </html>

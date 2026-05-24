@@ -1,117 +1,240 @@
-/* Layout & Background */
+:root {
+    --color-page-text: #ffffff;
+    --color-accent: #ffbc6b;
+    --color-link: #ffb01c;
+    --color-link-hover: #ffffff;
+    --color-hot-pink: #ff69b4;
+    --color-danger: #ff0000;
+    --color-card: rgba(239, 182, 255, 0.43);
+    --color-card-border: rgba(255, 255, 255, 0.16);
+    --shadow-raised: 0 4px 15px rgba(0, 0, 0, 0.3);
+    --space-page: 20px;
+    --content-max-width: 1200px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
-    padding: 0;
     min-height: 100vh;
     font-family: Arial, sans-serif;
-    background: radial-gradient(circle at top left, 
-                #de7022e7, #5c1f00, #693600, #ffdda7);
+    background:
+        radial-gradient(circle at top left, #de7022e7, #5c1f00, #693600, #ffdda7);
     background-attachment: fixed;
-    color: white;
+    color: var(--color-page-text);
 }
 
-/* Container for the Image and Video */
-.content-container {
-    display: flex;
-    flex-direction: row; /* Default: side-by-side for desktop */
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-.radial {
-    padding: 10px;
-    background: radial-gradient(circle at top left, 
-               #ffca75, #8B0000, #c76c1c, #833200);
+a {
+    color: var(--color-link);
+    text-decoration-color: rgba(255, 0, 0, 0.52);
 }
 
-/* MOBILE SCALING (For iPhone Portrait Mode) */
-@media (max-width: 768px) {
-    .content-container {
-        flex-direction: column; /* Stacks image on TOP and video BELOW */
-        gap: 35px; /* Extra space so it doesn't look cluttered on mobile */
-    }
-
-    h1 {
-        font-size: 3.0rem !important; /* Shrinks text slightly so it fits on one screen */
-    }
-
-    .content-block {
-        width: 100%; /* Ensures elements take up the full width of the phone */
-    }
+a:hover {
+    color: var(--color-link-hover);
 }
 
-/* Typography Styles */
-h1 {
+img {
+    max-width: 100%;
+}
+
+h1,
+h5 {
     font-family: "Times New Roman", Times, serif;
-    font-weight: bold;
-    color: #FFFFFF;
-    font-size: 4rem;
-    text-align: center;
-    margin-top: 60px;
+}
+
+h1 {
+    margin: 60px 0 0;
     padding: 0 15px;
+    color: var(--color-page-text);
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
 }
 
 h2 {
-    font-family: Brush Script MT, cursive;
-    color: #ffbc6b;
+    margin: 0 0 10px;
+    color: var(--color-accent);
+    font-family: "Brush Script MT", cursive;
     font-size: 1.8rem;
     text-align: center;
-    margin-bottom: 10px;
 }
 
 h5 {
-    font-family: "Times New Roman", Times, serif;
-    font-style: italic;
-    text-decoration: underline;
-    color: #5a5a31;
-    text-align: center;
+    margin: 0;
     padding: 40px 0;
-}
-p {
-    font-family: "Times New Roman", Times, serif;
+    color: #5a5a31;
+    font-size: 2rem;
     font-style: italic;
-    color: #ffbc6b;
     text-align: center;
-    padding: 5px 0;
+    text-decoration: underline;
 }
 
-/* Placeholders */
+p {
+    margin: 0;
+    padding: 5px 0;
+    color: var(--color-accent);
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    text-align: center;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.is-hidden {
+    display: none !important;
+}
+
+.hero-section {
+    padding: 1px var(--space-page) 20px;
+}
+
+.hero-section--compact {
+    min-height: 40vh;
+}
+
+.header-slot {
+    padding-top: 20px;
+}
+
+.radial {
+    padding: 10px;
+    background:
+        radial-gradient(circle at top left, #ffca75, #8b0000, #c76c1c, #833200);
+}
+
+.content-container,
+.detail-layout {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: var(--space-page);
+}
+
+.content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.content-container--centered {
+    justify-content: center;
+}
+
 .content-block {
     flex: 1;
+    width: 100%;
     max-width: 500px;
 }
 
+.content-block--centered {
+    max-width: 600px;
+}
+
 .placeholder-img {
-    width: 100%;
-    aspect-ratio: 1 / 1; /* Makes the image a perfect square on mobile */
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px dashed #ffffff;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed var(--color-page-text);
     border-radius: 20px;
 }
 
-/* Standard Video (16:9) - The default */
+.image-link {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.image-link:hover .placeholder-img {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.2);
+    border-style: solid;
+}
+
+.featured-visual {
+    position: relative;
+}
+
+.featured-image-link {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.featured-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.treat-image-title {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    margin: 0;
+    color: var(--color-page-text);
+    font-size: 2rem;
+}
+
+.preorder-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    background-color: #5100ffd4;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+    color: var(--color-page-text);
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.preorder-btn:hover {
+    background-color: #ffd900b7;
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
+    color: var(--color-page-text);
+    transform: scale(1.06);
+}
+
+.featured-preorder {
+    position: absolute;
+    top: 10px;
+    right: -15px;
+    margin: 0;
+}
+
 .video-container {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
     height: 0;
+    padding-bottom: 56.25%;
     overflow: hidden;
     border-radius: 10px;
-    background-color: #000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    background-color: #000000;
+    box-shadow: var(--shadow-raised);
 }
 
-/* NEW: Shorts Mode (9:16) - Vertical Phone Shape */
 .video-container.shorts-mode {
-    padding-bottom: 177.78%; /* (16 / 9) * 100 = 177.77...% */
-    max-width: 400px; /* Optional: Prevents it from being MASSIVE on desktop */
-    margin: 0 auto;   /* Centers it if we limit the width */
+    max-width: 400px;
+    margin: 0 auto;
+    padding-bottom: 177.78%;
 }
 
 .video-container iframe {
@@ -123,127 +246,159 @@ p {
     border: none;
 }
 
-/* Page 2 Specific Typography */
+.detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.main-image-display {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: var(--shadow-raised);
+    object-fit: contain;
+}
+
+.image-grid {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+    width: 90%;
+    margin-top: 20px;
+    justify-self: center;
+    align-items: flex-start;
+}
+
+.gallery-detail-img {
+    width: 90%;
+    height: auto;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    object-fit: contain;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.gallery-detail-img:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc((100% - 20px) / 2);
+}
+
+.gallery-detail-img:hover {
+    border-color: var(--color-hot-pink);
+    transform: scale(1.05);
+}
+
+.info-card {
+    box-sizing: border-box;
+    padding: 5px;
+    border: 2px solid var(--color-card-border);
+    border-radius: 10px;
+    background: var(--color-card);
+    box-shadow: var(--shadow-raised);
+    color: var(--color-page-text);
+}
+
+.info-card.in-header {
+    max-width: 800px;
+    margin: 0 auto 30px;
+    text-align: center;
+}
+
+.info-card.in-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+}
+
+.ingredient-container {
+    margin-top: 10px;
+    padding-top: 5px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
 .ingredient-list {
-    font-size: 1.2rem;
     max-width: 600px;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 20px;
+    font-size: 1.2rem;
     line-height: 1.6;
 }
 
-    .allergen-heading {
-        font-size: 1.8rem;
-    }
-/* Center the entire allergen block */
-.allergen-container {
-    text-align: center;
-    width: 100%;
-    margin-top: 30px;
-}
-
 .allergen-heading {
-    color: #FF0000; /* Contrasting Red */
-    font-size: 2.2rem;
+    margin: 0 0 5px;
+    color: var(--color-danger);
     font-family: "Times New Roman", Times, serif;
-    text-transform: uppercase;
+    font-size: 2.2rem;
     font-weight: bold;
-    margin-bottom: 5px; /* Brings the list closer to the heading */
+    text-transform: uppercase;
 }
 
 .allergen-list {
-    font-size: 1.2rem;
-    color: hsl(0, 100%, 50%);
     margin: 0;
+    color: var(--color-danger);
+    font-size: 1.2rem;
 }
 
-/* Ensure mobile scaling looks clean */
-@media (max-width: 768px) {
-    .allergen-heading {
-        font-size: 1.8rem;
-    }
-}
-/* Preorder Section */
-.preorder-section {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-
-.preorder-btn {
-    display: inline-block; /* Important for links to look like buttons */
-    background-color: #5100ffd4; /* Hot Pink */
-    text-decoration: none; /* Removes the underline from the link */
-    color: white;
-    font-size: 1.4rem;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.preorder-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
-}
-
-.preorder-btn:hover {
-    transform: scale(1.1);
-    background-color: #ffd900b7; /* Yellow hover to match h5 style */
-}
-
-/* Ensure mobile stacking remains active */
-@media (max-width: 768px) {
-    .content-container {
-        flex-direction: column;
-        gap: 25px;
-    }
-    
-}
-/* Gallery Layout */
-.gallery-container {
-    display: flex;
-    flex-wrap: wrap; /* Allows cards to wrap to the next line */
-    justify-content: center;
-    gap: 40px;
-    padding: 30px 20px;
-    max-width: 1200px;
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 40px;
 }
 
-/* Card Styling */
+.gallery-card {
+    max-width: none;
+    margin-bottom: 40px;
+}
+
+.gallery-card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.gallery-placeholder {
+    height: 200px;
+    margin-bottom: 15px;
+}
+
+.lazy-load.loaded {
+    opacity: 1;
+}
+
 .card-text {
-    text-align: center;
     padding: 20px;
+    text-align: center;
 }
 
 .card-text h3 {
+    margin: 0 0 5px;
+    color: var(--color-page-text);
     font-family: "Times New Roman", serif;
     font-size: 1.8rem;
-    margin-bottom: 5px;
-    color: white;
 }
 
-.card-text p {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.8;
-}
-
-/* Make sure images are clickable and hoverable */
-.image-link {
+.gallery-title-link {
+    color: var(--color-page-text);
     text-decoration: none;
-    transition: transform 0.3s ease;
 }
 
-.image-link:hover .placeholder-img {
-    transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.2);
-    border-style: solid;
-}
 .search-container {
     display: flex;
     justify-content: center;
@@ -255,14 +410,14 @@ p {
     width: 100%;
     max-width: 400px;
     padding: 15px 25px;
-    border-radius: 50px;
     border: 2px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px); /* Frosted glass effect */
-    color: white;
-    font-size: 1.1rem;
+    border-radius: 50px;
     outline: none;
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: var(--color-page-text);
+    font-size: 1.1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #treat-search::placeholder {
@@ -270,150 +425,149 @@ p {
 }
 
 #treat-search:focus {
-    border-color: #FF69B4; /* Glows pink when clicking */
+    border-color: var(--color-hot-pink);
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
 }
 
-/* Optional: Animation for appearing cards */
-.animate-in {
-    animation: fadeIn 0.4s ease forwards;
+.no-results {
+    width: 100%;
+    grid-column: 1 / -1;
+    text-align: center;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.animate-in {
+    animation: fade-in 0.4s ease forwards;
 }
-/* Enable smooth jumping when clicking anchor links */
-html {
-    scroll-behavior: smooth;
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .old-stuff-link {
-    text-align: center;
     padding: 20px 0;
+    text-align: center;
 }
 
 .old-stuff-link a {
-    color: #FFFFFF;
-    text-decoration: none;
-    font-family: "Times New Roman", serif;
-    font-style: italic;
-    font-size: 2.0rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
+    color: var(--color-page-text);
+    font-family: "Times New Roman", serif;
+    font-size: 2rem;
+    font-style: italic;
+    text-decoration: none;
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .old-stuff-link a:hover {
-    color: #FF69B4; /* Pink glow on hover */
-    border-bottom: 1px solid #FF69B4;
-    letter-spacing: 1px;
+    border-bottom-color: var(--color-hot-pink);
+    color: var(--color-hot-pink);
 }
 
-/* Adjust footer padding to make room */
-.home footer {
-    padding: 10px 0 20px 0;
+.home {
+    padding: 10px 0 20px;
 }
-/* Styling the specific "Old Stuff" H5 link */
-.old-stuff-link h5 a {
-    color: #FFFF00; /* Yellow to match your H5 style */
-    text-decoration: underline;
-    font-style: italic;
+
+.home a {
+    color: #ffff00;
     font-family: "Times New Roman", Times, serif;
-    transition: opacity 0.3s ease;
+    font-style: italic;
+    text-decoration: underline;
+    transition: color 0.3s ease, opacity 0.3s ease;
 }
 
-.old-stuff-link h5 a:hover {
+.home a:hover {
+    color: var(--color-hot-pink);
     opacity: 0.7;
-    color: #FF69B4; /* Subtle pink shift on hover */
 }
 
-/* Ensure the featured section stacks on iPhone */
-@media (max-width: 768px) {
-    #featured-treat-container {
-        flex-direction: column;
-    }
-}
-/* Target the link specifically */
-a {
-    color: rgb(255, 176, 28); /* Changes text color */
-    text-decoration-color: rgba(255, 0, 0, 0.523); /* Removes the underline */
-}
-
-/* Optional: Change color when hovering */
-a:hover {
-    color: #ffffff; /* Hot Pink on hover */
-}
-/* --- FOOTER & SOCIAL ICONS --- */
-.insta-container footer {
-
+.site-footer {
+    margin-top: 20px;
+    padding: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
-    padding: 0px 0;
-    margin-top: 20px; /* Separates footer from the rest of the page */
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider line */
+}
+
+.site-footer-copy {
+    margin-top: 10px;
+    color: #cccccc;
+    font-size: 0.8rem;
 }
 
 .social-icon {
-    padding-top: 20px;
-    width: 15%;;  /* Adjusts the size of the insta logo */
+    width: min(15%, 96px);
+    min-width: 48px;
     height: auto;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    padding-top: 20px;
     cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .social-icon:hover {
-    transform: scale(1.2); /* Grows slightly when hovered */
     opacity: 0.8;
-}
-/* =========================================
-   GALLERY GRID SYSTEM
-   Use this class on the PARENT <div> that holds the list of treats/images
-   ========================================= */
-.gallery-grid {
-    display: grid;
-    gap: 30px;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    
-    /* ADD THIS LINE: */
-    padding: 0 40px; /* 0px top/bottom, 40px left/right */
-    
-    /* Box-sizing ensures the padding doesn't make the width > 100% and cause scrollbars */
-    box-sizing: border-box; 
-    
-    /* Default (Mobile) */
-    grid-template-columns: 1fr;
+    transform: scale(1.2);
 }
 
-/* TABLETS: 2 Columns */
 @media (min-width: 600px) {
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* LAPTOPS: 3 Columns */
 @media (min-width: 900px) {
     .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-/* DESKTOPS: Max 4 Columns */
-/* This ensures it never goes to 5 or 6, even on huge screens */
-@media (min-width: 1200px) {
-    .gallery-grid {
-        grid-template-columns: repeat(3, 1fr);
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3rem;
     }
-}
-/* Smooth fade-in for lazy loaded images */
-.lazy-load.loaded {
-    opacity: 1 !important;
-}
 
-/* Optional: Add a light grey background to the image space while loading */
-.image-link img {
-    background-color: #f0f0f0;
-    min-height: 200px; /* Adjust to match your average image height */
+    .content-container,
+    .detail-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .content-block {
+        width: 100%;
+    }
+
+    .featured-preorder {
+        top: 12px;
+        right: 12px;
+        max-width: calc(100% - 24px);
+        padding: 12px 18px;
+        font-size: 1rem;
+    }
+
+    .image-grid {
+        grid-template-columns: 1fr;
+        width: 90%;
+    }
+
+    .gallery-detail-img,
+    .gallery-detail-img:last-child:nth-child(odd) {
+        grid-column: auto;
+        width: 100%;
+    }
+
+    .allergen-heading {
+        font-size: 1.8rem;
+    }
+
+    .search-container {
+        padding: 40px 20px;
+    }
 }

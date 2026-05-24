@@ -1,193 +1,552 @@
-document.addEventListener('DOMContentLoaded', () => {
+(function (window) {
+  "use strict";
 
-    // ==========================================
-    // HELPER FUNCTIONS
-    // ==========================================
+  const TRANSPARENT_PIXEL =
+    "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
-    // 1. Creates the "Vibe" Outline (Colored Border around text)
-    function getVibeStyle(color) {
-        if (!color) return ""; 
-        return `text-shadow: 1px 1px 0 ${color}, -1px 1px 0 ${color}, 1px -1px 0 ${color}, -1px -1px 0 ${color};`;
+  const fallbackConfig = {
+    siteName: "JayTreats",
+    featuredTreatId: "",
+    featuredPrice: 0,
+    defaultOrderNote: "jaytreat",
+    pages: {
+      home: "index.html",
+      gallery: "gallery.html",
+      detail: "treat.html",
+    },
+    social: {
+      instagram: "#",
+      instagramIcon: "images/insta.png",
+    },
+    payment: {
+      baseUrl: "",
+      username: "",
+    },
+    text: {
+      noMatchesPrefix: "No treats found matching",
+      treatNotFound: "Treat Not Found",
+    },
+  };
+
+  function mergeConfig(config) {
+    const source = config || {};
+
+    return {
+      ...fallbackConfig,
+      ...source,
+      pages: { ...fallbackConfig.pages, ...(source.pages || {}) },
+      social: { ...fallbackConfig.social, ...(source.social || {}) },
+      payment: { ...fallbackConfig.payment, ...(source.payment || {}) },
+      text: { ...fallbackConfig.text, ...(source.text || {}) },
+    };
+  }
+
+  function getConfig() {
+    return mergeConfig(window.JayTreatsConfig);
+  }
+
+  function getTreatData() {
+    return window.JayTreatsData || window.treatData || {};
+  }
+
+  function getTextShadow(color) {
+    if (!color) {
+      return "";
     }
 
-    // 2. Extracts a clean Video ID from ANY YouTube link (Shorts, regular, or dirty links)
-    function extractYouTubeID(url) {
-        if (!url) return "";
-        // Regex looks for exactly 11 characters after 'shorts/', 'v=', or 'youtu.be/'
-        const match = url.match(/(?:shorts\/|v=|youtu\.be\/)([\w-]{11})/);
-        return match ? match[1] : url; 
+    return `1px 1px 0 ${color}, -1px 1px 0 ${color}, 1px -1px 0 ${color}, -1px -1px 0 ${color}`;
+  }
+
+  function applyVibe(element, color) {
+    if (element && color) {
+      element.style.textShadow = getTextShadow(color);
+    }
+  }
+
+  function extractYouTubeId(value) {
+    if (!value) {
+      return "";
     }
 
-    // ==========================================
-    // PART 1: HOME PAGE LOGIC (Feature of the Week)
-    // ==========================================
-    const heroContainer = document.getElementById('treat-name');
-    const featuredContainer = document.getElementById('featured-treat-container');
-    
-    if (typeof currentTreatID !== 'undefined') {
-        const featuredTreat = treatData[currentTreatID];
-        if (heroContainer) {
-        heroContainer.innerText = featuredTreat.name + "";
+    const rawValue = String(value).trim();
+    const match = rawValue.match(/(?:shorts\/|embed\/|v=|youtu\.be\/)([\w-]{11})/);
+
+    if (match) {
+      return match[1];
+    }
+
+    return rawValue;
+  }
+
+  function isYouTubeShort(value) {
+    return /shorts\//.test(String(value || ""));
+  }
+
+  function formatPrice(value) {
+    const numericValue = Number(value);
+    return Number.isFinite(numericValue) ? numericValue.toFixed(2) : "0.00";
+  }
+
+  function getDetailUrl(config, treatId) {
+    return `${config.pages.detail}?id=${encodeURIComponent(treatId)}`;
+  }
+
+  function buildPaymentUrl(config, treat) {
+    const { payment } = config;
+
+    if (!payment.baseUrl || !payment.username) {
+      return "#";
+    }
+
+    const params = new URLSearchParams({
+      txn: "pay",
+      amount: formatPrice(config.featuredPrice),
+      note: config.defaultOrderNote || treat.name,
+    });
+
+    return `${payment.baseUrl.replace(/\/$/, "")}/${encodeURIComponent(payment.username)}?${params.toString()}`;
+  }
+
+  function createElement(documentRef, tagName, options = {}) {
+    const element = documentRef.createElement(tagName);
+
+    if (options.className) {
+      element.className = options.className;
+    }
+
+    if (options.text !== undefined) {
+      element.textContent = options.text;
+    }
+
+    if (options.attrs) {
+      Object.entries(options.attrs).forEach(([name, value]) => {
+        if (value !== undefined && value !== null) {
+          element.setAttribute(name, String(value));
         }
-    if (featuredContainer) {
-        
-        
-        if (featuredTreat) {
-            
-            // --- 1. PREORDER BUTTON LOGIC ---
-            const displayPrice = (typeof currentPrice !== 'undefined') ? currentPrice : "0";
+      });
+    }
 
-            // --- 2. IMAGE LOGIC ---
-            const heroImage = (featuredTreat.images && featuredTreat.images.length > 0) 
-                ? featuredTreat.images[0] : null;
+    return element;
+  }
 
-            let visualHTML = '';
-            const vibeStyle = getVibeStyle(featuredTreat.vibe || '#000');
+  function getPrimaryImage(treat) {
+    return Array.isArray(treat.images) && treat.images.length > 0 ? treat.images[0] : "";
+  }
 
-            if (heroImage) {
-                const preorderWrapper = document.getElementById('preorder-wrapper');
-                visualHTML = 
-                    `<div style="position: relative;">
-                        <img src="${heroImage}" alt="${featuredTreat.name}" style="width:100%; height: auto; border-radius:10px; display: block;">
-                        <h2 style="position: absolute; bottom: 10px; left: 10px; margin: 0; color: white; font-size: 2rem; ${vibeStyle}">
-                            ${featuredTreat.name}
-                        </h2>
-                        <a style="position: absolute; right: -15px; top: 10px; margin: 0;" href="https://venmo.com/Jaden-Daden?txn=pay&amount=${displayPrice}&note=jaytreat" target="_blank" class="preorder-btn">
-                        Click to preorder (${displayPrice.toFixed(2)}$)
-                    </a>
-                    </div>`;
-            } else {
-                visualHTML = `<div class="placeholder-img"><span>${featuredTreat.name}</span></div>`;
-            }
+  function hydrateSharedElements(documentRef, config) {
+    documentRef.querySelectorAll("[data-site-name]").forEach((element) => {
+      element.textContent = config.siteName;
+    });
 
-            // --- 3. VIDEO LOGIC ---
-            let rawLink = featuredTreat.youtubeID ? featuredTreat.youtubeID.trim() : "";
-            let cleanID = extractYouTubeID(rawLink);
-            
-            // CHECK: Do we actually have a video ID?
-            // (If rawLink is empty, or if cleanID is empty, we have no video)
-            const hasVideo = (cleanID && cleanID.length > 0);
+    documentRef.querySelectorAll("[data-current-year]").forEach((element) => {
+      element.textContent = new Date().getFullYear();
+    });
 
-            // --- 4. BUILD HTML (Conditional Layout) ---
-            
-            if (hasVideo) {
-                // SCENARIO A: WE HAVE A VIDEO (Standard Layout)
-                
-                let containerClass = "video-container"; 
-                if (rawLink.includes("shorts")) {
-                    containerClass += " shorts-mode";
-                }
-                featuredContainer.innerHTML = 
+    documentRef.querySelectorAll("[data-config-text]").forEach((element) => {
+      const key = element.getAttribute("data-config-text");
+      if (key && config.text[key]) {
+        element.textContent = config.text[key];
+      }
+    });
 
-                    '<div class="content-block">' +
-                        '<a href="treat.html?id=' + currentTreatID + '" class="image-link">' +
-                            visualHTML + 
-                        '</a>' +
-                    '</div>' +
-                    '<div class="content-block">' +
-                        '<div class="' + containerClass + '">' +
-                            '<iframe src="https://www.youtube.com/embed/' + cleanID + '?rel=0" frameborder="0" allowfullscreen></iframe>' +
-                        '</div>' +
-                    '</div>';
+    documentRef.querySelectorAll("[data-config-placeholder]").forEach((element) => {
+      const key = element.getAttribute("data-config-placeholder");
+      if (key && config.text[key]) {
+        element.setAttribute("placeholder", config.text[key]);
+      }
+    });
 
-            } else {
-                // SCENARIO B: NO VIDEO (Center the Image)
-                
-                // We add inline styles to center the block and limit its width so it doesn't look stretched
-                featuredContainer.innerHTML = 
-                    '<div class="content-block" style="margin: 0 auto; float: none; max-width: 600px; width: 100%;">' +
-                        '<a href="treat.html?id=' + currentTreatID + '" class="image-link">' +
-                            visualHTML + 
-                        '</a>' +
-                    '</div>';
-            }
+    documentRef.querySelectorAll("[data-page-link]").forEach((element) => {
+      const pageKey = element.getAttribute("data-page-link");
+      if (pageKey && config.pages[pageKey]) {
+        element.setAttribute("href", config.pages[pageKey]);
+      }
+    });
 
+    documentRef.querySelectorAll("[data-social-link='instagram']").forEach((element) => {
+      element.setAttribute("href", config.social.instagram);
+      element.setAttribute("rel", "noopener noreferrer");
+    });
+
+    documentRef.querySelectorAll("[data-social-icon='instagram']").forEach((element) => {
+      element.setAttribute("src", config.social.instagramIcon);
+    });
+  }
+
+  function createFeaturedVisual(documentRef, config, treat, treatId) {
+    const block = createElement(documentRef, "div", { className: "content-block featured-block" });
+    const visual = createElement(documentRef, "div", { className: "featured-visual" });
+    const detailLink = createElement(documentRef, "a", {
+      className: "image-link featured-image-link",
+      attrs: { href: getDetailUrl(config, treatId) },
+    });
+
+    const heroImage = getPrimaryImage(treat);
+
+    if (heroImage) {
+      const image = createElement(documentRef, "img", {
+        className: "featured-image",
+        attrs: {
+          src: heroImage,
+          alt: treat.name,
+        },
+      });
+      const imageTitle = createElement(documentRef, "h2", {
+        className: "treat-image-title",
+        text: treat.name,
+      });
+
+      applyVibe(imageTitle, treat.vibe || "#000");
+      detailLink.append(image, imageTitle);
+    } else {
+      detailLink.append(createElement(documentRef, "div", {
+        className: "placeholder-img",
+        text: treat.name,
+      }));
+    }
+
+    const preorderLink = createElement(documentRef, "a", {
+      className: "preorder-btn featured-preorder",
+      text: `Click to preorder (${formatPrice(config.featuredPrice)}$)`,
+      attrs: {
+        href: buildPaymentUrl(config, treat),
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
+    });
+
+    visual.append(detailLink, preorderLink);
+    block.append(visual);
+    return block;
+  }
+
+  function createVideoBlock(documentRef, treat) {
+    const rawVideo = treat.youtubeID ? String(treat.youtubeID).trim() : "";
+    const videoId = extractYouTubeId(rawVideo);
+    const block = createElement(documentRef, "div", { className: "content-block" });
+    const videoWrapper = createElement(documentRef, "div", {
+      className: `video-container${isYouTubeShort(rawVideo) ? " shorts-mode" : ""}`,
+    });
+    const iframe = createElement(documentRef, "iframe", {
+      attrs: {
+        src: `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`,
+        title: `${treat.name} video`,
+        loading: "lazy",
+        allowfullscreen: "",
+      },
+    });
+
+    videoWrapper.append(iframe);
+    block.append(videoWrapper);
+    return block;
+  }
+
+  function renderHomePage(documentRef, config, data) {
+    const nameHeader = documentRef.getElementById("treat-name");
+    const featuredContainer = documentRef.getElementById("featured-treat-container");
+
+    if (!nameHeader && !featuredContainer) {
+      return;
+    }
+
+    const treatId = config.featuredTreatId;
+    const featuredTreat = data[treatId];
+
+    if (!featuredTreat) {
+      if (nameHeader) {
+        nameHeader.textContent = config.text.treatNotFound;
+      }
+
+      if (featuredContainer) {
+        featuredContainer.textContent = `Treat data not found for ID: ${treatId}`;
+      }
+
+      return;
+    }
+
+    if (nameHeader) {
+      nameHeader.textContent = featuredTreat.name;
+      applyVibe(nameHeader, featuredTreat.vibe);
+    }
+
+    if (!featuredContainer) {
+      return;
+    }
+
+    featuredContainer.replaceChildren();
+    featuredContainer.classList.remove("content-container--centered");
+
+    const visualBlock = createFeaturedVisual(documentRef, config, featuredTreat, treatId);
+    const videoId = extractYouTubeId(featuredTreat.youtubeID);
+
+    if (videoId) {
+      featuredContainer.append(visualBlock, createVideoBlock(documentRef, featuredTreat));
+      return;
+    }
+
+    featuredContainer.classList.add("content-container--centered");
+    visualBlock.classList.add("content-block--centered");
+    featuredContainer.append(visualBlock);
+  }
+
+  function createImageObserver(windowRef) {
+    if (!("IntersectionObserver" in windowRef)) {
+      return null;
+    }
+
+    return new windowRef.IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          const image = entry.target;
+          image.src = image.dataset.src;
+          image.classList.add("loaded");
+          observer.unobserve(image);
+        });
+      },
+      { rootMargin: "0px 0px 300px 0px" },
+    );
+  }
+
+  function renderGalleryPage(documentRef, config, data, windowRef) {
+    const galleryContainer = documentRef.getElementById("full-gallery");
+    const searchInput = documentRef.getElementById("treat-search");
+
+    if (!galleryContainer) {
+      return;
+    }
+
+    const imageObserver = createImageObserver(windowRef);
+
+    function observeImage(image) {
+      if (imageObserver) {
+        imageObserver.observe(image);
+        return;
+      }
+
+      image.src = image.dataset.src;
+      image.classList.add("loaded");
+    }
+
+    function renderGallery(filterText = "") {
+      const cleanFilter = filterText.toLowerCase().trim();
+      let matchCount = 0;
+
+      galleryContainer.replaceChildren();
+
+      Object.entries(data).forEach(([id, treat]) => {
+        const searchableText = `${treat.name || ""} ${treat.ingredients || ""}`.toLowerCase();
+
+        if (!searchableText.includes(cleanFilter)) {
+          return;
+        }
+
+        matchCount += 1;
+
+        const card = createElement(documentRef, "article", {
+          className: "content-block gallery-card animate-in",
+        });
+        const detailLink = createElement(documentRef, "a", {
+          className: "image-link",
+          attrs: { href: getDetailUrl(config, id) },
+        });
+        const cardImage = getPrimaryImage(treat);
+
+        if (cardImage) {
+          const image = createElement(documentRef, "img", {
+            className: "lazy-load gallery-card-image",
+            attrs: {
+              src: TRANSPARENT_PIXEL,
+              "data-src": cardImage,
+              alt: treat.name,
+            },
+          });
+          detailLink.append(image);
+          observeImage(image);
         } else {
-            featuredContainer.innerHTML = "<p>Treat data not found for ID: " + currentTreatID + "</p>";
+          detailLink.append(createElement(documentRef, "div", {
+            className: "placeholder-img gallery-placeholder",
+            text: treat.name,
+          }));
         }
-    }
-}
 
-// ==========================================
-    // PART 2: GALLERY PAGE LOGIC (Full Menu)
-    // ==========================================
-    const galleryContainer = document.getElementById('full-gallery');
-    const searchInput = document.getElementById('treat-search');
-
-    if (galleryContainer) {
-        
-        // --- LAZY LOADING OBSERVER ---
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    // Move data-src to src
-                    img.src = img.dataset.src;
-                    // Add a class to trigger CSS fade-in
-                    img.classList.add('loaded');
-                    // Stop watching this specific image
-                    observer.unobserve(img);
-                }
-            });
-        }, {
-            rootMargin: '0px 0px 300px 0px' // Load 300px before they appear
+        const cardText = createElement(documentRef, "div", { className: "card-text" });
+        const heading = createElement(documentRef, "h3");
+        const headingLink = createElement(documentRef, "a", {
+          className: "gallery-title-link",
+          text: treat.name,
+          attrs: { href: getDetailUrl(config, id) },
         });
 
-        function renderGallery(filterText = "") {
-            galleryContainer.innerHTML = "";
-            let matchCount = 0; 
-            const cleanFilter = filterText.toLowerCase().trim();
+        applyVibe(headingLink, treat.vibe || "#000");
+        heading.append(headingLink);
+        cardText.append(heading);
+        card.append(detailLink, cardText);
+        galleryContainer.append(card);
+      });
 
-            Object.keys(treatData).forEach(function(id) {
-                const treat = treatData[id];
-                
-                if (treat.name.toLowerCase().includes(cleanFilter) || 
-                    treat.ingredients.toLowerCase().includes(cleanFilter)) {
-                    
-                    matchCount++;
-                    
-                    const cardImage = (treat.images && treat.images.length > 0) ? treat.images[0] : null;
-                    
-                    // MODIFIED: Use data-src instead of src for the high-res image
-                    // We use a tiny transparent gif as the initial src to keep it valid
-                    let cardVisual = cardImage 
-                        ? `<img class="lazy-load" 
-                                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
-                                data-src="${cardImage}" 
-                                alt="${treat.name}" 
-                                style="width:100%; height:auto; border-radius:10px; margin-bottom:15px; display:block; opacity:0; transition: opacity 0.5s ease-in;">`
-                        : `<div class="placeholder-img" style="height: 200px; margin-bottom: 15px;"><span>${treat.name}</span></div>`;
-
-                    const vibeStyle = getVibeStyle(treat.vibe || '#000');
-
-                    const cardHTML = 
-                        '<div class="content-block animate-in" style="margin-bottom: 40px;">' +
-                            '<a href="treat.html?id=' + id + '" class="image-link">' +
-                                cardVisual +
-                            '</a>' +
-                            '<div class="card-text">' +
-                                `<h3><a href="treat.html?id=${id}" style="text-decoration: none; color: white; ${vibeStyle}">${treat.name}</a></h3>` +
-                            '</div>' +
-                        '</div>';
-                    
-                    galleryContainer.insertAdjacentHTML('beforeend', cardHTML);
-                }
-            });
-
-            // Start observing the newly created images
-            document.querySelectorAll('.lazy-load').forEach(img => imageObserver.observe(img));
-
-            if (matchCount === 0) {
-                galleryContainer.innerHTML = '<p style="text-align:center; width:100%;">No treats found matching "' + filterText + '"</p>';
-            }
-        }
-
-        renderGallery();
-
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => renderGallery(e.target.value));
-        }
+      if (matchCount === 0) {
+        galleryContainer.append(createElement(documentRef, "p", {
+          className: "no-results",
+          text: `${config.text.noMatchesPrefix} "${filterText}"`,
+        }));
+      }
     }
-    
-    
-});
+
+    renderGallery();
+
+    if (searchInput) {
+      searchInput.addEventListener("input", (event) => renderGallery(event.target.value));
+    }
+  }
+
+  function createInfoCard(documentRef, treat) {
+    const card = createElement(documentRef, "section", {
+      className: "info-card",
+      attrs: { id: "universal-info-card", "aria-label": `${treat.name} details` },
+    });
+    const allergenHeading = createElement(documentRef, "h3", {
+      className: "allergen-heading",
+      text: "Contains:",
+    });
+    const allergenList = createElement(documentRef, "p", {
+      className: "allergen-list",
+      text: treat.allergens || "Not listed",
+    });
+    const ingredientContainer = createElement(documentRef, "div", {
+      className: "ingredient-container",
+    });
+    const ingredientHeading = createElement(documentRef, "h2", { text: "Ingredients" });
+    const ingredientList = createElement(documentRef, "p", {
+      className: "ingredient-list",
+      text: treat.ingredients || "Not listed",
+    });
+
+    ingredientContainer.append(ingredientHeading, ingredientList);
+    card.append(allergenHeading, allergenList, ingredientContainer);
+    return card;
+  }
+
+  function renderTreatDetailPage(documentRef, config, data, windowRef) {
+    const detailRoot = documentRef.getElementById("treat-detail");
+    const nameHeader = documentRef.getElementById("treat-name");
+
+    if (!detailRoot || !nameHeader) {
+      return;
+    }
+
+    const params = new URLSearchParams(windowRef.location.search);
+    const treatId = params.get("id");
+    const treat = treatId ? data[treatId] : null;
+
+    if (!treat) {
+      nameHeader.textContent = config.text.treatNotFound;
+      detailRoot.classList.add("is-hidden");
+      return;
+    }
+
+    nameHeader.textContent = treat.name;
+    applyVibe(nameHeader, treat.vibe);
+    documentRef.title = `${treat.name} | ${config.siteName.toLowerCase()}`;
+
+    const infoCard = createInfoCard(documentRef, treat);
+    const headerSlot = documentRef.getElementById("header-slot");
+    const mediaSlot = documentRef.getElementById("media-slot");
+    const videoWrapper = documentRef.getElementById("video-wrapper");
+    const videoFrame = documentRef.getElementById("video-player");
+    const rawVideo = treat.youtubeID ? String(treat.youtubeID).trim() : "";
+    const videoId = extractYouTubeId(rawVideo);
+
+    if (videoId && headerSlot && videoWrapper && videoFrame) {
+      headerSlot.append(infoCard);
+      infoCard.classList.add("in-header");
+      videoWrapper.classList.remove("is-hidden", "shorts-mode");
+      videoWrapper.classList.toggle("shorts-mode", isYouTubeShort(rawVideo));
+      videoFrame.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+      videoFrame.title = `${treat.name} video`;
+    } else if (mediaSlot && videoWrapper && videoFrame) {
+      videoWrapper.classList.add("is-hidden");
+      videoFrame.removeAttribute("src");
+      mediaSlot.append(infoCard);
+      infoCard.classList.add("in-grid");
+    }
+
+    renderTreatImages(documentRef, treat);
+  }
+
+  function renderTreatImages(documentRef, treat) {
+    const mainImage = documentRef.getElementById("main-treat-image");
+    const extraContainer = documentRef.getElementById("extra-images-container");
+    const images = Array.isArray(treat.images) ? treat.images : [];
+
+    if (!mainImage || !extraContainer) {
+      return;
+    }
+
+    extraContainer.replaceChildren();
+
+    if (images.length === 0) {
+      mainImage.hidden = true;
+      return;
+    }
+
+    mainImage.hidden = false;
+    mainImage.src = images[0];
+    mainImage.alt = `${treat.name} main view`;
+
+    images.slice(1).forEach((imagePath, index) => {
+      const image = createElement(documentRef, "img", {
+        className: "gallery-detail-img",
+        attrs: {
+          src: imagePath,
+          alt: `${treat.name} detail ${index + 1}`,
+          loading: "lazy",
+        },
+      });
+
+      extraContainer.append(image);
+    });
+  }
+
+  function init() {
+    const documentRef = window.document;
+
+    if (!documentRef) {
+      return;
+    }
+
+    const config = getConfig();
+    const data = getTreatData();
+
+    hydrateSharedElements(documentRef, config);
+    renderHomePage(documentRef, config, data);
+    renderGalleryPage(documentRef, config, data, window);
+    renderTreatDetailPage(documentRef, config, data, window);
+  }
+
+  window.JayTreats = {
+    getConfig,
+    getTreatData,
+    renderHomePage,
+    renderGalleryPage,
+    renderTreatDetailPage,
+    utils: {
+      buildPaymentUrl,
+      extractYouTubeId,
+      formatPrice,
+      getTextShadow,
+      isYouTubeShort,
+    },
+  };
+
+  if (window.document) {
+    if (window.document.readyState === "loading") {
+      window.document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  }
+})(window);

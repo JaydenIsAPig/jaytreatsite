@@ -1,12 +1,4 @@
-
-const SITE_VERSION = "20260429";
-window.SITE_VERSION = SITE_VERSION;
-
-// 1. The "Pointer" - Change this string to match the ID of the treat you want featured
-const currentTreatID = "bday-cake";
-const currentPrice = 4.00;
-
-// 2. The "Backlog" - Your complete database of items
+// Catalog data only. Site-level settings live in site-config.js.
 
 const treatData = {
   "bday-cake": {
@@ -372,3 +364,6 @@ const treatData = {
     ],
   },
 };
+
+window.JayTreatsData = treatData;
+window.treatData = treatData;

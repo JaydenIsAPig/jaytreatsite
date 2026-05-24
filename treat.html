@@ -2,328 +2,61 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Treat Details | jaytreats</title>
-    <script>
-        document.write('<script src="treats.js?fresh=' + Date.now() + '"><\/script>');
-    </script>
-    <script>
-        var siteVersion = window.SITE_VERSION || Date.now();
-        document.write('<link rel="stylesheet" href="style.css?v=' + siteVersion + '">');
-        document.write('<script src="gallery.js?v=' + siteVersion + '"><\/script>');
-    </script>
-
-    <style>
-        /* --- 1. LAYOUT GRID --- */
-        .content-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        @media (min-width: 768px) {
-            .content-container {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 30px;
-                align-items: start;
-            }
-
-            #extra-images-container {
-                grid-column: span 2;
-            }
-        }
-
-        /* --- 2. VIDEO PLAYER --- */
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 10px;
-            background-color: #000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            display: none; /* JS controls visibility */
-        }
-
-        .video-container.shorts-mode {
-            padding-bottom: 177.78%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* --- 3. MAIN IMAGE --- */
-        .main-image-display {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            display: block;
-        }
-
-        /* --- 4. GALLERY GRID --- */
-        .image-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            width: 90%;
-            margin-top: 20px;
-            align-items: flex-start;
-            justify-self: center;
-        }
-
-        .gallery-detail-img {
-            width: 90%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            .image-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .gallery-detail-img:last-child:nth-child(odd) {
-                grid-column: 1 / -1;
-                justify-self: center;
-                width: calc((100% - 20px) / 2);
-            }
-        }
-
-        .gallery-detail-img:hover {
-            transform: scale(1.05);
-            border-color: #FF69B4;
-        }
-
-        .content-block {
-            width: 100%;
-            display: block;
-        }
-
-        /* --- 5. THE UNIVERSAL CARD STYLE --- */
-        /* This applies the visual look (Box, Colors, Borders) PERMANENTLY */
-        
-        #universal-info-card {
-            background: rgba(239, 182, 255, 0.432);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 5px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            box-sizing: border-box;
-            
-            /* Default Text Colors */
-            color: white;
-        }
-
-
-        /* Separator line before Allergens */
-        #universal-info-card .ingredient-container {
-            margin-top: 10px;
-            padding-top: 5px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.148);
-        }
-
-        /* STRICT COLOR MAPPING */
-        
-
-
-        /* --- POSITION VARIANTS (Controlled by JS) --- */
-
-        /* Variant A: When in Header (Top) */
-        #universal-info-card.in-header {
-            text-align: center; /* Center text for header look */
-            max-width: 800px;   /* Don't let it stretch too wide */
-            margin: 0 auto 30px auto; /* Center the box itself */
-        }
-
-        /* Variant B: When in Grid (Side) */
-        #universal-info-card.in-grid {
-            text-align: center; /* Left align for side column */
-            height: 100%;     /* Match height of image */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Treat Details | JayTreats</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="site-config.js"></script>
+    <script defer src="treats.js"></script>
+    <script defer src="gallery.js"></script>
 </head>
 
 <body>
-
     <header class="hero-section">
-        <div class = "radial"> 
-        <h1 id="treat-name">Loading...</h1>
+        <div class="radial">
+            <h1 id="treat-name">Loading...</h1>
         </div>
-        <div id="header-slot">
-            
-            <div id="universal-info-card">
-                
-                
-                
-                    <h3 class="allergen-heading">Contains:</h3>
-                    <p id="allergen-list" class="allergen-list"></p>
-                
-                <div class="ingredient-container"></div>
-                <h2>Ingredients</h2>
-                <p id="ingredient-list" class="ingredient-list"></p>
-                </div>
-            </div>
-            </div>
+        <div id="header-slot" class="header-slot"></div>
     </header>
 
-    <main class="content-container">
-
+    <main id="treat-detail" class="detail-layout">
         <div class="content-block">
-            <img id="main-treat-image" src="" alt="Treat Main View" class="main-image-display">
+            <img
+                id="main-treat-image"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                alt="Treat main view"
+                class="main-image-display"
+            />
         </div>
 
         <div class="content-block" id="media-slot">
-            <div class="video-container" id="video-wrapper">
-                <iframe id="video-player" src="" frameborder="0" allowfullscreen></iframe>
+            <div class="video-container is-hidden" id="video-wrapper">
+                <iframe id="video-player" title="Treat video" loading="lazy" allowfullscreen></iframe>
             </div>
-            
         </div>
 
-        <div id="extra-images-container" class="image-grid">
-        </div>
-
+        <div id="extra-images-container" class="image-grid"></div>
     </main>
 
-    <script>
-        window.onload = function () {
-            const params = new URLSearchParams(window.location.search);
-            const treatId = params.get('id');
+    <nav class="home" aria-label="Home">
+        <div class="radial">
+            <h5>
+                <a href="index.html" data-page-link="home" data-config-text="backHomeLabel">Back to Home</a>
+            </h5>
+        </div>
+    </nav>
 
-            if (treatId && treatData[treatId]) {
-                const treat = treatData[treatId];
-
-                // 1. Populate Text
-                const nameHeader = document.getElementById('treat-name');
-                nameHeader.innerText = treat.name;
-                document.getElementById('allergen-list').innerText = treat.allergens;
-                document.getElementById('ingredient-list').innerText = treat.ingredients;
-
-                document.title = treat.name + " | jaytreats";
-
-                // Vibe Coloring
-                if (treat.vibe) {
-                    const c = treat.vibe;
-                    nameHeader.style.textShadow =
-                        `1px 1px 0 ${c}, -1px 1px 0 ${c}, 1px -1px 0 ${c}, -1px -1px 0 ${c}`;
-                }
-
-                // 2. LAYOUT LOGIC (Move Card & Toggle Alignment)
-                const infoCard = document.getElementById('universal-info-card');
-                const headerSlot = document.getElementById('header-slot');
-                const mediaSlot = document.getElementById('media-slot');
-                const videoWrapper = document.getElementById('video-wrapper');
-                const videoFrame = document.getElementById('video-player');
-
-                if (treat.youtubeID) {
-                    // --- CASE A: Video Exists ---
-                    // 1. Place Card in Header
-                    headerSlot.appendChild(infoCard);
-                    
-                    // 2. Set Alignment Class
-                    infoCard.classList.add('in-header');
-                    infoCard.classList.remove('in-grid');
-                    
-                    // 3. Show Video
-                    videoWrapper.style.display = 'block';
-
-                    // Video setup
-                    let rawID = treat.youtubeID;
-                    let videoID = rawID;
-                    let isShort = false;
-                    if (rawID.includes('shorts/')) {
-                        isShort = true;
-                        videoID = rawID.split('shorts/')[1];
-                    } else if (rawID.includes('v=')) {
-                        videoID = rawID.split('v=')[1].split('&')[0];
-                    }
-
-                    if (isShort) {
-                        videoWrapper.classList.add('shorts-mode');
-                    } else {
-                        videoWrapper.classList.remove('shorts-mode');
-                    }
-                    videoFrame.src = "https://www.youtube.com/embed/" + videoID + "?rel=0&modestbranding=1";
-
-                } else {
-                    // --- CASE B: No Video ---
-                    // 1. Hide Video
-                    videoWrapper.style.display = 'none';
-
-                    // 2. Move Card to Media Slot (Side)
-                    mediaSlot.appendChild(infoCard);
-
-                    // 3. Set Alignment Class
-                    infoCard.classList.add('in-grid');
-                    infoCard.classList.remove('in-header');
-                }
-
-                // 3. Image Logic
-                const mainImg = document.getElementById('main-treat-image');
-                const extraContainer = document.getElementById('extra-images-container');
-                extraContainer.innerHTML = "";
-
-                if (treat.images && treat.images.length > 0) {
-                    mainImg.src = treat.images[0];
-                    mainImg.alt = treat.name + " Main View";
-                    if (treat.images.length > 1) {
-                        treat.images.slice(1).forEach(function (imgSrc) {
-                            const newImg = document.createElement('img');
-                            newImg.src = imgSrc;
-                            newImg.className = "gallery-detail-img";
-                            extraContainer.appendChild(newImg);
-                        });
-                    }
-                } else {
-                    mainImg.style.display = 'none';
-                }
-
-            } else {
-                document.getElementById('treat-name').innerText = "Treat Not Found";
-            }
-        };
-    </script>
-</body>
-<div class="home">
-    <footer>
-        <div class=radial><h5 style="font-size:2.0rem;"><a href="index.html">Back to Home</a></h5></div>
-    </footer>
-</div>
-<div class="insta-container">
-    <footer>
-        <a href="https://www.instagram.com/jaydessertss" target="_blank">
-            <img src="images/insta.png" alt="Follow us on Instagram" class="social-icon">
+    <footer class="site-footer insta-container">
+        <a href="#" target="_blank" rel="noopener noreferrer" data-social-link="instagram" aria-label="Follow JayTreats on Instagram">
+            <img src="images/insta.png" data-social-icon="instagram" alt="Follow us on Instagram" class="social-icon" />
         </a>
-        <p style="font-size: 0.8rem; color: #ccc; margin-top: 10px;">
-            &copy; 2026 JayTreats
+        <p class="site-footer-copy">
+            &copy; <span data-current-year>2026</span> <span data-site-name>JayTreats</span>
         </p>
-        <footer>
-</div>
+    </footer>
+</body>
 
 </html>
