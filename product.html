@@ -7,7 +7,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <title>Product Gallery | Featured Product</title>
+    <title>Product Details | Product Gallery</title>
     <link rel="stylesheet" href="style.css" />
     <script defer src="site-config.js"></script>
     <script defer src="products.js"></script>
@@ -22,17 +22,25 @@
         </nav>
     </header>
 
-    <main>
-        <section id="featured-product-section" class="featured-hero" aria-labelledby="featured-product-title">
-            <div id="featured-product-container" class="featured-product-container"></div>
+    <main id="product-detail" class="detail-layout" aria-live="polite">
+        <section class="detail-media" aria-label="Product images">
+            <img
+                id="main-product-image"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                alt="Product main view"
+                class="main-image-display"
+            />
+            <div id="media-slot" class="media-slot"></div>
         </section>
 
-        <nav class="browse-link" aria-label="Product gallery">
-            <a class="secondary-link" href="gallery.html" data-page-link="gallery" data-config-text="browseGalleryLabel">
-                Browse all products
-            </a>
-        </nav>
+        <section id="product-info" class="detail-info"></section>
+
+        <section id="extra-images-container" class="image-grid" aria-label="More product images"></section>
     </main>
+
+    <nav class="home-link" aria-label="Product gallery">
+        <a class="secondary-link" href="gallery.html" data-page-link="gallery" data-config-text="backGalleryLabel">Back to products</a>
+    </nav>
 
     <footer class="site-footer">
         <div class="footer-content">

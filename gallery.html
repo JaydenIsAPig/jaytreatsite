@@ -7,44 +7,74 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <title>Flavor Gallery | JayTreats</title>
+    <title>Product Gallery | All Products</title>
     <link rel="stylesheet" href="style.css" />
     <script defer src="site-config.js"></script>
-    <script defer src="treats.js"></script>
-    <script defer src="gallery.js"></script>
+    <script defer src="products.js"></script>
+    <script defer src="storefront.js"></script>
 </head>
 
 <body>
-    <header class="hero-section hero-section--compact">
-        <h1 data-config-text="galleryTitle">The Archives</h1>
-        <h2 data-config-text="gallerySubtitle">Taste them all (visually)</h2>
-        <div class="search-container">
-            <label class="visually-hidden" for="treat-search">Search treats</label>
-            <input
-                type="text"
-                id="treat-search"
-                placeholder="Search for your favorites..."
-                data-config-placeholder="gallerySearchPlaceholder"
-            />
-        </div>
+    <header class="site-header">
+        <a class="site-brand" href="index.html" data-page-link="home" data-site-name>Product Gallery</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+            <a href="index.html" data-page-link="home" data-config-text="homeNavLabel">Home</a>
+        </nav>
     </header>
 
-    <main id="full-gallery" class="gallery-grid" aria-live="polite"></main>
+    <main>
+        <section class="gallery-header" aria-labelledby="gallery-title">
+            <h1 id="gallery-title" data-config-text="galleryTitle">Product Gallery</h1>
+            <p data-config-text="gallerySubtitle">Browse the full collection.</p>
+        </section>
 
-    <nav class="home" aria-label="Home">
-        <div class="radial">
-            <h5>
-                <a href="index.html" data-page-link="home" data-config-text="backHomeLabel">Back to Home</a>
-            </h5>
-        </div>
+        <section class="filter-panel" aria-label="Product filters">
+            <div class="filter-field">
+                <label for="product-search" data-config-text="searchLabel">Search products</label>
+                <input
+                    type="search"
+                    id="product-search"
+                    placeholder="Search by name, feature, or tag"
+                    data-config-placeholder="gallerySearchPlaceholder"
+                />
+            </div>
+
+            <div class="filter-field">
+                <label for="category-filter" data-config-text="categoryFilterLabel">Category</label>
+                <select id="category-filter" data-category-filter>
+                    <option value="all">All categories</option>
+                </select>
+            </div>
+
+            <div id="specification-filters" class="specification-filters" data-specification-filters></div>
+        </section>
+
+        <section id="gallery-results-summary" class="results-summary" aria-live="polite"></section>
+        <section id="product-gallery" class="gallery-grid" aria-live="polite"></section>
+    </main>
+
+    <nav class="home-link" aria-label="Home">
+        <a class="secondary-link" href="index.html" data-page-link="home" data-config-text="backHomeLabel">Back to home</a>
     </nav>
 
-    <footer class="site-footer insta-container">
-        <a href="#" target="_blank" rel="noopener noreferrer" data-social-link="instagram" aria-label="Follow JayTreats on Instagram">
-            <img src="images/insta.png" data-social-icon="instagram" alt="Follow us on Instagram" class="social-icon" />
-        </a>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-details">
+                <p class="footer-title" data-site-name>Product Gallery</p>
+                <p data-config-text="siteTagline">Simple products, clearly presented.</p>
+            </div>
+
+            <form class="email-signup" data-email-signup novalidate>
+                <label for="footer-email" data-config-text="emailSignupTitle">Join our email list</label>
+                <div class="email-signup-row">
+                    <input id="footer-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" data-config-placeholder="emailPlaceholder" required />
+                    <button type="submit" data-config-text="emailButtonLabel">Get updates</button>
+                </div>
+                <p class="form-status" data-email-status aria-live="polite"></p>
+            </form>
+        </div>
         <p class="site-footer-copy">
-            &copy; <span data-current-year>2026</span> <span data-site-name>JayTreats</span>
+            &copy; <span data-current-year>2026</span> <span data-site-name>Product Gallery</span>
         </p>
     </footer>
 </body>

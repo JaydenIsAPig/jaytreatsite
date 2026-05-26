@@ -1,20 +1,20 @@
-# JayTreats Static Site
+# Product Gallery Static Site
 
-JayTreats is a small static dessert site with three pages:
+This is a small, reusable product showcase template built with plain HTML, CSS, and browser JavaScript. It has three pages:
 
-- `index.html` shows the featured treat.
-- `gallery.html` shows a searchable archive.
-- `treat.html?id=<treat-id>` shows one treat with ingredients, allergens, images, and an optional YouTube embed.
+- `index.html` shows a featured product hero.
+- `gallery.html` shows a searchable and filterable product gallery.
+- `product.html?id=<product-id>` shows one product with images, description, features, specifications, pricing, contact details, and optional media.
 
-The project uses plain HTML, CSS, and browser JavaScript. There is no build step and no npm dependency install required.
+There is no build step and no dependency install required.
 
 ## Project Structure
 
-- `site-config.js` contains reusable site settings: featured treat, price, page paths, social links, payment settings, and shared copy.
-- `treats.js` contains the treat catalog only.
-- `gallery.js` contains shared rendering logic for the home page, archive, and detail page.
+- `site-config.js` contains reusable site settings, page paths, category filter values, default contact details, CTA settings, and email signup configuration.
+- `products.js` contains product catalog data only.
+- `storefront.js` contains shared rendering logic for the home page, gallery, product detail page, filtering, and email signup handling.
 - `style.css` contains all shared page and component styling.
-- `images/` contains treat and social media images.
+- `images/` contains product and shared image assets.
 - `scripts/validate-site.js` runs lightweight sanity checks.
 
 ## Run Locally
@@ -39,37 +39,52 @@ Useful extra syntax checks:
 
 ```sh
 node --check site-config.js
-node --check treats.js
-node --check gallery.js
+node --check products.js
+node --check storefront.js
 ```
 
 ## Configure
 
-Edit `site-config.js` to change the reusable site settings:
+Edit `site-config.js` to change template-wide settings:
 
-- `featuredTreatId`: the treat shown on the home page.
-- `featuredPrice`: the preorder amount.
-- `defaultOrderNote`: the note added to payment links.
-- `pages`: local page names.
-- `social`: Instagram URL and icon path.
-- `payment`: payment provider base URL and username.
-- `text`: shared labels and page copy.
+- `siteName` and `siteTagline`
+- `featuredProductId`
+- `pages`
+- `categories`
+- `specificationFilters`
+- `defaultDistributorContact`
+- `defaultCta`
+- `emailSignup`
+- `text`
 
-Edit `treats.js` to add or update treats. Each treat should include:
+Category dropdown values and optional specification dropdowns come from `site-config.js`, so filter values can be added or renamed without changing component logic.
 
+## Add Products
+
+Edit `products.js` to add or update products. Each product supports:
+
+- `id`
 - `name`
-- `vibe`
-- `ingredients`
-- `allergens`
-- `images`
-- optional `youtubeID`
+- `image`
+- `description`
+- `features`
+- `specifications`
+- `price`
+- `distributorContact`
+- `category`
+- `featured`
+- `galleryImages`
+- `tags`
+- optional `ctaLabel`, `ctaUrl`, `accentColor`, and `videoUrl`
 
-Use image paths relative to the project root, such as `images/example-main.webp`.
+Use image paths relative to the project root, such as `images/product-030-01.webp`.
+
+## Email Signup
+
+The footer signup form is frontend-only by default. Submission is isolated in `storefront.js` through `submitEmailSignup`, and `site-config.js` exposes `emailSignup.endpoint` for future services such as Mailchimp, ConvertKit, SendGrid, or a custom API.
+
+When no endpoint is configured, the form validates the email and shows the configured success message without contacting an external service.
 
 ## Deploy
 
-The existing `.cpanel.yml` copies the project files into `/home/jaytreat/public_html/`. Because this is a static site, deployment only needs the HTML, CSS, JS, and image files.
-
-## Repurpose
-
-To adapt this for another catalog-style site, replace the content in `site-config.js`, swap the records in `treats.js`, and update the assets in `images/`. The render functions in `gallery.js` are intentionally separated from the catalog so the same structure can be reused for other product, menu, portfolio, or archive pages.
+The existing `.cpanel.yml` copies the static files into `$HOME/public_html/`. For other hosts, deploy the HTML, CSS, JavaScript, and image files as static assets.
