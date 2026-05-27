@@ -67,6 +67,7 @@ function validateConfig(config, productData) {
   assert(config.pages && config.pages.detail === "product.html", "Config must define the product detail page path.");
   assert(Array.isArray(config.categories) && config.categories.length > 0, "Config must define category filter values.");
   assert(config.categories.some((category) => category.value === "all"), "Config categories must include an all option.");
+  assert(config.categories.some((category) => category.value === "featured"), "Config categories must include a featured products filter option.");
   assert(config.defaultDistributorContact && config.defaultDistributorContact.email, "Config must define default distributor contact info.");
   assert(config.defaultCta && config.defaultCta.label && config.defaultCta.url, "Config must define a universal contact CTA label and URL.");
   const socialLinks = config.socialLinks === undefined ? [] : config.socialLinks;
@@ -92,10 +93,13 @@ function validateProductData(productData, config) {
     assert(Array.isArray(product.features), `${id} features must be an array.`);
     assert(product.specifications && typeof product.specifications === "object", `${id} specifications must be an object.`);
     assert(product.category && categoryValues.has(product.category), `${id} has an unknown category: ${product.category}`);
+    assert(product.category !== "featured", `${id} should use the featured boolean instead of a featured category.`);
+    assert(typeof product.featured === "boolean", `${id} featured must be a boolean.`);
     assert(Array.isArray(product.galleryImages), `${id} galleryImages must be an array.`);
     assert(product.galleryImages.length > 0, `${id} should include at least one gallery image.`);
     assert(product.image === product.galleryImages[0], `${id} image should match the first gallery image.`);
     assert(Array.isArray(product.tags), `${id} tags must be an array.`);
+    assert(!product.tags.some((tag) => String(tag).toLowerCase() === "featured"), `${id} should use the featured boolean instead of a featured tag.`);
     assert(!product.ctaLabel && !product.ctaUrl, `${id} should use the universal contact CTA from site-config.js.`);
 
     product.galleryImages.forEach((imagePath) => {

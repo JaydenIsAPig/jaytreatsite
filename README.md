@@ -58,7 +58,7 @@ Edit `site-config.js` to change template-wide settings:
 - `emailSignup`
 - `text`
 
-Category dropdown values and optional specification dropdowns come from `site-config.js`, so filter values can be added or renamed without changing component logic.
+Category dropdown values and optional specification dropdowns come from `site-config.js`, so filter values can be added or renamed without changing component logic. The `featured` dropdown value is a reusable featured-products filter and matches products whose `featured` boolean is `true`.
 
 ## Add Products
 
@@ -73,7 +73,7 @@ Edit `products.js` to add or update products. Each product supports:
 - `price`
 - `distributorContact`
 - `category`
-- `featured`
+- `featured` boolean, which defaults to `false` when omitted
 - `galleryImages`
 - `tags`
 - optional `accentColor` and `videoUrl`

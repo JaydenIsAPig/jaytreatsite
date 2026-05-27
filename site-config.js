@@ -13,7 +13,7 @@
     },
     categories: [
       { value: "all", label: "All categories" },
-      { value: "featured", label: "Featured" },
+      { value: "featured", label: "Featured products" },
       { value: "gift-ready", label: "Gift-ready" },
       { value: "everyday", label: "Everyday" },
       { value: "limited-run", label: "Limited run" },
@@ -62,7 +62,7 @@
       gallerySubtitle: "Browse the full collection.",
       searchLabel: "Search products",
       categoryFilterLabel: "Category",
-      gallerySearchPlaceholder: "Search by name, feature, or tag",
+      gallerySearchPlaceholder: "Search by name, feature, tag, or featured",
       browseGalleryLabel: "Browse all products",
       backHomeLabel: "Back to home",
       backGalleryLabel: "Back to products",

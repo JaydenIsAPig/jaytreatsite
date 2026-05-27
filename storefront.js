@@ -3,6 +3,7 @@
 
   const TRANSPARENT_PIXEL =
     "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+  const FEATURED_FILTER_VALUE = "featured";
 
   const fallbackConfig = {
     siteName: "Product Gallery",
@@ -397,6 +398,7 @@
       product.name,
       product.description,
       getCategoryLabel(config, product.category),
+      product.featured ? FEATURED_FILTER_VALUE : "",
       ...(product.features || []),
       ...(product.tags || []),
       specificationText,
@@ -424,6 +426,18 @@
 
   function getSpecificationValue(product, key) {
     return product && product.specifications ? product.specifications[key] || "" : "";
+  }
+
+  function matchesCategoryFilter(product, selectedCategory) {
+    if (selectedCategory === "all") {
+      return true;
+    }
+
+    if (selectedCategory === FEATURED_FILTER_VALUE) {
+      return product.featured === true;
+    }
+
+    return product.category === selectedCategory;
   }
 
   function populateSpecificationFilters(documentRef, config, products, filtersContainer) {
@@ -545,7 +559,7 @@
 
       const filteredProducts = products.filter((product) => {
         const matchesSearch = !cleanSearch || getSearchText(config, product).includes(cleanSearch);
-        const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
+        const matchesCategory = matchesCategoryFilter(product, selectedCategory);
         const matchesSpecifications = selectedSpecificationFilters.every((filter) => {
           return filter.value === "all" || getSpecificationValue(product, filter.key) === filter.value;
         });
