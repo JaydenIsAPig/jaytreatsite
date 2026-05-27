@@ -27,8 +27,6 @@
       galleryImages,
       tags: product.tags || [],
       accentColor: product.accentColor || "#2f6f73",
-      ctaLabel: product.ctaLabel || "",
-      ctaUrl: product.ctaUrl || "",
       videoUrl: product.videoUrl || "",
     };
   }

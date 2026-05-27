@@ -53,7 +53,8 @@ Edit `site-config.js` to change template-wide settings:
 - `categories`
 - `specificationFilters`
 - `defaultDistributorContact`
-- `defaultCta`
+- `defaultCta` for the universal Contact us button label and destination URL
+- `socialLinks` for up to 3 optional footer social media links and icon image paths
 - `emailSignup`
 - `text`
 
@@ -75,7 +76,7 @@ Edit `products.js` to add or update products. Each product supports:
 - `featured`
 - `galleryImages`
 - `tags`
-- optional `ctaLabel`, `ctaUrl`, `accentColor`, and `videoUrl`
+- optional `accentColor` and `videoUrl`
 
 Use image paths relative to the project root, such as `images/product-030-01.webp`.
 

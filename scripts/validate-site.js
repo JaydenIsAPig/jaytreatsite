@@ -55,6 +55,7 @@ function validateHtml() {
     assert(html.includes("site-config.js"), `${fileName} should load site-config.js.`);
     assert(html.includes("products.js"), `${fileName} should load products.js.`);
     assert(html.includes("storefront.js"), `${fileName} should load storefront.js.`);
+    assert(html.includes("data-social-links"), `${fileName} should include the shared social media link container.`);
   });
 }
 
@@ -67,6 +68,15 @@ function validateConfig(config, productData) {
   assert(Array.isArray(config.categories) && config.categories.length > 0, "Config must define category filter values.");
   assert(config.categories.some((category) => category.value === "all"), "Config categories must include an all option.");
   assert(config.defaultDistributorContact && config.defaultDistributorContact.email, "Config must define default distributor contact info.");
+  assert(config.defaultCta && config.defaultCta.label && config.defaultCta.url, "Config must define a universal contact CTA label and URL.");
+  const socialLinks = config.socialLinks === undefined ? [] : config.socialLinks;
+  assert(Array.isArray(socialLinks), "Config socialLinks must be an array when defined.");
+  assert(socialLinks.length <= 3, "Config socialLinks can contain up to 3 links.");
+  socialLinks.forEach((link, index) => {
+    const label = link.platform || `Social link ${index + 1}`;
+    assert(link.platform && link.url && link.image, `${label} must define platform, url, and image.`);
+    assert(fs.existsSync(path.join(rootDir, link.image)), `${label} references missing image: ${link.image}`);
+  });
   assert(config.emailSignup && Object.prototype.hasOwnProperty.call(config.emailSignup, "endpoint"), "Config must define email signup settings.");
 }
 
@@ -86,6 +96,7 @@ function validateProductData(productData, config) {
     assert(product.galleryImages.length > 0, `${id} should include at least one gallery image.`);
     assert(product.image === product.galleryImages[0], `${id} image should match the first gallery image.`);
     assert(Array.isArray(product.tags), `${id} tags must be an array.`);
+    assert(!product.ctaLabel && !product.ctaUrl, `${id} should use the universal contact CTA from site-config.js.`);
 
     product.galleryImages.forEach((imagePath) => {
       assert(fs.existsSync(path.join(rootDir, imagePath)), `${id} references missing image: ${imagePath}`);

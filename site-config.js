@@ -28,9 +28,26 @@
       note: "Contact us for availability, ordering, and product questions.",
     },
     defaultCta: {
-      label: "Contact about this product",
-      url: "mailto:hello@example.com",
+      label: "Contact us",
+      url: "https://example.com/contact",
     },
+    socialLinks: [
+      {
+        platform: "Instagram",
+        url: "https://www.instagram.com/",
+        image: "images/social-instagram.png",
+      },
+      {
+        platform: "Facebook",
+        url: "https://www.facebook.com/",
+        image: "images/social-facebook.svg",
+      },
+      {
+        platform: "TikTok",
+        url: "https://www.tiktok.com/",
+        image: "images/social-tiktok.svg",
+      },
+    ],
     emailSignup: {
       enabled: true,
       provider: "placeholder",

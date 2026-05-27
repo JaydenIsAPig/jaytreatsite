@@ -22,9 +22,10 @@
       note: "Contact us for availability, ordering, and product questions.",
     },
     defaultCta: {
-      label: "Contact about this product",
-      url: "mailto:hello@example.com",
+      label: "Contact us",
+      url: "https://example.com/contact",
     },
+    socialLinks: [],
     emailSignup: {
       enabled: true,
       provider: "placeholder",
@@ -76,6 +77,7 @@
       },
       defaultCta: { ...fallbackConfig.defaultCta, ...(source.defaultCta || {}) },
       emailSignup: { ...fallbackConfig.emailSignup, ...(source.emailSignup || {}) },
+      socialLinks: Array.isArray(source.socialLinks) ? source.socialLinks.slice(0, 3) : fallbackConfig.socialLinks,
       text: { ...fallbackConfig.text, ...(source.text || {}) },
       categories: source.categories || fallbackConfig.categories,
       specificationFilters: source.specificationFilters || fallbackConfig.specificationFilters,
@@ -185,10 +187,10 @@
     return `${config.pages.detail}?id=${encodeURIComponent(productId)}`;
   }
 
-  function getProductCta(config, product) {
+  function getContactCta(config) {
     return {
-      label: product.ctaLabel || config.defaultCta.label,
-      url: product.ctaUrl || config.defaultCta.url,
+      label: config.defaultCta.label,
+      url: config.defaultCta.url,
     };
   }
 
@@ -210,6 +212,40 @@
     if (element && product && product.accentColor) {
       element.style.setProperty("--product-accent", product.accentColor);
     }
+  }
+
+  function renderSocialLinks(documentRef, config) {
+    documentRef.querySelectorAll("[data-social-links]").forEach((container) => {
+      container.replaceChildren();
+
+      (config.socialLinks || []).slice(0, 3).forEach((link) => {
+        if (!link.url || !link.image || !link.platform) {
+          return;
+        }
+
+        const socialLink = createElement(documentRef, "a", {
+          className: "social-link",
+          attrs: {
+            href: link.url,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            "aria-label": link.platform,
+          },
+        });
+        socialLink.append(
+          createElement(documentRef, "img", {
+            className: "social-link-icon",
+            attrs: {
+              src: link.image,
+              alt: "",
+              loading: "lazy",
+            },
+          }),
+          createElement(documentRef, "span", { text: link.platform }),
+        );
+        container.append(socialLink);
+      });
+    });
   }
 
   function hydrateSharedElements(documentRef, config) {
@@ -241,6 +277,8 @@
         element.setAttribute("href", config.pages[pageKey]);
       }
     });
+
+    renderSocialLinks(documentRef, config);
   }
 
   function createMetric(documentRef, label, value) {
@@ -308,10 +346,11 @@
 
     const metrics = createElement(documentRef, "div", { className: "product-metrics" });
     metrics.append(
-      createMetric(documentRef, config.text.priceLabel, formatPrice(featuredProduct.price)),
       createMetric(documentRef, config.text.categoryLabel, getCategoryLabel(config, featuredProduct.category)),
+      createMetric(documentRef, config.text.priceLabel, formatPrice(featuredProduct.price)),
     );
 
+    const contactCta = getContactCta(config);
     const actions = createElement(documentRef, "div", { className: "button-row" });
     actions.append(
       createElement(documentRef, "a", {
@@ -320,9 +359,9 @@
         attrs: { href: getDetailUrl(config, featuredProduct.id) },
       }),
       createElement(documentRef, "a", {
-        className: "secondary-button",
-        text: config.text.browseGalleryLabel,
-        attrs: { href: config.pages.gallery },
+        className: "secondary-button contact-button",
+        text: contactCta.label,
+        attrs: { href: contactCta.url },
       }),
     );
 
@@ -607,16 +646,38 @@
       section.append(createElement(documentRef, "p", { text: contact.note }));
     }
 
-    const links = createElement(documentRef, "div", { className: "contact-links" });
+    const contactCta = getContactCta(config);
+    const contactActions = createElement(documentRef, "div", { className: "contact-actions" });
+
+    if (contactCta.url && contactCta.label) {
+      contactActions.append(
+        createElement(documentRef, "a", {
+          className: "secondary-button contact-button",
+          text: contactCta.label,
+          attrs: { href: contactCta.url },
+        }),
+      );
+    }
 
     if (contact.email) {
-      links.append(
+      if (contactActions.childElementCount > 0) {
+        contactActions.append(createElement(documentRef, "span", { className: "contact-or", text: "or" }));
+      }
+
+      contactActions.append(
         createElement(documentRef, "a", {
+          className: "secondary-button contact-email-button",
           text: contact.email,
           attrs: { href: `mailto:${contact.email}` },
         }),
       );
     }
+
+    if (contactActions.childElementCount > 0) {
+      section.append(contactActions);
+    }
+
+    const links = createElement(documentRef, "div", { className: "contact-links" });
 
     if (contact.phone) {
       links.append(
@@ -745,19 +806,7 @@
       createMetric(documentRef, config.text.categoryLabel, getCategoryLabel(config, product.category)),
     );
 
-    const cta = getProductCta(config, product);
-    const actions = createElement(documentRef, "div", { className: "button-row" });
-    if (cta.url && cta.label) {
-      actions.append(
-        createElement(documentRef, "a", {
-          className: "primary-button",
-          text: cta.label,
-          attrs: { href: cta.url },
-        }),
-      );
-    }
-
-    infoRoot.append(heading, metrics, actions);
+    infoRoot.append(heading, metrics);
     appendListSection(documentRef, infoRoot, config.text.featuresLabel, product.features);
     appendSpecificationSection(documentRef, infoRoot, config.text.specificationsLabel, product.specifications);
     appendContactSection(documentRef, infoRoot, config, product);

@@ -8,6 +8,11 @@
     --color-accent: #2f6f73;
     --color-accent-strong: #214f52;
     --color-warm: #c9783d;
+    --color-nav-button: #f2a15f;
+    --color-primary-button: #3f8f8a;
+    --color-browse-button: #2f6f73;
+    --color-contact-button: #bfe8f6;
+    --color-contact-button-border: #88cfe4;
     --color-focus: #7a4bd6;
     --shadow-soft: 0 16px 40px rgba(31, 42, 36, 0.12);
     --content-max-width: 1180px;
@@ -97,8 +102,9 @@ p {
     display: inline-flex;
     align-items: center;
     color: var(--color-text);
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.1;
     text-decoration: none;
 }
 
@@ -123,7 +129,18 @@ p {
     text-decoration: none;
 }
 
-.site-nav a:hover,
+.site-nav a {
+    border-color: var(--color-nav-button);
+    background: var(--color-nav-button);
+    color: var(--color-text);
+}
+
+.site-nav a:hover {
+    border-color: var(--color-warm);
+    background: var(--color-warm);
+    color: #ffffff;
+}
+
 .secondary-link:hover {
     border-color: var(--color-accent);
     color: var(--color-accent-strong);
@@ -244,7 +261,12 @@ p {
     cursor: pointer;
 }
 
-.primary-button,
+.primary-button {
+    border: 1px solid var(--color-primary-button);
+    background: var(--color-primary-button);
+    color: #ffffff;
+}
+
 .email-signup button {
     border: 1px solid var(--color-accent-strong);
     background: var(--color-accent-strong);
@@ -269,6 +291,30 @@ p {
 .text-button:hover {
     border-color: var(--color-accent);
     color: var(--color-accent-strong);
+}
+
+.browse-link .secondary-link {
+    border-color: var(--color-browse-button);
+    background: var(--color-browse-button);
+    color: #ffffff;
+}
+
+.browse-link .secondary-link:hover {
+    border-color: var(--color-warm);
+    background: var(--color-warm);
+    color: #ffffff;
+}
+
+.contact-button {
+    border-color: var(--color-contact-button-border);
+    background: var(--color-contact-button);
+    color: var(--color-text);
+}
+
+.contact-button:hover {
+    border-color: var(--color-accent);
+    background: #d6f2fb;
+    color: var(--color-text);
 }
 
 .browse-link,
@@ -538,6 +584,31 @@ select {
     font-weight: 700;
 }
 
+.contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0 12px;
+}
+
+.contact-or {
+    color: var(--color-muted);
+    font-weight: 700;
+}
+
+.contact-email-button {
+    border-color: var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+.contact-email-button:hover {
+    border-color: var(--color-contact-button-border);
+    background: #eef9fc;
+    color: var(--color-text);
+}
+
 .contact-links {
     display: flex;
     flex-wrap: wrap;
@@ -596,11 +667,49 @@ select {
     margin: 0 auto;
 }
 
+.footer-details {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+}
+
 .footer-title {
-    margin-bottom: 6px;
+    margin-bottom: 0;
     color: var(--color-text);
     font-size: 1.15rem;
     font-weight: 700;
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+.social-link {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.social-link:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent-strong);
+}
+
+.social-link-icon {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
 }
 
 .email-signup {
@@ -699,6 +808,10 @@ select {
     .site-nav a {
         width: 100%;
         justify-content: center;
+    }
+
+    .site-brand {
+        font-size: 1.8rem;
     }
 
     h1 {
