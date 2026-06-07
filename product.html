@@ -7,7 +7,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <title>Product Details | Product Gallery</title>
+    <meta name="description" content="View jewelry details, pricing, additional images, and clear ordering information." />
+    <title>Jewelry Details | Linden &amp; Light Jewelry</title>
     <link rel="stylesheet" href="style.css" />
     <script defer src="site-config.js"></script>
     <script defer src="products.js"></script>
@@ -15,13 +16,32 @@
 </head>
 
 <body>
+    <div class="announcement-bar" data-config-text="announcementText">Complimentary gift wrapping on every piece</div>
+
     <header class="site-header">
-        <a class="site-brand" href="index.html" data-page-link="home" data-site-name>Product Gallery</a>
+        <a class="site-brand" href="index.html" data-page-link="home" aria-label="Linden and Light Jewelry home">
+            <span class="brand-mark" aria-hidden="true">L</span>
+            <span class="brand-copy">
+                <span class="brand-name" data-site-name>Linden &amp; Light Jewelry</span>
+                <span class="brand-tagline" data-config-text="brandTagline">Jewelry chosen with care</span>
+            </span>
+        </a>
         <nav class="site-nav" aria-label="Primary navigation">
+            <a href="index.html" data-page-link="home" data-config-text="homeNavLabel">Home</a>
             <a href="gallery.html" data-page-link="gallery" data-config-text="galleryNavLabel">Products</a>
+            <a href="index.html#about" data-config-text="aboutNavLabel">Our story</a>
         </nav>
     </header>
 
+    <nav class="breadcrumb detail-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html" data-page-link="home">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="gallery.html" data-page-link="gallery">Collection</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Piece details</span>
+    </nav>
+
+    <!-- storefront.js resolves the ?id= product and fills these detail mounts. -->
     <main id="product-detail" class="detail-layout" aria-live="polite">
         <section class="detail-media" aria-label="Product images">
             <img
@@ -30,12 +50,18 @@
                 alt="Product main view"
                 class="main-image-display"
             />
-            <div id="media-slot" class="media-slot"></div>
         </section>
 
         <section id="product-info" class="detail-info"></section>
 
-        <section id="extra-images-container" class="image-grid" aria-label="More product images"></section>
+        <section class="detail-gallery" aria-label="Additional product views">
+            <div class="image-gallery-heading">
+                <h2 data-config-text="galleryImagesLabel">More views</h2>
+                <p data-config-text="galleryImagesHelp">Select an image to see it larger.</p>
+            </div>
+            <div id="extra-images-container" class="image-grid" aria-label="More product images"></div>
+            <div id="media-slot" class="media-slot"></div>
+        </section>
     </main>
 
     <nav class="home-link" aria-label="Product gallery">
@@ -45,8 +71,8 @@
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-details">
-                <p class="footer-title" data-site-name>Product Gallery</p>
-                <p data-config-text="siteTagline">Simple products, clearly presented.</p>
+                <p class="footer-title" data-site-name>Linden &amp; Light Jewelry</p>
+                <p data-config-text="siteTagline">Simple jewelry, thoughtfully chosen.</p>
                 <div class="social-links" data-social-links aria-label="Social media links"></div>
             </div>
 
@@ -60,7 +86,7 @@
             </form>
         </div>
         <p class="site-footer-copy">
-            &copy; <span data-current-year>2026</span> <span data-site-name>Product Gallery</span>
+            &copy; <span data-current-year>2026</span> <span data-site-name>Linden &amp; Light Jewelry</span>
         </p>
     </footer>
 </body>

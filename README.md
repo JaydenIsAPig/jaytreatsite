@@ -1,10 +1,10 @@
-# Product Gallery Static Site
+# Linden & Light Jewelry Static Site
 
-This is a small, reusable product showcase template built with plain HTML, CSS, and browser JavaScript. It has three pages:
+This is a small, accessible jewelry storefront built with plain HTML, CSS, and browser JavaScript. It has three pages:
 
-- `index.html` shows a featured product hero.
-- `gallery.html` shows a searchable and filterable product gallery.
-- `product.html?id=<product-id>` shows one product with images, description, features, specifications, pricing, contact details, and optional media.
+- `index.html` introduces the shop, explains the three-step shopping path, shows featured pieces, and includes the seller story.
+- `gallery.html` shows a searchable and filterable jewelry collection.
+- `product.html?id=<product-id>` shows one piece with price, purchase guidance, selectable images, details, and contact information.
 
 There is no build step and no dependency install required.
 
@@ -16,6 +16,22 @@ There is no build step and no dependency install required.
 - `style.css` contains all shared page and component styling.
 - `images/` contains product and shared image assets.
 - `scripts/validate-site.js` runs lightweight sanity checks.
+- `docs/MAINTENANCE.md` is the full architecture, customization, extension, and verification guide.
+
+For future changes, start with [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md). It includes a change matrix, product schema, HTML hooks, renderer flow, loading strategy, responsive contracts, and recipes for extending the storefront.
+
+## Rebrand Implementation Notes
+
+- The existing product image files and their product ID mappings are intentionally unchanged.
+- Site-wide brand wording, navigation labels, contact details, categories, and reusable interface text live in `site-config.js`.
+- Jewelry names, prices, descriptions, searchable tags, and piece details live in `products.js`.
+- `storefront.js` renders the featured home content, collection cards, product-specific purchase links, selectable product views, filters, and email form behavior.
+- The home featured carousel is built from every product whose `featured` boolean is `true`. Each slide renders only its linked image and title, lingers for four seconds, then softly blurs and fades into the next item. It also supports arrows and horizontal touch swipes.
+- Featured images are requested on demand. After the current image renders, only the neighboring images are preloaded and decoded to keep manual navigation responsive without loading the full image catalog.
+- Elements marked with `data-reveal` use `initScrollReveal` for the brief seller-story fade-in. Reduced-motion preferences are respected in `style.css`.
+- The header keeps Home, Shop jewelry, and Our story visible at all screen sizes instead of hiding navigation behind a menu.
+- The CSS uses larger type, strong focus states, generous touch targets, and responsive one-, two-, and three-column layouts for phone and laptop use.
+- The shared color system in `style.css` uses a Tucson-summer palette led by brilliant sky blues, hot sun yellows, and violet desert-sunset tones.
 
 ## Run Locally
 
@@ -45,24 +61,24 @@ node --check storefront.js
 
 ## Configure
 
-Edit `site-config.js` to change template-wide settings:
+Edit `site-config.js` to change shop-wide settings:
 
 - `siteName` and `siteTagline`
 - `featuredProductId`
 - `pages`
 - `categories`
 - `specificationFilters`
-- `defaultDistributorContact`
-- `defaultCta` for the universal Contact us button label and destination URL
+- `defaultDistributorContact` for the shared seller contact record
+- `defaultCta` for the universal purchase-inquiry label and destination URL
 - `socialLinks` for up to 3 optional footer social media links and icon image paths
 - `emailSignup`
 - `text`
 
-Category dropdown values and optional specification dropdowns come from `site-config.js`, so filter values can be added or renamed without changing component logic. The `featured` dropdown value is a reusable featured-products filter and matches products whose `featured` boolean is `true`.
+Category dropdown values and optional specification dropdowns come from `site-config.js`, so filter values can be added or renamed without changing component logic. The `featured` dropdown value matches pieces whose `featured` boolean is `true`.
 
 ## Add Products
 
-Edit `products.js` to add or update products. Each product supports:
+Edit `products.js` to add or update jewelry pieces. Each record supports:
 
 - `id`
 - `name`

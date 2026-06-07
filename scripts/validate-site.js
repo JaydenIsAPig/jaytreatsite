@@ -7,6 +7,7 @@ const vm = require("vm");
 const rootDir = path.resolve(__dirname, "..");
 const scriptFiles = ["site-config.js", "products.js", "storefront.js"];
 const htmlFiles = ["index.html", "gallery.html", "product.html"];
+const maintenanceGuide = "docs/MAINTENANCE.md";
 const errors = [];
 
 function assert(condition, message) {
@@ -56,6 +57,33 @@ function validateHtml() {
     assert(html.includes("products.js"), `${fileName} should load products.js.`);
     assert(html.includes("storefront.js"), `${fileName} should load storefront.js.`);
     assert(html.includes("data-social-links"), `${fileName} should include the shared social media link container.`);
+  });
+}
+
+function validateDocumentation() {
+  const readme = readProjectFile("README.md");
+  const guidePath = path.join(rootDir, maintenanceGuide);
+
+  assert(fs.existsSync(guidePath), `${maintenanceGuide} should document the storefront architecture.`);
+
+  if (!fs.existsSync(guidePath)) {
+    return;
+  }
+
+  const guide = readProjectFile(maintenanceGuide);
+  const requiredSections = [
+    "## Architecture At A Glance",
+    "## Current Feature Inventory",
+    "## Change Matrix",
+    "## File Responsibilities",
+    "## Shared HTML Hooks",
+    "## Featured Carousel",
+    "## Verification Checklist",
+  ];
+
+  assert(readme.includes(maintenanceGuide), `README.md should link to ${maintenanceGuide}.`);
+  requiredSections.forEach((section) => {
+    assert(guide.includes(section), `${maintenanceGuide} is missing "${section}".`);
   });
 }
 
@@ -153,6 +181,7 @@ function validateNaming() {
 
 function run() {
   validateHtml();
+  validateDocumentation();
 
   const window = loadBrowserScripts();
   validateConfig(window.StorefrontConfig, window.StorefrontProducts);
