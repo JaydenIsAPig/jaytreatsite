@@ -8,7 +8,7 @@
    */
   const siteConfig = {
     version: "20260606",
-    siteName: "Linden & Light Jewelry",
+    siteName: "Caren for Jewelry",
     siteTagline: "Simple jewelry, thoughtfully chosen.",
     featuredProductId: "product-001",
     // Canonical paths used by every data-page-link element and generated URL.
@@ -31,14 +31,14 @@
     // Each key becomes a generated gallery dropdown when product values exist.
     specificationFilters: [{ key: "availability", label: "Availability" }],
     defaultDistributorContact: {
-      name: "Linden & Light",
-      email: "hello@lindenandlight.com",
+      name: "Caren Romack",
+      email: "hello@example.com",
       phone: "",
       note: "Ordering is personal and simple. Send a note for availability, sizing, gift help, or any questions about this piece.",
     },
     defaultCta: {
       label: "Ask to purchase",
-      url: "mailto:hello@lindenandlight.com",
+      url: "mailto:hello@example.com",
     },
     // The shared footer renderer displays at most three social links.
     socialLinks: [
@@ -111,9 +111,9 @@
       purchaseHelp: "Select the button below to ask about availability and purchase this piece directly.",
       galleryImagesLabel: "More views",
       galleryImagesHelp: "Select an image to see it larger.",
-      aboutEyebrow: "A note from the seller",
+      aboutEyebrow: "A word from Caren",
       aboutTitle: "Jewelry should be a joy to choose and a pleasure to wear.",
-      aboutBody: "Linden & Light is a small independent shop built around uncomplicated beauty. Each piece is selected for its wearable shape, thoughtful detail, and ability to feel special without feeling fussy.",
+      aboutBody: "Peace light and nothing but love friends Im home due to ugly health so I decided to make everyone sparkle! Everything I carry is genuine gemstones, Moissanite and gorgeous 925 sterling silver, 14kt Gold over 925 or Platinum Rhodium solid 925. Native items from specific artists will state name/initials and Tribe. Worry free diamonds the Moissanite is all D Vvs1 which gives you top brilliance and sparkles. Diamonds have a hardness of 10, Moissanite is 9.25 and the Sparkle will out live us all. I always test at pickup for you. Let’s sparkle and light up the world friends. P.S. Don’t like the prices shoot me an offer and I’ll see what I can do for you. Im 5 Star rated and I respond immediately until bed. I provide high quality items at very affordable prices for that item. Thank you for stopping by. Plz share my page with friends and family .",
       aboutNote: "Questions are always welcome. I am happy to help you choose a piece or find a thoughtful gift.",
       aboutContactLabel: "Say hello",
       emailSignupTitle: "A little beauty in your inbox",

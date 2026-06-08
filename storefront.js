@@ -15,8 +15,8 @@
 
   // Defensive defaults keep shared rendering usable when optional config is absent.
   const fallbackConfig = {
-    siteName: "Linden & Light Jewelry",
-    siteTagline: "Simple jewelry, thoughtfully chosen.",
+    siteName: "Caren Jewelry",
+    siteTagline: "Quality jewelry, thoughtfully chosen.",
     featuredProductId: "",
     pages: {
       home: "index.html",
@@ -26,14 +26,14 @@
     categories: [{ value: "all", label: "All categories" }],
     specificationFilters: [],
     defaultDistributorContact: {
-      name: "Linden & Light",
-      email: "hello@lindenandlight.com",
+      name: "Caren Romack",
+      email: "hello@example.com",
       phone: "",
-      note: "Contact us for availability, sizing, ordering, and product questions.",
+      note: "Contact us for availability, ordering, and product questions.",
     },
     defaultCta: {
       label: "Ask to purchase",
-      url: "mailto:hello@lindenandlight.com",
+      url: "mailto:hello@example.com",
     },
     socialLinks: [],
     emailSignup: {
