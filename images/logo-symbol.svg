@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Peace symbol</title>
+  <rect width="256" height="256" rx="128" fill="#fff7df"/>
+  <circle cx="128" cy="128" r="91" fill="none" stroke="#4f9461" stroke-width="15"/>
+  <path
+    d="M128 37v182M128 128 70 184M128 128l58 56"
+    fill="none"
+    stroke="#4f9461"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="15"
+  />
+</svg>

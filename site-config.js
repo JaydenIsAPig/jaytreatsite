@@ -63,7 +63,7 @@
       enabled: true,
       provider: "placeholder",
       endpoint: "",
-      successMessage: "Thank you. You are on the Linden & Light list.",
+      successMessage: "Thank you. You are on the Caren for Jewelry list.",
       errorMessage: "Please enter a valid email address.",
     },
     // Reusable UI copy is connected to HTML through data-config-text.

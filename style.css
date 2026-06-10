@@ -155,15 +155,12 @@ p {
 .brand-mark {
     width: 48px;
     height: 48px;
-    display: inline-grid;
+    display: block;
     flex: 0 0 auto;
-    place-items: center;
     border: 1px solid var(--color-gold);
     border-radius: 50%;
-    color: var(--color-gold-dark);
     background: rgba(255, 240, 168, 0.72);
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.55rem;
+    object-fit: cover;
 }
 
 .brand-copy {
@@ -679,7 +676,8 @@ p {
 
 .filter-panel {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
     gap: 18px;
     max-width: var(--content-max-width);
     margin: 0 auto 24px;
@@ -690,27 +688,37 @@ p {
     box-shadow: var(--shadow-card);
 }
 
-.filter-heading {
-    grid-column: 1 / -1;
+.search-field {
+    grid-column: span 2;
 }
 
-.filter-heading h2 {
-    margin-bottom: 4px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.16rem;
-    font-weight: 800;
-    letter-spacing: 0;
+.search-field label {
+    color: var(--color-sage-deep);
 }
 
-.filter-heading p {
-    margin-bottom: 4px;
-    font-size: 0.95rem;
+.search-field input {
+    min-height: 64px;
+    border-width: 2px;
+    border-color: color-mix(in srgb, var(--color-sky) 68%, var(--color-border));
+    box-shadow: 0 8px 22px rgba(36, 91, 138, 0.11);
+    font-size: 1.04rem;
 }
 
 .filter-field {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.filter-field label {
+    min-height: 28px;
+    display: flex;
+    align-items: flex-end;
+    line-height: 1.25;
+}
+
+.filter-field select {
+    min-height: 64px;
 }
 
 .specification-filters {
@@ -779,6 +787,24 @@ select {
     box-shadow: var(--shadow-soft);
 }
 
+.product-card--featured {
+    border-color: rgba(100, 185, 120, 0.62);
+    background:
+        linear-gradient(rgba(245, 255, 247, 0.42), rgba(255, 254, 249, 0.94)),
+        var(--color-surface);
+    box-shadow:
+        0 0 0 1px rgba(125, 225, 148, 0.2),
+        0 0 24px rgba(125, 225, 148, 0.38),
+        0 14px 36px rgba(74, 155, 93, 0.18);
+}
+
+.product-card--featured:hover {
+    box-shadow:
+        0 0 0 1px rgba(125, 225, 148, 0.3),
+        0 0 34px rgba(125, 225, 148, 0.5),
+        0 20px 48px rgba(74, 155, 93, 0.24);
+}
+
 .product-card-image-link {
     display: block;
     overflow: hidden;
@@ -809,6 +835,35 @@ select {
     padding: 22px;
 }
 
+.product-card-labels {
+    display: flex;
+    width: 100%;
+    min-height: 29px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin-bottom: 9px;
+}
+
+.product-card-labels .category-pill {
+    margin-bottom: 0;
+}
+
+.featured-label {
+    margin: 0 0 0 auto;
+    color: #64b978;
+    font-size: 0.77rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-shadow:
+        0 0 6px rgba(125, 225, 148, 1),
+        0 0 15px rgba(125, 225, 148, 0.75),
+        0 0 24px rgba(125, 225, 148, 0.45);
+    text-align: right;
+    text-transform: lowercase;
+}
+
 .product-card-title {
     margin: 0 0 9px;
     font-size: 1.5rem;
@@ -827,14 +882,6 @@ select {
     flex: 1;
     margin-bottom: 18px;
     font-size: 0.98rem;
-}
-
-.product-card-price {
-    margin-bottom: 17px;
-    color: var(--color-text);
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.4rem;
-    font-weight: 700;
 }
 
 .product-card .text-button {
@@ -1345,6 +1392,10 @@ select {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .filter-panel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .detail-info {
         position: static;
     }
@@ -1422,6 +1473,10 @@ select {
     .footer-content,
     .email-signup-row {
         grid-template-columns: 1fr;
+    }
+
+    .search-field {
+        grid-column: auto;
     }
 
     .product-metrics {

@@ -720,7 +720,9 @@
   }
 
   function createProductCard(documentRef, config, product, imageObserver, headingTag = "h2") {
-    const card = createElement(documentRef, "article", { className: "product-card animate-in" });
+    const card = createElement(documentRef, "article", {
+      className: `product-card animate-in${product.featured ? " product-card--featured" : ""}`,
+    });
     applyAccent(card, product);
 
     const detailUrl = getDetailUrl(config, product.id);
@@ -753,6 +755,7 @@
 
     const cardContent = createElement(documentRef, "div", { className: "product-card-content" });
     const title = createElement(documentRef, headingTag, { className: "product-card-title" });
+    const cardLabels = createElement(documentRef, "div", { className: "product-card-labels" });
     title.append(
       createElement(documentRef, "a", {
         text: product.name,
@@ -760,14 +763,26 @@
       }),
     );
 
-    cardContent.append(
+    cardLabels.append(
       createElement(documentRef, "p", {
         className: "category-pill",
         text: getCategoryLabel(config, product.category),
       }),
+    );
+
+    if (product.featured) {
+      cardLabels.append(
+        createElement(documentRef, "p", {
+          className: "featured-label",
+          text: "featured item",
+        }),
+      );
+    }
+
+    cardContent.append(
+      cardLabels,
       title,
       createElement(documentRef, "p", { className: "product-card-description", text: product.description }),
-      createElement(documentRef, "p", { className: "product-card-price", text: formatPrice(product.price) }),
       createElement(documentRef, "a", {
         className: "text-button",
         text: config.text.viewProductLabel,
