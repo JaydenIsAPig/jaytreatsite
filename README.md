@@ -1,6 +1,6 @@
 # JayTreats Static Site
 
-JayTreats is a small static dessert site with three pages:
+JayTreats is a small static dessert site with three pages, this project also has 2 other sites as branches, Jewlery-Site to show off what the template is capable of and template for others to use and me to repurpose:
 
 - `index.html` shows the featured treat.
 - `gallery.html` shows a searchable archive.
