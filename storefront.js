@@ -15,7 +15,7 @@
 
   // Defensive defaults keep shared rendering usable when optional config is absent.
   const fallbackConfig = {
-    siteName: "Caren Jewelry",
+    siteName: "Care Jewelry",
     siteTagline: "Quality jewelry, thoughtfully chosen.",
     featuredProductId: "",
     pages: {
@@ -26,7 +26,7 @@
     categories: [{ value: "all", label: "All categories" }],
     specificationFilters: [],
     defaultDistributorContact: {
-      name: "Caren Romack",
+      name: "Marc Rowley",
       email: "hello@example.com",
       phone: "",
       note: "Contact us for availability, ordering, and product questions.",
