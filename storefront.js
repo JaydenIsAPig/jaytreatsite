@@ -545,48 +545,43 @@
 
     previousButton.addEventListener("click", () => showFeaturedProduct(currentIndex - 1, true));
     nextButton.addEventListener("click", () => showFeaturedProduct(currentIndex + 1, true));
-    featuredContainer.addEventListener("mouseenter", stopRotation);
-    featuredContainer.addEventListener("mouseleave", startRotation);
     featuredContainer.addEventListener("focusin", stopRotation);
     featuredContainer.addEventListener("focusout", startRotation);
     featuredContainer.addEventListener("dragstart", (event) => event.preventDefault());
-    featuredContainer.addEventListener("pointerdown", (event) => {
-      pointerStartX = event.clientX;
-      gestureHandled = false;
-      stopRotation();
-      if (typeof featuredContainer.setPointerCapture === "function") {
-        featuredContainer.setPointerCapture(event.pointerId);
-      }
-    });
-    featuredContainer.addEventListener("pointerup", (event) => {
-      if (pointerStartX === null) {
-        return;
-      }
-      const distance = event.clientX - pointerStartX;
-      pointerStartX = null;
-      completeSwipe(distance);
-    });
-    featuredContainer.addEventListener("mousedown", (event) => {
-      mouseStartX = event.clientX;
-      if (pointerStartX === null) {
+    if ("PointerEvent" in window) {
+      featuredContainer.addEventListener("pointerdown", (event) => {
+        pointerStartX = event.clientX;
         gestureHandled = false;
-      }
-      stopRotation();
-    });
-    featuredContainer.addEventListener("mouseup", (event) => {
-      if (mouseStartX === null) {
-        return;
-      }
-      const distance = event.clientX - mouseStartX;
-      mouseStartX = null;
-      completeSwipe(distance);
-    });
-    featuredContainer.addEventListener("pointercancel", () => {
-      pointerStartX = null;
-      mouseStartX = null;
-      gestureHandled = false;
-      startRotation();
-    });
+        stopRotation();
+      });
+      featuredContainer.addEventListener("pointerup", (event) => {
+        if (pointerStartX === null) {
+          return;
+        }
+        const distance = event.clientX - pointerStartX;
+        pointerStartX = null;
+        completeSwipe(distance);
+      });
+      featuredContainer.addEventListener("pointercancel", () => {
+        pointerStartX = null;
+        gestureHandled = false;
+        startRotation();
+      });
+    } else {
+      featuredContainer.addEventListener("mousedown", (event) => {
+        mouseStartX = event.clientX;
+        gestureHandled = false;
+        stopRotation();
+      });
+      featuredContainer.addEventListener("mouseup", (event) => {
+        if (mouseStartX === null) {
+          return;
+        }
+        const distance = event.clientX - mouseStartX;
+        mouseStartX = null;
+        completeSwipe(distance);
+      });
+    }
     featuredContainer.addEventListener(
       "click",
       (event) => {
